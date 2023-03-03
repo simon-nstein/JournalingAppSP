@@ -9,84 +9,52 @@ import SwiftUI
 //poppins font
 
 struct ContentView: View {
+    @ObservedObject var viewModel: JournalData;
     let dateFormatter = DateFormatter()
     
     var body: some View {
         NavigationView {
             VStack {
-                Text(getCurrentDate())
-                    .offset(y: -40)
-                Text("Rose, Bud, Thorn")
-                    .offset(y: -30)
-                    .font(.system(size: 40))
-                Text("A Mindful Way to Reflect")
-                    .font(.subheadline)
-                    .offset(y: -20)
+                //Homepage Headers
+                OffsetTextView(
+                    text: getCurrentDate(),
+                    fontSize: CustomFontSize.smallFontSize,
+                    offset: -40
+                )
                 
+                OffsetTextView(
+                    text: "Rose, Bud, Thorn",
+                    fontSize: CustomFontSize.extraLargeFont,
+                    offset: -30
+                )
+                
+                OffsetTextView(
+                    text: "A Mindful Way to Reflect",
+                    fontSize: CustomFontSize.standardFontSize,
+                    offset: -20
+                )
+                
+
+                // Scroll view of rose, bud, thorn
                 ScrollView(.horizontal) {
                     HStack(spacing: 20) {
                         NavigationLink(destination: Rose()) {
-                            Rectangle()
-                                .frame(width: 300, height: 500)
-                                .foregroundColor(Color(red: 0.9803921568627451, green: 0.9254901960784314, blue: 0.8941176470588236))
-                                .cornerRadius(10)
-                                //.shadow(color: Color.black.opacity(0.5), radius: 7)
-                                .overlay(
-                                        VStack {
-                                            Text("ROSE")
-                                            Text("A highlight, success, small win, or something positive that happened today.")
-                                                .foregroundColor(Color(red: 0.41568627450980394, green: 0.4117647058823529, blue: 0.4117647058823529))
-                                                .offset(y: 40)
-                                            Spacer()
-                                        }
-                                            .offset(y: 30)
-                                            .padding()
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 30))
-                                        
-                                )
+                            Cardify(
+                                title: "ROSE",
+                                paragraph: "A highlight, success, small win, or something positive that happened today."
+                            )
                         }
                         NavigationLink(destination: Bud()) {
-                            Rectangle()
-                                .frame(width: 300, height: 500)
-                                .foregroundColor(Color(red: 0.9294117647058824, green: 0.9568627450980393, blue: 0.8862745098039215))
-                                .cornerRadius(10)
-                                //.shadow(color: Color.black.opacity(0.5), radius: 7)
-                                .overlay(
-                                        VStack {
-                                            Text("BUD")
-                                            Text("A challenge you experienced or something you can use more support with.")
-                                                .foregroundColor(Color(red: 0.41568627450980394, green: 0.4117647058823529, blue: 0.4117647058823529))
-                                                .offset(y: 40)
-                                            Spacer()
-                                        }
-                                            .offset(y: 30)
-                                            .padding()
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 30))
-                                        
-                                )
+                            Cardify(
+                                title: "BUD",
+                                paragraph: "A challenge you experienced or something you can use more support with."
+                            )
                         }
                         NavigationLink(destination: Thorn()) {
-                            Rectangle()
-                                .frame(width: 300, height: 500)
-                                .foregroundColor(Color(red: 0.9176470588235294, green: 0.9372549019607843, blue: 0.9686274509803922))
-                                .cornerRadius(10)
-                                //.shadow(color: Color.black.opacity(0.5), radius: 7)
-                                .overlay(
-                                        VStack {
-                                            Text("THORN")
-                                            Text("New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
-                                                .foregroundColor(Color(red: 0.41568627450980394, green: 0.4117647058823529, blue: 0.4117647058823529))
-                                                .offset(y: 40)
-                                            Spacer()
-                                        }
-                                            .offset(y: 30)
-                                            .padding()
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 30))
-                                        
-                                )
+                            Cardify(
+                                title: "THORN",
+                                paragraph: "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing."
+                            )
                         }
                     }
                 }
@@ -102,11 +70,64 @@ struct ContentView: View {
         dateFormatter.locale = location
         return dateFormatter.string(from: currentDate)
     }
+    
+    struct OffsetTextView: View {
+        let text: String
+        let fontSize: CGFloat
+        let offset: CGFloat
+        
+        var body: some View {
+            Text(text)
+                .offset(y: offset)
+                .font(Font.custom("Poppins-Medium", size: fontSize))
+        }
+    }
+    
+    // A View that allows you to easily reuse code to turn values into a "card"
+    struct Cardify: View {
+        let title: String
+        let paragraph: String
+        
+        var cardColor: Color {
+            switch(title) {
+                case "ROSE":
+                    return CustomColor.RoseColor
+                case "BUD":
+                    return CustomColor.BudColor
+                case "THORN":
+                    return CustomColor.ThornColor
+                default:
+                    return CustomColor.TextColor
+            }
+        }
+        
+        var body: some View {
+            
+            Rectangle()
+                .frame(width: 300, height: 500)
+                .foregroundColor(self.cardColor)
+                .cornerRadius(10)
+                .overlay(
+                        VStack {
+                            Text(self.title)
+                            Text(self.paragraph)
+                                .foregroundColor(CustomColor.TextColor)
+                                .offset(y: 40)
+                            Spacer()
+                        }
+                        .offset(y: 30)
+                        .padding()
+                        .foregroundColor(.black)
+                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
+                        
+                )
+        }
+    }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {    
     static var previews: some View {
-        ContentView()
-
+        ContentView(viewModel: JournalData())
     }
 }
