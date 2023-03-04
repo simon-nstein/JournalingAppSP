@@ -8,7 +8,8 @@
 import Foundation
 
 struct JournalModel {
-    var messageType = "" // rose, bud, thorn
-    var userMessage = ""  // the message the user types in for the card
-    var dateEntered: Date?// Date optional for whether the user inputs anything
+    var roseInput = ""
+    var budInput  = ""
+    var thornInput = ""
+    var dateEntered: Date?
 }

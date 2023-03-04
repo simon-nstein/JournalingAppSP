@@ -17,6 +17,7 @@ struct CustomColor {
 }
 
 struct CustomFontSize {
+    static let tinyFontSize: CGFloat = 8;
     static let smallFontSize: CGFloat = 12;
     static let standardFontSize: CGFloat = 15;
     static let largeFontSize: CGFloat = 30;
@@ -27,12 +28,20 @@ class JournalData: ObservableObject {
     @Published var model = JournalModel()
     
     // Variables
-    var messageType: String {
-        model.messageType
+    var roseInput: String {
+        get { return model.roseInput }
+        set { model.roseInput = newValue }
     }
     
-    var userMessage: String {
-        model.userMessage
+    var budInput: String {
+        get { return model.budInput }
+        set { model.budInput = newValue }
+    }
+    
+    var thornInput: String {
+        get { return model.thornInput }
+        set { model.thornInput = newValue }
+        
     }
     
     var dateEntered: Date? {

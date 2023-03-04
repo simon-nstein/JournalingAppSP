@@ -2,14 +2,32 @@ import SwiftUI
 import Foundation
 
 struct Rose: View {
-    @State var address = ""
+    @ObservedObject var viewModel: JournalData;
+    @AppStorage("ROSE_KEY") var roseText = ""
+    @State var userInput = ""
         var body: some View {
             VStack() {
-                TextField("Describe a highlight, success, small win, or something positive that happened today.", text: $address, axis: .vertical)
+                
+                TextField(
+                    "Describe a highlight, success, small win, or something positive that happened today.",
+                    text: $userInput,
+                    axis: .vertical
+                )
                     .lineLimit(5...100)
-                    .font(.system(size: 30))
+                    .font(.system(size: CustomFontSize.largeFontSize))
                     .padding()
                     .lineSpacing(10)
+            
+                    // Saving the data
+                    .onChange(of: userInput) {
+                        self.viewModel.roseInput = $0
+                        self.roseText = $0
+                    }
+                    .onAppear {
+                        self.userInput = self.roseText
+                    }
+                
+                
                 Spacer()
                 Image(systemName: "mic.circle.fill")
                     .offset(y: -20)
@@ -17,13 +35,12 @@ struct Rose: View {
                     .foregroundColor(.black)
             }
             .offset(y: 40)
-            .background(Color(red: 0.9803921568627451, green: 0.9254901960784314, blue: 0.8941176470588236))
+            .background(CustomColor.RoseColor)
         }
 }
 struct Rose_Previews: PreviewProvider {
     static var previews: some View {
-        Rose()
-
+        Rose(viewModel: JournalData())
     }
 }
 

@@ -13,52 +13,55 @@ struct ContentView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                //Homepage Headers
-                OffsetTextView(
-                    text: getCurrentDate(),
-                    fontSize: CustomFontSize.smallFontSize,
-                    offset: -40
-                )
-                
-                OffsetTextView(
-                    text: "Rose, Bud, Thorn",
-                    fontSize: CustomFontSize.extraLargeFont,
-                    offset: -30
-                )
-                
-                OffsetTextView(
-                    text: "A Mindful Way to Reflect",
-                    fontSize: CustomFontSize.standardFontSize,
-                    offset: -20
-                )
-                
-
-                // Scroll view of rose, bud, thorn
-                ScrollView(.horizontal) {
-                    HStack(spacing: 20) {
-                        NavigationLink(destination: Rose()) {
-                            Cardify(
-                                title: "ROSE",
-                                paragraph: "A highlight, success, small win, or something positive that happened today."
-                            )
+            NavigationView {
+                VStack {
+                    //Homepage Headers
+                    OffsetTextView(
+                        text: getCurrentDate(),
+                        fontSize: CustomFontSize.standardFontSize,
+                        offset: 0
+                    )
+                    
+                    OffsetTextView(
+                        text: "Rose, Bud, Thorn",
+                        fontSize: CustomFontSize.extraLargeFont,
+                        offset: 0
+                    )
+                    
+                    OffsetTextView(
+                        text: "A Mindful Way to Reflect",
+                        fontSize: CustomFontSize.standardFontSize,
+                        offset: 0
+                    )
+                    
+                    
+                    // Scroll view of rose, bud, thorn
+                    ScrollView(.vertical) {
+                        VStack() {
+                            NavigationLink(destination: Rose(viewModel: self.viewModel)) {
+                                Cardify(
+                                    viewModel:self.viewModel,
+                                    title: "ROSE",
+                                    paragraph: (
+                                        self.viewModel.roseInput != "" ? self.viewModel.roseInput : "A highlight, success, small win, or something positive that happened today.")
+                                )
+                            }
+                            NavigationLink(destination: Bud(viewModel: self.viewModel)) {
+                                Cardify(
+                                    viewModel:self.viewModel,
+                                    title: "BUD",
+                                    paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
+                                )
+                            }
+                            NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
+                                Cardify(
+                                    viewModel:self.viewModel,
+                                    title: "THORN",
+                                    paragraph: (self.viewModel.thornInput != "" ? self.viewModel.thornInput : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
+                                )
+                            }
                         }
-                        NavigationLink(destination: Bud()) {
-                            Cardify(
-                                title: "BUD",
-                                paragraph: "A challenge you experienced or something you can use more support with."
-                            )
-                        }
-                        NavigationLink(destination: Thorn()) {
-                            Cardify(
-                                title: "THORN",
-                                paragraph: "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing."
-                            )
-                        }
-                    }
                 }
-                .padding(20)
             }
         }
     }
@@ -85,6 +88,7 @@ struct ContentView: View {
     
     // A View that allows you to easily reuse code to turn values into a "card"
     struct Cardify: View {
+        let viewModel: JournalData
         let title: String
         let paragraph: String
         
@@ -102,28 +106,24 @@ struct ContentView: View {
         }
         
         var body: some View {
-            
-            Rectangle()
-                .frame(width: 300, height: 500)
+            RoundedRectangle(cornerRadius: 15)
+                .frame(width: 350, height: 200)
                 .foregroundColor(self.cardColor)
-                .cornerRadius(10)
                 .overlay(
                         VStack {
                             Text(self.title)
+                                .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
                             Text(self.paragraph)
                                 .foregroundColor(CustomColor.TextColor)
-                                .offset(y: 40)
+                                .offset(y: 10)
                             Spacer()
                         }
-                        .offset(y: 30)
-                        .padding()
                         .foregroundColor(.black)
-                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
-                        
-                )
+                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.standardFontSize))
+                        .padding()
+                )       .padding(.vertical, 8.0)
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {    
