@@ -20,6 +20,7 @@ struct CustomFontSize {
     static let tinyFontSize: CGFloat = 8;
     static let smallFontSize: CGFloat = 12;
     static let standardFontSize: CGFloat = 15;
+    static let RoseFontSize: CGFloat = 22;
     static let largeFontSize: CGFloat = 30;
     static let extraLargeFont: CGFloat = 40;
 }
@@ -46,6 +47,18 @@ class JournalData: ObservableObject {
     
     var dateEntered: Date? {
         model.dateEntered
+    }
+    
+    var greeting: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 0..<12:
+            return "Good Morning"
+        case 12..<18:
+            return "Good Afternoon"
+        default:
+            return "Good Evening"
+        }
     }
     
 

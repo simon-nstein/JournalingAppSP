@@ -13,54 +13,61 @@ struct ContentView: View {
     let dateFormatter = DateFormatter()
     
     var body: some View {
-            NavigationView {
+        NavigationView {
+            ScrollView(.vertical) {
                 VStack {
-                    //Homepage Headers
-                    OffsetTextView(
-                        text: getCurrentDate(),
-                        fontSize: CustomFontSize.standardFontSize,
-                        offset: 0
-                    )
+                    HStack{
+                        //Homepage Headers
+                        OffsetTextView(
+                            text: self.viewModel.greeting,
+                            fontSize: CustomFontSize.largeFontSize,
+                            offset: 0
+                            
+                        )
+                        Spacer()
+                        Image(systemName: "calendar")
+                            .font(.system(size: 30))
+                    }
+                    .padding()
                     
-                    OffsetTextView(
-                        text: "Rose, Bud, Thorn",
-                        fontSize: CustomFontSize.extraLargeFont,
-                        offset: 0
-                    )
-                    
-                    OffsetTextView(
-                        text: "A Mindful Way to Reflect",
-                        fontSize: CustomFontSize.standardFontSize,
-                        offset: 0
-                    )
-                    
-                    
-                    // Scroll view of rose, bud, thorn
-                    ScrollView(.vertical) {
-                        VStack() {
-                            NavigationLink(destination: Rose(viewModel: self.viewModel)) {
-                                Cardify(
-                                    viewModel:self.viewModel,
-                                    title: "ROSE",
-                                    paragraph: (
-                                        self.viewModel.roseInput != "" ? self.viewModel.roseInput : "A highlight, success, small win, or something positive that happened today.")
-                                )
-                            }
-                            NavigationLink(destination: Bud(viewModel: self.viewModel)) {
-                                Cardify(
-                                    viewModel:self.viewModel,
-                                    title: "BUD",
-                                    paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
-                                )
-                            }
-                            NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
-                                Cardify(
-                                    viewModel:self.viewModel,
-                                    title: "THORN",
-                                    paragraph: (self.viewModel.thornInput != "" ? self.viewModel.thornInput : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
-                                )
-                            }
+                    VStack {
+                        HStack{
+                            OffsetTextView(
+                                text: "Take some time to reflect...",
+                                fontSize: 16,
+                                offset: 20
+                            )
+                            .foregroundColor(CustomColor.TextColor)
+                            Spacer()
+                        }.padding()
+                        
+                        // Scroll view of rose, bud, thorn
+                        NavigationLink(destination: Rose(viewModel: self.viewModel)) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "ROSE",
+                                paragraph: (
+                                    self.viewModel.roseInput != "" ? self.viewModel.roseInput : "A highlight, success, small win, or something positive that happened today.")
+                            )
                         }
+                        NavigationLink(destination: Bud(viewModel: self.viewModel)) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "BUD",
+                                paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
+                            )
+                        }
+                        NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "THORN",
+                                paragraph: (self.viewModel.thornInput != "" ? self.viewModel.thornInput : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
+                            )
+                        }
+                    }.offset(y: -20)
+                    
+                    
+                    
                 }
             }
         }

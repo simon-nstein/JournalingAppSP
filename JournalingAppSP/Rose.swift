@@ -7,16 +7,20 @@ struct Rose: View {
     @State var userInput = ""
         var body: some View {
             VStack() {
-                
+                HStack{
+                    Text("Describe a highlight, success, small win, or something positive that happened today.")
+                        .padding(.leading)
+                        .foregroundColor(CustomColor.TextColor)
+                    
+                    Spacer()
+                }
                 TextField(
-                    "Describe a highlight, success, small win, or something positive that happened today.",
+                    "Start Typing...",
                     text: $userInput,
                     axis: .vertical
                 )
                     .lineLimit(5...100)
-                    .font(.system(size: CustomFontSize.largeFontSize))
                     .padding()
-                    .lineSpacing(10)
             
                     // Saving the data
                     .onChange(of: userInput) {
@@ -36,7 +40,10 @@ struct Rose: View {
             }
             .offset(y: 40)
             .background(CustomColor.RoseColor)
+            .font(Font.custom("Poppins-Medium", size: CustomFontSize.RoseFontSize))
+            
         }
+        
 }
 struct Rose_Previews: PreviewProvider {
     static var previews: some View {

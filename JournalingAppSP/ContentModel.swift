@@ -12,4 +12,5 @@ struct JournalModel {
     var budInput  = ""
     var thornInput = ""
     var dateEntered: Date?
+    var greeting = ""
 }
