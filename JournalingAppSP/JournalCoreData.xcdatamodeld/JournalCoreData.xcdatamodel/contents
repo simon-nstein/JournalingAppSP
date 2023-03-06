@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BudEntity" representedClassName="BudEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="budMessage" optional="YES" attributeType="String"/>
+        <attribute name="dateEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="RoseEntity" representedClassName="RoseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dateEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateID" optional="YES" attributeType="String"/>
+        <attribute name="roseMessage" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ThornEntity" representedClassName="ThornEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dateEntered" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateID" optional="YES" attributeType="String"/>
+        <attribute name="thornMessage" optional="YES" attributeType="String"/>
+    </entity>
+</model>

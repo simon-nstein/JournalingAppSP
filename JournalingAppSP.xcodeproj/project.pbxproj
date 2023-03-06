@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */; };
+		3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F729B5A51200FAEB20 /* WeekGlance.swift */; };
 		3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98BF29B278A700804A6A /* ContentViewModel.swift */; };
 		3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98C129B2790100804A6A /* ContentModel.swift */; };
 		F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalCoreData.xcdatamodel; sourceTree = "<group>"; };
+		3F4814F729B5A51200FAEB20 /* WeekGlance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGlance.swift; sourceTree = "<group>"; };
 		3FBD98BF29B278A700804A6A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		3FBD98C129B2790100804A6A /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 		3FBD98C329B2872C00804A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +73,9 @@
 				3FBD98C329B2872C00804A6A /* Info.plist */,
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
+				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
 				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
+				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
 				3FBD98C129B2790100804A6A /* ContentModel.swift */,
 				F6E6D1B729B1A8A900DF59B5 /* Rose.swift */,
 				F6E6D1B929B1A8B400DF59B5 /* Bud.swift */,
@@ -162,8 +168,10 @@
 			files = (
 				F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */,
 				F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */,
+				3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */,
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
 				F6E6D1B829B1A8A900DF59B5 /* Rose.swift in Sources */,
+				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
 				F6E6D1BC29B1A8BB00DF59B5 /* Thorn.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
 				F6E6D1BA29B1A8B400DF59B5 /* Bud.swift in Sources */,
@@ -369,6 +377,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */,
+			);
+			currentVersion = 3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */;
+			path = JournalCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F6E6D19E29B1A88800DF59B5 /* Project object */;
 }

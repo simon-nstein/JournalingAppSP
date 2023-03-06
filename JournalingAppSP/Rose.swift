@@ -3,7 +3,6 @@ import Foundation
 
 struct Rose: View {
     @ObservedObject var viewModel: JournalData;
-    @AppStorage("ROSE_KEY") var roseText = ""
     @State var userInput = ""
         var body: some View {
             VStack() {
@@ -25,10 +24,11 @@ struct Rose: View {
                     // Saving the data
                     .onChange(of: userInput) {
                         self.viewModel.roseInput = $0
-                        self.roseText = $0
+                        self.viewModel.addRose(with: $0)
+                        self.viewModel.saveData()
                     }
                     .onAppear {
-                        self.userInput = self.roseText
+                        self.userInput = self.viewModel.getTodaysRose() ?? ""
                     }
                 
                 

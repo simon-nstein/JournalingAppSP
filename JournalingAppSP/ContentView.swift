@@ -25,8 +25,12 @@ struct ContentView: View {
                             
                         )
                         Spacer()
-                        Image(systemName: "calendar")
-                            .font(.system(size: 30))
+                        
+                        NavigationLink(destination: WeekGlance(viewModel: self.viewModel)) {
+                            Image(systemName: "calendar")
+                                .font(.system(size: 30))
+                        }
+                            
                     }
                     .padding()
                     
@@ -47,7 +51,7 @@ struct ContentView: View {
                                 viewModel:self.viewModel,
                                 title: "ROSE",
                                 paragraph: (
-                                    self.viewModel.roseInput != "" ? self.viewModel.roseInput : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
+                                    self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                             )
                         }
                         NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
