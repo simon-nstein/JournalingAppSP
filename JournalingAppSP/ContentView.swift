@@ -33,7 +33,7 @@ struct ContentView: View {
                     VStack {
                         HStack{
                             OffsetTextView(
-                                text: "Take some time to reflect...",
+                                text: "Take some time to reflect and click on each of the boxes below to capture your thoughts...",
                                 fontSize: 16,
                                 offset: 20
                             )
@@ -47,20 +47,20 @@ struct ContentView: View {
                                 viewModel:self.viewModel,
                                 title: "ROSE",
                                 paragraph: (
-                                    self.viewModel.roseInput != "" ? self.viewModel.roseInput : "A highlight, success, small win, or something positive that happened today.")
-                            )
-                        }
-                        NavigationLink(destination: Bud(viewModel: self.viewModel)) {
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "BUD",
-                                paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
+                                    self.viewModel.roseInput != "" ? self.viewModel.roseInput : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                             )
                         }
                         NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "THORN",
+                                paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
+                            )
+                        }
+                        NavigationLink(destination: Bud(viewModel: self.viewModel)) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "BUD",
                                 paragraph: (self.viewModel.thornInput != "" ? self.viewModel.thornInput : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
                             )
                         }

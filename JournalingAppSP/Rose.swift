@@ -8,7 +8,7 @@ struct Rose: View {
         var body: some View {
             VStack() {
                 HStack{
-                    Text("Describe a highlight, success, small win, or something positive that happened today.")
+                    Text("Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                         .padding(.leading)
                         .foregroundColor(CustomColor.TextColor)
                     
