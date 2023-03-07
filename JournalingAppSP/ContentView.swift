@@ -46,7 +46,8 @@ struct ContentView: View {
                         }.padding()
                         
                         // Scroll view of rose, bud, thorn
-                        NavigationLink(destination: Rose(viewModel: self.viewModel)) {
+                        /** Testing the new input view */
+                        NavigationLink(destination: InputView(viewModel: viewModel, type: "ROSE")){
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "ROSE",
@@ -54,18 +55,21 @@ struct ContentView: View {
                                     self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                             )
                         }
-                        NavigationLink(destination: Thorn(viewModel: self.viewModel)) {
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "THORN",
-                                paragraph: (self.viewModel.budInput != "" ? self.viewModel.budInput : "A challenge you experienced or something you can use more support with.")
-                            )
-                        }
-                        NavigationLink(destination: Bud(viewModel: self.viewModel)) {
+                        
+                        NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "BUD",
-                                paragraph: (self.viewModel.thornInput != "" ? self.viewModel.thornInput : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
+                                paragraph: (
+                                    self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : "A challenge you experienced or something you can use more support with.")
+                            )
+                        }
+                        NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "THORN",
+                                paragraph: (
+                                    self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
                             )
                         }
                     }.offset(y: -20)

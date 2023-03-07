@@ -16,23 +16,41 @@ struct WeekGlance: View {
                 Section(
                     header: Text("Rose")) {
                         ForEach(viewModel.savedRoses, id: \.self) { rose in
-                            Text(rose.roseMessage ?? "")
+                            HStack {
+                                Text(rose.roseMessage ?? "")
+                                Spacer()
+                                Text(rose.dateID!)
+                            }
                         }
-                        .onDelete(perform: deleteRose)
-                        .onMove(perform: { indices, newOffset in
-                            self.viewModel.savedRoses.move(fromOffsets: indices, toOffset: newOffset)
-                        })
                     }
                 
+                Section(
+                    header: Text("Bud")) {
+                        ForEach(viewModel.savedBuds, id: \.self) { bud in
+                            HStack {
+                                Text(bud.budMessage ?? "")
+                                Spacer()
+                                Text(bud.dateID!)
+                            }
+                        }
+                    }
+                
+                Section(
+                    header: Text("Thorn")) {
+                        ForEach(viewModel.savedThorns, id: \.self) { thorn in
+                            HStack {
+                                Text(thorn.thornMessage ?? "")
+                                Spacer()
+                                Text(thorn.dateID!)
+                            }
+                        }
+                    }
             }
             .navigationTitle("Your week at a glance").font(Font.custom("Poppins-Medium", size: 20))
-            .navigationBarItems(leading: EditButton())
+            .navigationBarBackButtonHidden(true)
         }
     }
     
-    func deleteRose(from indexSet: IndexSet) {
-        self.viewModel.savedRoses.remove(atOffsets: indexSet)
-    }
 }
 
 struct WeekGlance_Previews: PreviewProvider {

@@ -21,7 +21,7 @@ struct CustomFontSize {
     static let tinyFontSize: CGFloat = 8;
     static let smallFontSize: CGFloat = 12;
     static let standardFontSize: CGFloat = 15;
-    static let RoseFontSize: CGFloat = 22;
+    static let inputFontSize: CGFloat = 22;
     static let largeFontSize: CGFloat = 30;
     static let extraLargeFont: CGFloat = 40;
 }
@@ -45,27 +45,57 @@ class JournalData: ObservableObject {
                 print("Successfully loaded core data. [+]")
             }
         }
-        //deleteAllEntries(from: "RoseEntity")
         fetchRoses()
+        fetchBuds()
+        fetchThorns()
     }
 
     
     // Functions
-    func deleteAllEntries(from entity: String) {
-        let request = NSFetchRequest<RoseEntity>(entityName:entity)
+    
+    // A function that deletes all the entries in your CoreData for each entity
+    func deleteAllEntries() {
+        let request = NSFetchRequest<RoseEntity>(entityName:"RoseEntity")
+        let request2 = NSFetchRequest<BudEntity>(entityName:"BudEntity")
+        let request3 = NSFetchRequest<ThornEntity>(entityName:"ThornEntity")
         
         do {
+            
             savedRoses = try CoreDataContainer.viewContext.fetch(request)
             for item in savedRoses {
                 CoreDataContainer.viewContext.delete(item)
             }
+            
+            savedBuds = try CoreDataContainer.viewContext.fetch(request2)
+            for item in savedBuds {
+                CoreDataContainer.viewContext.delete(item)
+            }
+            
+            savedThorns = try CoreDataContainer.viewContext.fetch(request3)
+            for item in savedThorns {
+                CoreDataContainer.viewContext.delete(item)
+            }
+             
             saveData()
+            print("all entries successfully deleted")
         } catch {
             print("Error deleting roses [-]. \(error)")
         }
     }
     
-    // Updates the array "savedRoses" with all entries that exist in the database
+    // Saves all updated data and recalls the roses, buds, and thorns
+    func saveData() {
+        do {
+            try CoreDataContainer.viewContext.save()
+            fetchRoses()
+            fetchBuds()
+            fetchThorns()
+        } catch let error {
+            print("Error saving [-]. \(error)")
+        }
+    }
+    
+    // ROSE FUNCTIONS
     func fetchRoses() {
         let request = NSFetchRequest<RoseEntity>(entityName: "RoseEntity")
         
@@ -76,7 +106,6 @@ class JournalData: ObservableObject {
         }
     }
     
-    // Will add (or edit an existing) rose entry in the database
     func addRose(with message: String) {
         let todayDate = Date()
         let formatter = DateFormatter()
@@ -94,15 +123,6 @@ class JournalData: ObservableObject {
         roseObject.dateEntered = todayDate
     }
     
-    func saveData() {
-        do {
-            try CoreDataContainer.viewContext.save()
-            fetchRoses()
-        } catch let error {
-            print("Error saving [-]. \(error)")
-        }
-    }
-    
     func getTodaysRose() -> String? {
         let todayDate = Date()
         let formatter = DateFormatter()
@@ -118,8 +138,94 @@ class JournalData: ObservableObject {
     }
     
     
+    // BUD FUNCTIONS
+    func fetchBuds() {
+        let request = NSFetchRequest<BudEntity>(entityName: "BudEntity")
+        
+        do {
+            savedBuds = try CoreDataContainer.viewContext.fetch(request)
+        } catch {
+            print("Error fetching buds [-]. \(error)")
+        }
+    }
+    
+    func addBud(with message: String) {
+        let todayDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let stringDate = formatter.string(from: todayDate)
+        for i in 0..<self.savedBuds.count {
+            if self.savedBuds[i].dateID == stringDate {
+                self.savedBuds[i].budMessage = message
+                return
+            }
+        }
+        let budObject = BudEntity(context: CoreDataContainer.viewContext)
+        budObject.budMessage = message
+        budObject.dateID = stringDate
+        budObject.dateEntered = todayDate
+    }
+    
+    func getTodaysBud() -> String? {
+        let todayDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let stringDate = formatter.string(from: todayDate)
+        
+        for i in 0..<self.savedBuds.count {
+            if self.savedBuds[i].dateID == stringDate {
+                return self.savedBuds[i].budMessage
+            }
+        }
+        return nil
+    }
+    
+
+    // THORN FUNCTIONS
+    func fetchThorns() {
+        let request = NSFetchRequest<ThornEntity>(entityName: "ThornEntity")
+        
+        do {
+            savedThorns = try CoreDataContainer.viewContext.fetch(request)
+        } catch {
+            print("Error fetching thorns [-]. \(error)")
+        }
+    }
+    
+    func addThorn(with message: String) {
+        let todayDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let stringDate = formatter.string(from: todayDate)
+        for i in 0..<self.savedThorns.count {
+            if self.savedThorns[i].dateID == stringDate {
+                self.savedThorns[i].thornMessage = message
+                return
+            }
+        }
+        let thornObject = ThornEntity(context: CoreDataContainer.viewContext)
+        thornObject.thornMessage = message
+        thornObject.dateID = stringDate
+        thornObject.dateEntered = todayDate
+    }
+    
+    func getTodaysThorn() -> String? {
+        let todayDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let stringDate = formatter.string(from: todayDate)
+        
+        for i in 0..<self.savedThorns.count {
+            if self.savedThorns[i].dateID == stringDate {
+                return self.savedThorns[i].thornMessage
+            }
+        }
+        return nil
+    }
+    
     
     // Variables
+    
     var roseInput: String {
         get { return model.roseInput }
         set { model.roseInput = newValue }
@@ -151,7 +257,4 @@ class JournalData: ObservableObject {
             return "Good Evening"
         }
     }
-    
-
-    // Intents (functions for interaction between UI and backend)
 }

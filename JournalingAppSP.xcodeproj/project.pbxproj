@@ -11,13 +11,11 @@
 		3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F729B5A51200FAEB20 /* WeekGlance.swift */; };
 		3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98BF29B278A700804A6A /* ContentViewModel.swift */; };
 		3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98C129B2790100804A6A /* ContentModel.swift */; };
+		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
 		F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */; };
 		F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */; };
 		F6E6D1AE29B1A88A00DF59B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */; };
 		F6E6D1B129B1A88A00DF59B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */; };
-		F6E6D1B829B1A8A900DF59B5 /* Rose.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1B729B1A8A900DF59B5 /* Rose.swift */; };
-		F6E6D1BA29B1A8B400DF59B5 /* Bud.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1B929B1A8B400DF59B5 /* Bud.swift */; };
-		F6E6D1BC29B1A8BB00DF59B5 /* Thorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1BB29B1A8BB00DF59B5 /* Thorn.swift */; };
 		F6E6D1C229B51B9400DF59B5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */; };
 /* End PBXBuildFile section */
 
@@ -28,14 +26,12 @@
 		3FBD98C129B2790100804A6A /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 		3FBD98C329B2872C00804A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3FBD98C629B2879800804A6A /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F6E6D1A629B1A88800DF59B5 /* JournalingAppSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalingAppSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalingAppSPApp.swift; sourceTree = "<group>"; };
 		F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F6E6D1B729B1A8A900DF59B5 /* Rose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rose.swift; sourceTree = "<group>"; };
-		F6E6D1B929B1A8B400DF59B5 /* Bud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bud.swift; sourceTree = "<group>"; };
-		F6E6D1BB29B1A8BB00DF59B5 /* Thorn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thorn.swift; sourceTree = "<group>"; };
 		F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../Poppins-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,13 +69,11 @@
 				3FBD98C329B2872C00804A6A /* Info.plist */,
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
+				3FDAECF529B7F69500C9A633 /* InputView.swift */,
 				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
 				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
 				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
 				3FBD98C129B2790100804A6A /* ContentModel.swift */,
-				F6E6D1B729B1A8A900DF59B5 /* Rose.swift */,
-				F6E6D1B929B1A8B400DF59B5 /* Bud.swift */,
-				F6E6D1BB29B1A8BB00DF59B5 /* Thorn.swift */,
 				F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */,
 				F6E6D1AF29B1A88A00DF59B5 /* Preview Content */,
 			);
@@ -170,11 +164,9 @@
 				F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */,
 				3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */,
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
-				F6E6D1B829B1A8A900DF59B5 /* Rose.swift in Sources */,
 				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
-				F6E6D1BC29B1A8BB00DF59B5 /* Thorn.swift in Sources */,
+				3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
-				F6E6D1BA29B1A8B400DF59B5 /* Bud.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +309,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"MTL_ENABLE_DEBUG_INFO[arch=*]" = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = SimonPaul.JournalingAppSP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -5,7 +5,7 @@ struct Rose: View {
     @ObservedObject var viewModel: JournalData;
     @State var userInput = ""
         var body: some View {
-            VStack() {
+            VStack {
                 HStack{
                     Text("Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                         .padding(.leading)
@@ -18,18 +18,18 @@ struct Rose: View {
                     text: $userInput,
                     axis: .vertical
                 )
-                    .lineLimit(5...100)
-                    .padding()
-            
-                    // Saving the data
-                    .onChange(of: userInput) {
-                        self.viewModel.roseInput = $0
-                        self.viewModel.addRose(with: $0)
-                        self.viewModel.saveData()
-                    }
-                    .onAppear {
-                        self.userInput = self.viewModel.getTodaysRose() ?? ""
-                    }
+                .lineLimit(5...100)
+                .padding()
+        
+                // Saving the data
+                .onChange(of: userInput) {
+                    self.viewModel.roseInput = $0
+                    self.viewModel.addRose(with: $0)
+                    self.viewModel.saveData()
+                }
+                .onAppear {
+                    self.userInput = self.viewModel.getTodaysRose() ?? ""
+                }
                 
                 
                 Spacer()
@@ -40,10 +40,9 @@ struct Rose: View {
             }
             .offset(y: 40)
             .background(CustomColor.RoseColor)
-            .font(Font.custom("Poppins-Medium", size: CustomFontSize.RoseFontSize))
+            .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
             
         }
-        
 }
 struct Rose_Previews: PreviewProvider {
     static var previews: some View {
