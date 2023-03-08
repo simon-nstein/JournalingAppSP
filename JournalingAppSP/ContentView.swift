@@ -50,7 +50,7 @@ struct ContentView: View {
                         NavigationLink(destination: InputView(viewModel: viewModel, type: "ROSE")){
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "ROSE",
+                                title: "Rose",
                                 paragraph: (
                                     self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today."),
                                 image: Image("roseIMG")
@@ -62,7 +62,7 @@ struct ContentView: View {
                         NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "THORN",
+                                title: "Thorn",
                                 paragraph: (
                                     self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : "A challenge you experienced or something you can use more support with."),
                                 image: Image("thornIMG")
@@ -73,7 +73,7 @@ struct ContentView: View {
                         NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "BUD",
+                                title: "Bud",
                                 paragraph: (
                                     self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : "New ideas that have blossomed or something you are looking forward to experiencing."),
                                 image: Image("budIMG")
@@ -118,11 +118,11 @@ struct ContentView: View {
         
         var cardColor: Color {
             switch(title) {
-                case "ROSE":
+                case "Rose":
                     return CustomColor.RoseColor
-                case "BUD":
+                case "Bud":
                     return CustomColor.BudColor
-                case "THORN":
+                case "Thorn":
                     return CustomColor.ThornColor
                 default:
                     return CustomColor.TextColor
@@ -135,11 +135,13 @@ struct ContentView: View {
                 .foregroundColor(self.cardColor)
                 .overlay(
                     HStack{
-                        VStack {
+                        VStack(alignment: .leading) {
                             Text(self.title)
-                                .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
+                                .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
                             Text(self.paragraph)
+                                .font(Font.custom("Poppins-Medium", size: CustomFontSize.standardFontSize))
                                 .foregroundColor(CustomColor.TextColor)
+                                .multilineTextAlignment(.leading)
                                 .offset(y: 10)
                             Spacer()
                         }

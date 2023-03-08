@@ -18,6 +18,8 @@
 		F6E6D1B129B1A88A00DF59B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */; };
 		F6E6D1C229B51B9400DF59B5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */; };
 		F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */; };
+		F6E6D1D829B90F3800DF59B5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1D729B90F3700DF59B5 /* Poppins-Regular.ttf */; };
+		F6E6D1DA29B90FE900DF59B5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1D929B90FE900DF59B5 /* Poppins-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,11 +32,13 @@
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F6E6D1A629B1A88800DF59B5 /* JournalingAppSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalingAppSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalingAppSPApp.swift; sourceTree = "<group>"; };
-		F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		F6E6D1D729B90F3700DF59B5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		F6E6D1D929B90FE900DF59B5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 			children = (
 				F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */,
 				F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */,
+				F6E6D1D729B90F3700DF59B5 /* Poppins-Regular.ttf */,
+				F6E6D1D929B90FE900DF59B5 /* Poppins-SemiBold.ttf */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -150,9 +156,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E6D1DA29B90FE900DF59B5 /* Poppins-SemiBold.ttf in Resources */,
 				F6E6D1C229B51B9400DF59B5 /* Poppins-Medium.ttf in Resources */,
 				F6E6D1B129B1A88A00DF59B5 /* Preview Assets.xcassets in Resources */,
 				F6E6D1AE29B1A88A00DF59B5 /* Assets.xcassets in Resources */,
+				F6E6D1D829B90F3800DF59B5 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
