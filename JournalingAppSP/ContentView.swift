@@ -37,7 +37,7 @@ struct ContentView: View {
                     VStack {
                         HStack{
                             OffsetTextView(
-                                text: "Take some time to reflect and click on each of the boxes below to capture your thoughts...",
+                                text: "Take a moment to reflect and click each box to capture your thoughts...",
                                 fontSize: 16,
                                 offset: 20
                             )
@@ -55,6 +55,7 @@ struct ContentView: View {
                                     self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
                             )
                         }
+                        .navigationBarBackButtonHidden(true)
                         
                         NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
                             Cardify(

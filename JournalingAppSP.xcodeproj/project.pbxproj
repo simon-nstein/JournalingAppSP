@@ -17,6 +17,7 @@
 		F6E6D1AE29B1A88A00DF59B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */; };
 		F6E6D1B129B1A88A00DF59B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */; };
 		F6E6D1C229B51B9400DF59B5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */; };
+		F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6E6D1B029B1A88A00DF59B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F6E6D1C129B51B9400DF59B5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
 				3FDAECF529B7F69500C9A633 /* InputView.swift */,
+				F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */,
 				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
 				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
 				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
 				F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */,
 				F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */,
 				3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */,

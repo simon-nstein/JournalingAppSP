@@ -23,6 +23,7 @@ struct InputView: View {
     @State var userInput = ""
     var body: some View {
         VStack {
+            NavBarView(type: type)
             Text(headerText)
                 .padding(.leading)
                 .foregroundColor(CustomColor.TextColor)
@@ -76,7 +77,8 @@ struct InputView: View {
         }
         .offset(y: 40)
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
-        
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
