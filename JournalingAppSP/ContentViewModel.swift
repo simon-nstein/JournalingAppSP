@@ -15,6 +15,7 @@ struct CustomColor {
     static let BudColor = Color("BudColor")
     static let ThornColor = Color("ThornColor")
     static let TextColor = Color("TextColor")
+    static let darkBlue = Color("darkBlue")
 }
 
 struct CustomFontSize {

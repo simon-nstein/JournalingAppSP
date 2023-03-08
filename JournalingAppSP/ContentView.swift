@@ -52,30 +52,36 @@ struct ContentView: View {
                                 viewModel:self.viewModel,
                                 title: "ROSE",
                                 paragraph: (
-                                    self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
+                                    self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today."),
+                                image: Image("roseIMG")
+                                //imageName: "roseIMG"
                             )
                         }
                         .navigationBarBackButtonHidden(true)
+                        
+                        NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
+                            Cardify(
+                                viewModel:self.viewModel,
+                                title: "THORN",
+                                paragraph: (
+                                    self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : "A challenge you experienced or something you can use more support with."),
+                                image: Image("thornIMG")
+                                //imageName: "roseIMG"
+                            )
+                        }
                         
                         NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "BUD",
                                 paragraph: (
-                                    self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : "A challenge you experienced or something you can use more support with.")
+                                    self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : "New ideas that have blossomed or something you are looking forward to experiencing."),
+                                image: Image("budIMG")
+                                //imageName: "roseIMG"
                             )
                         }
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "THORN",
-                                paragraph: (
-                                    self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
-                            )
-                        }
+                        
                     }.offset(y: -20)
-                    
-                    
                     
                 }
             }
@@ -107,6 +113,8 @@ struct ContentView: View {
         let viewModel: JournalData
         let title: String
         let paragraph: String
+        let image: Image
+        //let imageName: String
         
         var cardColor: Color {
             switch(title) {
@@ -126,6 +134,7 @@ struct ContentView: View {
                 .frame(width: 350, height: 200)
                 .foregroundColor(self.cardColor)
                 .overlay(
+                    HStack{
                         VStack {
                             Text(self.title)
                                 .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
@@ -137,7 +146,13 @@ struct ContentView: View {
                         .foregroundColor(.black)
                         .font(Font.custom("Poppins-Medium", size: CustomFontSize.standardFontSize))
                         .padding()
-                )       .padding(.vertical, 8.0)
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100.0)
+                    }
+                )
+                .padding(.vertical, 8.0)
         }
     }
 }
