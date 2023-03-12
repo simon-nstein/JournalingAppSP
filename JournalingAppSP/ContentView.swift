@@ -28,6 +28,13 @@ struct ContentView: View {
                      .foregroundColor(Color("darkColor"))
                      .padding()
                     
+                    /*
+                    NavigationLink(destination: testView(viewModel: JournalData(), selectedTab: 1)){
+                        Text("Hello")
+                    }
+                     */
+                    
+                    
                     TextView(
                         text: "Daily Response",
                         fontSize: CustomFontSize.inputFontSize,
@@ -80,7 +87,7 @@ struct ContentView: View {
                             
                         }
                     } else{
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "ROSE")){
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 0)){
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "Rose",
@@ -90,7 +97,7 @@ struct ContentView: View {
                             )
                         }
                         
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 1)) {
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "Thorn",
@@ -101,7 +108,7 @@ struct ContentView: View {
                             )
                         }
                         
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 2)) {
                             Cardify(
                                 viewModel:self.viewModel,
                                 title: "Bud",

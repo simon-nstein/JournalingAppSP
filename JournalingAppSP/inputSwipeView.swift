@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct testView: View {
+struct inputSwipeView: View {
     @ObservedObject var viewModel: JournalData;
     //var type: String
     @State var selectedTab: Int
@@ -27,28 +27,11 @@ struct testView: View {
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
-        
-         
-         
-        /*
-         List {
-             Section(
-                 header: Text("Thorn")) {
-                     Text("Item 1")
-                     Text("Item 2")
-                     Text("Item 3")
-                }
-                     .listRowSeparator(.hidden)
-        }
-        .listStyle(PlainListStyle())
-         */
-         
-        
     }
 }
 
-struct testView_Previews: PreviewProvider {
+struct inputSwipeView_Previews: PreviewProvider {
     static var previews: some View {
-        testView(viewModel: JournalData(), selectedTab: 0)
+        inputSwipeView(viewModel: JournalData(), selectedTab: 0)
     }
 }
