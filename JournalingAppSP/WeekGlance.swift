@@ -14,44 +14,80 @@ struct WeekGlance: View {
         NavigationView {
             List {
                 Section(
-                    header: Text("Rose")) {
+                    header: Text("Roses")
+                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
+                        .foregroundColor(Color("darkColor"))
+                    
+                ) {
                         ForEach(viewModel.savedRoses, id: \.self) { rose in
-                            HStack {
-                                Text(rose.roseMessage ?? "")
-                                Spacer()
-                                Text(rose.dateID!)
+                            NavigationLink(destination: HistoryView(viewModel: viewModel, date: rose.dateID)){
+                                HStack {
+                                    Text(rose.roseMessage ?? "")
+                                    Spacer()
+                                    Text(rose.dateID!)
+                                }
+                                .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
+                                .foregroundColor(Color("darkColor"))
+                                
                             }
-                        }
+                            
+                        }.listRowSeparator(.hidden)
                     }
                 
+                Divider()
+                    .background(Color("veryLightColor"))
+                    .listRowSeparator(.hidden)
+                
                 Section(
-                    header: Text("Bud")) {
+                    header: Text("Buds")
+                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
+                        .foregroundColor(Color("darkColor"))
+                ) {
                         ForEach(viewModel.savedBuds, id: \.self) { bud in
-                            HStack {
-                                Text(bud.budMessage ?? "")
-                                Spacer()
-                                Text(bud.dateID!)
+                            NavigationLink(destination: HistoryView(viewModel: viewModel, date: bud.dateID)){
+                                HStack {
+                                    Text(bud.budMessage ?? "")
+                                    Spacer()
+                                    Text(bud.dateID!)
+                                }
+                                .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
+                                .foregroundColor(Color("darkColor"))
                             }
-                        }
+                        }.listRowSeparator(.hidden)
                     }
                 
+                Divider()
+                    .background(Color("veryLightColor"))
+                    .listRowSeparator(.hidden)
+                
                 Section(
-                    header: Text("Thorn")) {
+                    header: Text("Thorns")
+                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
+                        .foregroundColor(Color("darkColor"))
+                ) {
                         ForEach(viewModel.savedThorns, id: \.self) { thorn in
-                            HStack {
-                                Text(thorn.thornMessage ?? "")
-                                Spacer()
-                                Text(thorn.dateID!)
+                            NavigationLink(destination: HistoryView(viewModel: viewModel, date: thorn.dateID)){
+                                HStack {
+                                    Text(thorn.thornMessage ?? "")
+                                    Spacer()
+                                    Text(thorn.dateID!)
+                                }
+                                .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
+                                .foregroundColor(Color("darkColor"))
                             }
-                        }
+                        }.listRowSeparator(.hidden)
                     }
-            }
-            .navigationTitle("Your week at a glance").font(Font.custom("Poppins-Medium", size: 20))
-            .navigationBarBackButtonHidden(true)
-        }
+            }//end of list
+            .listStyle(PlainListStyle())
+            //.navigationTitle("Your week at a glance")
+            //.font(Font.custom("Poppins-Medium", size: 20))
+            
+        }//end nav view
     }
     
 }
+
+
 
 struct WeekGlance_Previews: PreviewProvider {
     static var previews: some View {
