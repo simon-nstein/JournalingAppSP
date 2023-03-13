@@ -19,6 +19,7 @@ struct HistoryView: View {
     
     var body: some View {
         let currentDate = date
+        // date is formatted like #/#/##
         let matchingRose = viewModel.savedRoses.first{ $0.dateID == currentDate }
         let matchingBud = viewModel.savedBuds.first{ $0.dateID == currentDate }
         let matchingThorn = viewModel.savedThorns.first{ $0.dateID == currentDate }
@@ -35,6 +36,7 @@ struct HistoryView: View {
         //return NavigationView{}
         return VStack{
             NavBarView()
+            //Text(self.date! ?? "")
             
             Text(formattedDate)
                 .foregroundColor(Color("darkColor"))
@@ -99,7 +101,7 @@ struct HistoryView: View {
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView(
-            viewModel: JournalData(), date: "3/12/23"
+            viewModel: JournalData(), date: "3/7/23"
         )
     }
 }

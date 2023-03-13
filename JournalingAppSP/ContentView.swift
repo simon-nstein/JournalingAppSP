@@ -10,7 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: JournalData;
-    let dateFormatter = DateFormatter()
+    //let dateFormatter = DateFormatter()
+    
+    @State var selectedDate: Date = Date()
+    let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
+    let endingDate: Date = Date()
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
     
     
     var body: some View {
@@ -27,12 +37,6 @@ struct ContentView: View {
                      .frame(maxWidth: .infinity, alignment: .leading)
                      .foregroundColor(Color("darkColor"))
                      .padding()
-                    
-                    /*
-                    NavigationLink(destination: testView(viewModel: JournalData(), selectedTab: 1)){
-                        Text("Hello")
-                    }
-                     */
                     
                     
                     TextView(
@@ -121,29 +125,28 @@ struct ContentView: View {
                         
                     }
                     
+                    TextView(
+                        text: "Your Responses at a Glance",
+                        fontSize: CustomFontSize.inputFontSize,
+                        offset: 10,
+                        fontType: "Poppins-SemiBold"
+                    )
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("darkColor"))
                     
-                    HStack{
-                        TextView(
-                            text: "Your Responses at a Glance",
-                            fontSize: CustomFontSize.inputFontSize,
-                            offset: 10,
-                            fontType: "Poppins-SemiBold"
-                        )
-                        .padding(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color("darkColor"))
-                        
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(Color("veryLightColor"))
-                            .padding(.top)
-                            .padding(.trailing, 20)
-                            .font(.system(size: 24))
-                    }
-                    
+                    /*
+                    Image(systemName: "ellipsis")
+                        .foregroundColor(Color("veryLightColor"))
+                        .padding(.top)
+                        .padding(.trailing, 20)
+                        .font(.system(size: 24))
+                    */
+                    testView(viewModel: viewModel) //It has the space on top and bottom because it needs the space to show the History View.
                     WeekGlance(viewModel: viewModel)
-                    
                 }
             }
+            
         }//end
     }
     

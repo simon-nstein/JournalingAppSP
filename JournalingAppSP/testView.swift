@@ -9,46 +9,49 @@ import SwiftUI
 
 struct testView: View {
     @ObservedObject var viewModel: JournalData;
-    //var type: String
-    @State var selectedTab: Int
+    @State private var selectDate = Date()
+    @State private var navigate = false
     
+    @State var selectedDate: Date = Date()
+    let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
+    let endingDate: Date = Date()
+    
+    func dateToString(date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
+            return dateFormatter.string(from: date)
+    }
     
     var body: some View {
-        VStack{
-            NavBarView()
-            TabView(selection: $selectedTab) {
-                InputView(viewModel: viewModel, type: "BUD")
-                    .tag(0)
-                InputView(viewModel: viewModel, type: "ROSE")
-                    .tag(1)
-                InputView(viewModel: viewModel, type: "THORN")
-                    .tag(2)
+        NavigationView {
+            ZStack{
+                
+                //Text(dateToString(date: selectDate))
+                DatePicker(
+                    "",
+                    selection: $selectDate,
+                    in: startingDate...endingDate,
+                    displayedComponents: [.date]
+                )
+                .onChange(of: selectDate) { newValue in
+                    if viewModel.savedRoses.first(where: { $0.dateID == dateToString(date: selectDate) }) != nil {
+                        navigate = true
+                    }
                 }
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        }
-        
-         
-         
-        /*
-         List {
-             Section(
-                 header: Text("Thorn")) {
-                     Text("Item 1")
-                     Text("Item 2")
-                     Text("Item 3")
+                NavigationLink(isActive: $navigate) {
+                    HistoryView(viewModel: viewModel, date: dateToString(date: selectDate))
+                } label: {
+                    EmptyView()
                 }
-                     .listRowSeparator(.hidden)
-        }
-        .listStyle(PlainListStyle())
-         */
-         
-        
-    }
-}
+            } //end VStack
+            //.background(Color("darkColor"))
+            
+        } //end NavView
+    }//end body
+}//end struct
 
 struct testView_Previews: PreviewProvider {
     static var previews: some View {
-        testView(viewModel: JournalData(), selectedTab: 0)
+        testView(viewModel: JournalData())
     }
 }

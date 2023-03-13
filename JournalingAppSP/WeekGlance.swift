@@ -54,11 +54,13 @@ struct WeekGlance: View {
                                 .foregroundColor(Color("darkColor"))
                             }
                         }.listRowSeparator(.hidden)
-                    }
+                        
+                    }.offset(y:-30)
                 
                 Divider()
                     .background(Color("veryLightColor"))
                     .listRowSeparator(.hidden)
+                    .offset(y:-30)
                 
                 Section(
                     header: Text("Thorns")
@@ -76,7 +78,7 @@ struct WeekGlance: View {
                                 .foregroundColor(Color("darkColor"))
                             }
                         }.listRowSeparator(.hidden)
-                    }
+                    }.offset(y:-60)
             }//end of list
             .listStyle(PlainListStyle())
             //.navigationTitle("Your week at a glance")
