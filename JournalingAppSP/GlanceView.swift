@@ -7,77 +7,83 @@
 
 import SwiftUI
 
+
 struct GlanceView: View {
     let viewModel: JournalData
+    @State private var selectedView = "Week"
+    @State private var selectedButton = "Week"
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical) {
-                
+            VStack{
                 HStack(){
-                    Text("Week")
-                    Spacer()
-                    Text("Month")
-                    Spacer()
-                    Text("6 Months")
-                    Spacer()
-                    Text("Year")
-                }
-                .padding()
-                
-                
-                /*
-                ForEach(viewModel.savedRoses, id: \.self) { rose in
-                    HStack {
-                        Text(rose.roseMessage ?? "")
-                        Spacer()
-                        Text(rose.dateID!)
+                    Button(action: {
+                        self.selectedView = "Week"
+                        self.selectedButton = "Week"
+                    }) {
+                        Text("Week")
+                            .foregroundColor(selectedButton == "Week" ? Color("darkColor") : Color("veryLightColor"))
                     }
-                }
-                
-                
-                
-                
-                
-                List {
-                    Section(
-                        header: Text("Rose")) {
-                            ForEach(viewModel.savedRoses, id: \.self) { rose in
-                                HStack {
-                                    Text(rose.roseMessage ?? "")
-                                    Spacer()
-                                    Text(rose.dateID!)
-                                }
-                            }
-                        }
                     
-                    Section(
-                        header: Text("Bud")) {
-                            ForEach(viewModel.savedBuds, id: \.self) { bud in
-                                HStack {
-                                    Text(bud.budMessage ?? "")
-                                    Spacer()
-                                    Text(bud.dateID!)
-                                }
-                            }
-                        }
+                    Spacer()
                     
-                    Section(
-                        header: Text("Thorn")) {
-                            ForEach(viewModel.savedThorns, id: \.self) { thorn in
-                                HStack {
-                                    Text(thorn.thornMessage ?? "")
-                                    Spacer()
-                                    Text(thorn.dateID!)
-                                }
-                            }
-                        }
+                    Button(action: {
+                        self.selectedView = "Month"
+                        self.selectedButton = "Month"
+                    }) {
+                        Text("Month")
+                            .foregroundColor(selectedButton == "Month" ? Color("darkColor") : Color("veryLightColor"))
+                    }
+                    Spacer()
+                    
+                    Button(action: {
+                        self.selectedView = "SixMonths"
+                        self.selectedButton = "SixMonths"
+                    }) {
+                        Text("6 Months")
+                            .foregroundColor(selectedButton == "SixMonths" ? Color("darkColor") : Color("veryLightColor"))
+                    }
+                    Spacer()
+                    
+                    Button(action: {
+                        self.selectedView = "Year"
+                        self.selectedButton = "Year"
+                    }) {
+                        Text("Year")
+                            .foregroundColor(selectedButton == "Year" ? Color("darkColor") : Color("veryLightColor"))
+                    }
+                }//end HStack
+                .padding()
+                if selectedView == "Week" {
+                    //Text("Week")
+                    WeekGlance(viewModel: JournalData())
                 }
-                 */
-            }
-                 
-        }//end of list
-    }
+                if selectedView == "Month" {
+                    Text("Week")
+                }
+                if selectedView == "SixMonths" {
+                    Text("Week")
+                }
+                if selectedView == "Year" {
+                    Text("Week")
+                }
+                Spacer()
+            }//end VStack
+            
+        }//end NavView
+        .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
+        .foregroundColor(Color("darkColor"))
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//end of body
     
 }
 

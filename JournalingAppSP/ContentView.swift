@@ -154,6 +154,7 @@ struct ContentView: View {
                                  .font(.system(size: 24))
                                  .padding(.top)
                                  .padding(.trailing, 20)
+                                 .offset(y: 3)
                                  .foregroundColor(Color("veryLightColor"))
                                  .overlay {
                                  DatePicker(
@@ -176,7 +177,7 @@ struct ContentView: View {
                             }
                         } //end VStack
                 }
-                    WeekGlance(viewModel: viewModel)
+                    GlanceView(viewModel: JournalData())
                 }
             }
             
