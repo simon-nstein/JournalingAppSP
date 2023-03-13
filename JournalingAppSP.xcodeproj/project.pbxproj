@@ -13,6 +13,7 @@
 		3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98C129B2790100804A6A /* ContentModel.swift */; };
 		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
 		F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CB29BE99140054E7AF /* inputSwipeView.swift */; };
+		F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CF29BF7B130054E7AF /* TestTwoView.swift */; };
 		F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */; };
 		F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */; };
 		F6E6D1AE29B1A88A00DF59B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		3FBD98C629B2879800804A6A /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F64552CB29BE99140054E7AF /* inputSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputSwipeView.swift; sourceTree = "<group>"; };
+		F64552CF29BF7B130054E7AF /* TestTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTwoView.swift; sourceTree = "<group>"; };
 		F6E6D1A629B1A88800DF59B5 /* JournalingAppSP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JournalingAppSP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalingAppSPApp.swift; sourceTree = "<group>"; };
 		F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -87,6 +89,7 @@
 				3FDAECF529B7F69500C9A633 /* InputView.swift */,
 				F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */,
 				F6E6D1E729BD4B8D00DF59B5 /* testView.swift */,
+				F64552CF29BF7B130054E7AF /* TestTwoView.swift */,
 				F64552CB29BE99140054E7AF /* inputSwipeView.swift */,
 				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
 				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
@@ -197,6 +200,7 @@
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
 				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
 				F6E6D1E629BD111500DF59B5 /* HistoryView.swift in Sources */,
+				F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */,
 				3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
 			);

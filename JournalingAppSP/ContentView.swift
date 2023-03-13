@@ -22,6 +22,17 @@ struct ContentView: View {
         return formatter
     }
     
+    //Added for DatePicker
+    @State private var selectDate = Date()
+    @State private var navigate = false
+    //End take out
+    
+    func dateToString(date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
+            return dateFormatter.string(from: date)
+    }
+    
     
     var body: some View {
         NavigationView {
@@ -34,9 +45,9 @@ struct ContentView: View {
                         offset: 0,
                         fontType: "Poppins-Bold"
                     )
-                     .frame(maxWidth: .infinity, alignment: .leading)
-                     .foregroundColor(Color("darkColor"))
-                     .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("darkColor"))
+                    .padding()
                     
                     
                     TextView(
@@ -125,24 +136,46 @@ struct ContentView: View {
                         
                     }
                     
-                    TextView(
-                        text: "Your Responses at a Glance",
-                        fontSize: CustomFontSize.inputFontSize,
-                        offset: 10,
-                        fontType: "Poppins-SemiBold"
-                    )
-                    .padding(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("darkColor"))
-                    
-                    /*
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(Color("veryLightColor"))
-                        .padding(.top)
-                        .padding(.trailing, 20)
-                        .font(.system(size: 24))
-                    */
-                    testView(viewModel: viewModel) //It has the space on top and bottom because it needs the space to show the History View.
+                    HStack{
+                        TextView(
+                            text: "Your Responses at a Glance",
+                            fontSize: CustomFontSize.inputFontSize,
+                            offset: 10,
+                            fontType: "Poppins-SemiBold"
+                        )
+                        .padding(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("darkColor"))
+                        
+                        //Three dots that open calendar
+                        ZStack{
+                            //Text(dateToString(date: selectDate))
+                             Image(systemName: "ellipsis")
+                                 .font(.system(size: 24))
+                                 .padding(.top)
+                                 .padding(.trailing, 20)
+                                 .foregroundColor(Color("veryLightColor"))
+                                 .overlay {
+                                 DatePicker(
+                                     "",
+                                     selection: $selectDate,
+                                     in: startingDate...endingDate,
+                                     displayedComponents: [.date]
+                                    )
+                                    .blendMode(.destinationOver)
+                                     .onChange(of: selectDate) { newValue in
+                                         if viewModel.savedRoses.first(where: { $0.dateID == dateToString(date: selectDate) }) != nil {
+                                             navigate = true
+                                         }
+                                     }
+                            }
+                            NavigationLink(isActive: $navigate) {
+                                HistoryView(viewModel: viewModel, date: dateToString(date: selectDate))
+                            } label: {
+                                EmptyView()
+                            }
+                        } //end VStack
+                }
                     WeekGlance(viewModel: viewModel)
                 }
             }

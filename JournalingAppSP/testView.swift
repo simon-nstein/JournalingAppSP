@@ -25,8 +25,28 @@ struct testView: View {
     var body: some View {
         NavigationView {
             ZStack{
-                
                 //Text(dateToString(date: selectDate))
+                 Image(systemName: "ellipsis")
+                     .font(.system(size: 30))
+                     .foregroundColor(Color("veryLightColor"))
+                     .overlay {
+                     DatePicker(
+                         "",
+                         selection: $selectDate,
+                         in: startingDate...endingDate,
+                         displayedComponents: [.date]
+                        )
+                        .blendMode(.destinationOver)
+                         .onChange(of: selectDate) { newValue in
+                             if viewModel.savedRoses.first(where: { $0.dateID == dateToString(date: selectDate) }) != nil {
+                                 navigate = true
+                             }
+                         }
+                }
+                 
+                
+                
+                /*
                 DatePicker(
                     "",
                     selection: $selectDate,
@@ -38,6 +58,8 @@ struct testView: View {
                         navigate = true
                     }
                 }
+                 */
+                
                 NavigationLink(isActive: $navigate) {
                     HistoryView(viewModel: viewModel, date: dateToString(date: selectDate))
                 } label: {
