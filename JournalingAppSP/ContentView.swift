@@ -62,7 +62,7 @@ struct ContentView: View {
                     
                     TextView(
                         text: "Take a moment to reflect and click each box to capture your thoughts...",
-                        fontSize: 18,
+                        fontSize: CustomFontSize.standardFontSize,
                         offset: 0,
                         fontType: "Poppins-Regular"
                     )

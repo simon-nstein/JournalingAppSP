@@ -59,13 +59,13 @@ struct GlanceView: View {
                     WeekGlance(viewModel: JournalData())
                 }
                 if selectedView == "Month" {
-                    Text("Week")
+                    Text("Month")
                 }
                 if selectedView == "SixMonths" {
-                    Text("Week")
+                    Text("Six Months")
                 }
                 if selectedView == "Year" {
-                    Text("Week")
+                    Text("Year")
                 }
                 Spacer()
             }//end VStack

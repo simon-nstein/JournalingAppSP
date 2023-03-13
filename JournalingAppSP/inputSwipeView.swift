@@ -17,9 +17,9 @@ struct inputSwipeView: View {
         VStack{
             NavBarView()
             TabView(selection: $selectedTab) {
-                InputView(viewModel: viewModel, type: "BUD")
-                    .tag(0)
                 InputView(viewModel: viewModel, type: "ROSE")
+                    .tag(0)
+                InputView(viewModel: viewModel, type: "BUD")
                     .tag(1)
                 InputView(viewModel: viewModel, type: "THORN")
                     .tag(2)
