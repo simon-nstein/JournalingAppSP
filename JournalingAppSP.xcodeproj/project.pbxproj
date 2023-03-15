@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F322C5829C25CC500B62873 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322C5729C25CC500B62873 /* profileView.swift */; };
 		3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */; };
 		3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F729B5A51200FAEB20 /* WeekGlance.swift */; };
 		3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98BF29B278A700804A6A /* ContentViewModel.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F322C5729C25CC500B62873 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
 		3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalCoreData.xcdatamodel; sourceTree = "<group>"; };
 		3F4814F729B5A51200FAEB20 /* WeekGlance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGlance.swift; sourceTree = "<group>"; };
 		3FBD98BF29B278A700804A6A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				3FC6E9B229C18CE1004D9531 /* Poppins (1) */,
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
+				3F322C5729C25CC500B62873 /* profileView.swift */,
 				3FDAECF529B7F69500C9A633 /* InputView.swift */,
 				F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */,
 				F6E6D1E729BD4B8D00DF59B5 /* testView.swift */,
@@ -116,11 +119,11 @@
 				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
 				F6E6D1E529BD111500DF59B5 /* HistoryView.swift */,
 				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
+				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
 				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
 				3FBD98C129B2790100804A6A /* ContentModel.swift */,
 				F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */,
 				F6E6D1AF29B1A88A00DF59B5 /* Preview Content */,
-				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
 				3FC6E9BF29C19C6C004D9531 /* Auth0.plist */,
 			);
 			path = JournalingAppSP;
@@ -221,6 +224,7 @@
 			files = (
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
 				F6E6D1E429BD04FA00DF59B5 /* GlanceView.swift in Sources */,
+				3F322C5829C25CC500B62873 /* profileView.swift in Sources */,
 				F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */,
 				F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */,
 				F6E6D1E829BD4B8D00DF59B5 /* testView.swift in Sources */,

@@ -53,7 +53,9 @@ struct ContentView: View {
                         .padding()
                         
                         // Profile
-                        UserImage(urlString: userProfile.picture)
+                        NavigationLink(destination: profileView(userProfile: self.userProfile)){
+                            UserImage(urlString: userProfile.picture)
+                        }.padding()
                     }
                     
                     
@@ -118,6 +120,7 @@ struct ContentView: View {
                                     /*self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : */"Highlight a success or something positive today."),
                                 image: Image("roseIMG")
                             )
+                            .hoverEffect(.lift)
                         }
                         
                         NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 1)) {
@@ -129,6 +132,7 @@ struct ContentView: View {
                                 image: Image("thornIMG")
                                 //imageName: "roseIMG"
                             )
+                            .hoverEffect(.lift)
                         }
                         
                         NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 2)) {
@@ -140,6 +144,7 @@ struct ContentView: View {
                                 image: Image("budIMG")
                                 //imageName: "roseIMG"
                             )
+                            .hoverEffect(.lift)
                         }
                         
                     }
@@ -200,18 +205,6 @@ struct ContentView: View {
         return dateFormatter.string(from: currentDate)
     }
     
-    struct TextView: View {
-        let text: String
-        let fontSize: CGFloat
-        let offset: CGFloat
-        let fontType: String
-        
-        var body: some View {
-            Text(text)
-                .offset(y: offset)
-                .font(Font.custom(fontType, size: fontSize))
-        }
-    }
     
     // A View that allows you to easily reuse code to turn values into a "card"
     struct Cardify: View {
@@ -294,22 +287,35 @@ struct UserImage: View {
     var body: some View {
         AsyncImage(url: URL(string: urlString)) { image in
             image
-                .frame(maxWidth: 128)
+                .resizable()
+                .frame(maxWidth: 64, maxHeight: 54)
+                .padding()
         } placeholder: {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 128)
+                .frame(maxWidth: 64)
                 .foregroundColor(.blue)
                 .opacity(0.5)
         }
-        .padding(40)
+    }
+}
+
+struct TextView: View {
+    let text: String
+    let fontSize: CGFloat
+    let offset: CGFloat
+    let fontType: String
+    
+    var body: some View {
+        Text(text)
+            .offset(y: offset)
+            .font(Font.custom(fontType, size: fontSize))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {    
     static var previews: some View {
-        //ContentView(viewModel: JournalData())
-        LoginSystemView()
+        ContentView(viewModel: JournalData(), userProfile: Profile.empty)
     }
 }

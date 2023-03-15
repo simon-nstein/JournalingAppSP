@@ -18,7 +18,7 @@ struct LoginSystemView: View {
             
             VStack {
                 
-                Text("SwiftUI Login demo")
+                Text("Rose, Bud, Thorn")
                     .modifier(TitleStyle())
                 
                 Button("Log in") {
@@ -62,23 +62,22 @@ struct LoginSystemView: View {
     
     struct TitleStyle: ViewModifier {
         let titleFontBold = Font.title.weight(.bold)
-        let navyBlue = Color(red: 0, green: 0, blue: 0.5)
         
         func body(content: Content) -> some View {
             content
                 .font(titleFontBold)
-                .foregroundColor(navyBlue)
+                .foregroundColor(CustomColor.darkButtonColor)
                 .padding()
         }
     }
     
     struct MyButtonStyle: ButtonStyle {
-        let navyBlue = Color(red: 0, green: 0, blue: 0.5)
+        let darkColor = CustomColor.darkButtonColor
         
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .padding()
-                .background(navyBlue)
+                .background(darkColor)
                 .foregroundColor(.white)
                 .clipShape(Capsule())
         }
