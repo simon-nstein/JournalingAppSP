@@ -11,7 +11,8 @@ import SwiftUI
 struct JournalingAppSPApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: JournalData())
+            //ContentView(viewModel: JournalData())
+            LoginSystemView()
         }
     }
 }

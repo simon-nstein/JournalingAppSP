@@ -15,6 +15,9 @@
 		3FC6E9AD29C18B91004D9531 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9AC29C18B91004D9531 /* Poppins-Regular.ttf */; };
 		3FC6E9AF29C18B9D004D9531 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9AE29C18B9D004D9531 /* Poppins-SemiBold.ttf */; };
 		3FC6E9B329C18CE1004D9531 /* Poppins (1) in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9B229C18CE1004D9531 /* Poppins (1) */; };
+		3FC6E9B529C18E10004D9531 /* LoginSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */; };
+		3FC6E9BE29C19AE2004D9531 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC6E9BD29C19AE2004D9531 /* Auth0 */; };
+		3FC6E9C029C19C6C004D9531 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9BF29C19C6C004D9531 /* Auth0.plist */; };
 		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
 		F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CB29BE99140054E7AF /* inputSwipeView.swift */; };
 		F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CF29BF7B130054E7AF /* TestTwoView.swift */; };
@@ -39,6 +42,11 @@
 		3FC6E9AE29C18B9D004D9531 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../Poppins (1)/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		3FC6E9B029C18BF4004D9531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FC6E9B229C18CE1004D9531 /* Poppins (1) */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Poppins (1)"; path = "../../Poppins (1)"; sourceTree = "<group>"; };
+		3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSystemView.swift; sourceTree = "<group>"; };
+		3FC6E9B729C1960E004D9531 /* Auth0.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Auth0.swift; path = ../../Desktop/Auth0.swift; sourceTree = "<group>"; };
+		3FC6E9B829C19646004D9531 /* JWTDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JWTDecode.swift; path = ../../Desktop/JWTDecode.swift; sourceTree = "<group>"; };
+		3FC6E9BB29C19A59004D9531 /* Auth0.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Auth0.swift; path = ../../Desktop/Auth0.swift; sourceTree = "<group>"; };
+		3FC6E9BF29C19C6C004D9531 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F64552CB29BE99140054E7AF /* inputSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputSwipeView.swift; sourceTree = "<group>"; };
 		F64552CF29BF7B130054E7AF /* TestTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTwoView.swift; sourceTree = "<group>"; };
@@ -58,15 +66,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC6E9BE29C19AE2004D9531 /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FC6E9B629C1960E004D9531 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3FC6E9B729C1960E004D9531 /* Auth0.swift */,
+				3FC6E9B829C19646004D9531 /* JWTDecode.swift */,
+				3FC6E9BB29C19A59004D9531 /* Auth0.swift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		F6E6D19D29B1A88800DF59B5 = {
 			isa = PBXGroup;
 			children = (
+				3FC6E9B629C1960E004D9531 /* Packages */,
 				F6E6D1A829B1A88800DF59B5 /* JournalingAppSP */,
 				F6E6D1A729B1A88800DF59B5 /* Products */,
 			);
@@ -83,6 +103,7 @@
 		F6E6D1A829B1A88800DF59B5 /* JournalingAppSP */ = {
 			isa = PBXGroup;
 			children = (
+				3FC6E9B029C18BF4004D9531 /* Info.plist */,
 				3FC6E9B229C18CE1004D9531 /* Poppins (1) */,
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
@@ -99,7 +120,8 @@
 				3FBD98C129B2790100804A6A /* ContentModel.swift */,
 				F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */,
 				F6E6D1AF29B1A88A00DF59B5 /* Preview Content */,
-				3FC6E9B029C18BF4004D9531 /* Info.plist */,
+				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
+				3FC6E9BF29C19C6C004D9531 /* Auth0.plist */,
 			);
 			path = JournalingAppSP;
 			sourceTree = "<group>";
@@ -132,6 +154,9 @@
 			dependencies = (
 			);
 			name = JournalingAppSP;
+			packageProductDependencies = (
+				3FC6E9BD29C19AE2004D9531 /* Auth0 */,
+			);
 			productName = JournalingAppSP;
 			productReference = F6E6D1A629B1A88800DF59B5 /* JournalingAppSP.app */;
 			productType = "com.apple.product-type.application";
@@ -160,6 +185,9 @@
 				Base,
 			);
 			mainGroup = F6E6D19D29B1A88800DF59B5;
+			packageReferences = (
+				3FC6E9BC29C19AE2004D9531 /* XCRemoteSwiftPackageReference "Auth0" */,
+			);
 			productRefGroup = F6E6D1A729B1A88800DF59B5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -180,6 +208,7 @@
 				3FC6E9AF29C18B9D004D9531 /* Poppins-SemiBold.ttf in Resources */,
 				3FC6E9B329C18CE1004D9531 /* Poppins (1) in Resources */,
 				3FC6E9AD29C18B91004D9531 /* Poppins-Regular.ttf in Resources */,
+				3FC6E9C029C19C6C004D9531 /* Auth0.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +226,7 @@
 				F6E6D1E829BD4B8D00DF59B5 /* testView.swift in Sources */,
 				3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */,
 				F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */,
+				3FC6E9B529C18E10004D9531 /* LoginSystemView.swift in Sources */,
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
 				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
 				F6E6D1E629BD111500DF59B5 /* HistoryView.swift in Sources */,
@@ -406,6 +436,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3FC6E9BC29C19AE2004D9531 /* XCRemoteSwiftPackageReference "Auth0" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3FC6E9BD29C19AE2004D9531 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FC6E9BC29C19AE2004D9531 /* XCRemoteSwiftPackageReference "Auth0" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */ = {

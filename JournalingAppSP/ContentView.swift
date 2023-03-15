@@ -10,11 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: JournalData;
-    //let dateFormatter = DateFormatter()
+    var userProfile: Profile
+    @State var selectedDate = Date()
     
-    @State var selectedDate: Date = Date()
+    
     let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
-    let endingDate: Date = Date()
+    let endingDate = Date()
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -39,15 +40,22 @@ struct ContentView: View {
             ScrollView(.vertical) {
                 VStack {
                     //Homepage Headers
-                    TextView(
-                        text: self.viewModel.greeting,
-                        fontSize: CustomFontSize.largeFontSize,
-                        offset: 0,
-                        fontType: "Poppins-Bold"
-                    )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("darkColor"))
-                    .padding()
+                    HStack {
+                        //Greeting
+                        TextView(
+                            text: self.viewModel.greeting,
+                            fontSize: CustomFontSize.largeFontSize,
+                            offset: 0,
+                            fontType: "Poppins-Bold"
+                        )
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("darkColor"))
+                        .padding()
+                        
+                        // Profile
+                        UserImage(urlString: userProfile.picture)
+                    }
+                    
                     
                     
                     TextView(
@@ -275,8 +283,33 @@ struct ContentView: View {
     }
 }
 
+struct UserImage: View {
+    // Given the URL of the user’s picture, this view asynchronously
+    // loads that picture and displays it. It displays a “person”
+    // placeholder image while downloading the picture or if
+    // the picture has failed to download.
+    
+    var urlString: String
+    
+    var body: some View {
+        AsyncImage(url: URL(string: urlString)) { image in
+            image
+                .frame(maxWidth: 128)
+        } placeholder: {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 128)
+                .foregroundColor(.blue)
+                .opacity(0.5)
+        }
+        .padding(40)
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {    
     static var previews: some View {
-        ContentView(viewModel: JournalData())
+        //ContentView(viewModel: JournalData())
+        LoginSystemView()
     }
 }
