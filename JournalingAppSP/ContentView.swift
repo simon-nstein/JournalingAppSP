@@ -10,94 +10,198 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel: JournalData;
-    let dateFormatter = DateFormatter()
+    //let dateFormatter = DateFormatter()
+    
+    @State var selectedDate: Date = Date()
+    let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
+    let endingDate: Date = Date()
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter
+    }
+    
+    //Added for DatePicker
+    @State private var selectDate = Date()
+    @State private var navigate = false
+    //End take out
+    
+    func dateToString(date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
+            return dateFormatter.string(from: date)
+    }
+    
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
                 VStack {
-                    HStack{
-                        //Homepage Headers
-                        OffsetTextView(
-                            text: self.viewModel.greeting,
-                            fontSize: CustomFontSize.largeFontSize,
-                            offset: 0
-                            
-                        )
-                        Spacer()
-                        
-                        NavigationLink(destination: WeekGlance(viewModel: self.viewModel)) {
-                            Image(systemName: "calendar")
-                                .font(.system(size: 30))
-                        }
-                            
-                    }
+                    //Homepage Headers
+                    TextView(
+                        text: self.viewModel.greeting,
+                        fontSize: CustomFontSize.largeFontSize,
+                        offset: 0,
+                        fontType: "Poppins-Bold"
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("darkColor"))
                     .padding()
                     
-                    VStack {
-                        HStack{
-                            OffsetTextView(
-                                text: "Take some time to reflect and click on each of the boxes below to capture your thoughts...",
-                                fontSize: 16,
-                                offset: 20
-                            )
-                            .foregroundColor(CustomColor.TextColor)
-                            Spacer()
-                        }.padding()
+                    
+                    TextView(
+                        text: "Daily Response",
+                        fontSize: CustomFontSize.inputFontSize,
+                        offset: 0,
+                        fontType: "Poppins-SemiBold"
+                    )
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("darkColor"))
+                    
+                    TextView(
+                        text: "Take a moment to reflect and click each box to capture your thoughts...",
+                        fontSize: CustomFontSize.standardFontSize,
+                        offset: 0,
+                        fontType: "Poppins-Regular"
+                    )
+                    .padding(.top, -7)
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(Color("LighterColor"))
+                    
+                    
+                    
+                    if (self.viewModel.getTodaysRose() != nil && self.viewModel.getTodaysBud() != nil && self.viewModel.getTodaysThorn() != nil) {
                         
-                        // Scroll view of rose, bud, thorn
-                        /** Testing the new input view */
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "ROSE")){
+                        NavigationLink(destination: HistoryView(viewModel: viewModel, date: getCurrentDate())){
+                            RoundedRectangle(cornerRadius: 15)
+                                .frame(width: 350, height: 100)
+                                .foregroundColor(Color("lightCard"))
+                                .overlay(
+                                    HStack{
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(Color("checkGreen"))
+                                            .font(.system(size: 43))
+                                        Text("Your responses today are complete and recorded.")
+                                            .multilineTextAlignment(.leading)
+                                            .foregroundColor(CustomColor.TextColor)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(Color("veryLightColor"))
+                                            .padding([.top, .bottom, .trailing])
+                                            .font(.system(size: 24))
+                                        
+                                    }
+                                        .padding(.top)
+                                        .padding(.bottom)
+                                        .padding(.trailing, -5)
+                                        .padding(.leading)
+                                )
+                            
+                        }
+                    } else{
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 0)){
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "ROSE",
+                                title: "Rose",
                                 paragraph: (
-                                    self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : "Highlight a success, small win, or something positive that happened today or that you are planning for today.")
+                                    /*self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : */"Highlight a success or something positive today."),
+                                image: Image("roseIMG")
                             )
                         }
                         
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "BUD")) {
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 1)) {
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "BUD",
+                                title: "Thorn",
                                 paragraph: (
-                                    self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : "A challenge you experienced or something you can use more support with.")
+                                    /*self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : */"Describe a challenge you experienced today."),
+                                image: Image("thornIMG")
+                                //imageName: "roseIMG"
                             )
                         }
-                        NavigationLink(destination: InputView(viewModel: viewModel, type: "THORN")) {
+                        
+                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 2)) {
                             Cardify(
                                 viewModel:self.viewModel,
-                                title: "THORN",
+                                title: "Bud",
                                 paragraph: (
-                                    self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing.")
+                                    /*self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : */"Explain something that you’re looking forward to."),
+                                image: Image("budIMG")
+                                //imageName: "roseIMG"
                             )
                         }
-                    }.offset(y: -20)
+                        
+                    }
                     
-                    
-                    
+                    HStack{
+                        TextView(
+                            text: "Your Responses at a Glance",
+                            fontSize: CustomFontSize.inputFontSize,
+                            offset: 10,
+                            fontType: "Poppins-SemiBold"
+                        )
+                        .padding(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("darkColor"))
+                        
+                        //Three dots that open calendar
+                        ZStack{
+                            //Text(dateToString(date: selectDate))
+                             Image(systemName: "ellipsis")
+                                 .font(.system(size: 24))
+                                 .padding(.top)
+                                 .padding(.trailing, 20)
+                                 .offset(y: 3)
+                                 .foregroundColor(Color("veryLightColor"))
+                                 .overlay {
+                                 DatePicker(
+                                     "",
+                                     selection: $selectDate,
+                                     in: startingDate...endingDate,
+                                     displayedComponents: [.date]
+                                    )
+                                    .blendMode(.destinationOver)
+                                     .onChange(of: selectDate) { newValue in
+                                         if viewModel.savedRoses.first(where: { $0.dateID == dateToString(date: selectDate) }) != nil {
+                                             navigate = true
+                                         }
+                                     }
+                            }
+                            NavigationLink(isActive: $navigate) {
+                                HistoryView(viewModel: viewModel, date: dateToString(date: selectDate))
+                            } label: {
+                                EmptyView()
+                            }
+                        } //end VStack
+                }
+                    GlanceView(viewModel: JournalData())
                 }
             }
-        }
+            
+        }//end
     }
     
     func getCurrentDate() -> String {
         let location = Locale.current
         let currentDate = Date()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .short
         dateFormatter.locale = location
         return dateFormatter.string(from: currentDate)
     }
     
-    struct OffsetTextView: View {
+    struct TextView: View {
         let text: String
         let fontSize: CGFloat
         let offset: CGFloat
+        let fontType: String
         
         var body: some View {
             Text(text)
                 .offset(y: offset)
-                .font(Font.custom("Poppins-Medium", size: fontSize))
+                .font(Font.custom(fontType, size: fontSize))
         }
     }
     
@@ -106,37 +210,67 @@ struct ContentView: View {
         let viewModel: JournalData
         let title: String
         let paragraph: String
+        let image: Image
+        //let imageName: String
         
         var cardColor: Color {
             switch(title) {
-                case "ROSE":
+                case "Rose":
                     return CustomColor.RoseColor
-                case "BUD":
+                case "Thorn":
                     return CustomColor.BudColor
-                case "THORN":
+                case "Bud":
                     return CustomColor.ThornColor
                 default:
                     return CustomColor.TextColor
             }
         }
         
+
+        
         var body: some View {
             RoundedRectangle(cornerRadius: 15)
-                .frame(width: 350, height: 200)
+                .frame(width: 350, height: 100)
                 .foregroundColor(self.cardColor)
                 .overlay(
-                        VStack {
-                            Text(self.title)
-                                .font(Font.custom("Poppins-Medium", size: CustomFontSize.largeFontSize))
+                    HStack{
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 100.0)
+                        
+                        VStack(alignment: .leading) {
+                            HStack{
+                                Text(self.title)
+                                    .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
+                                    .foregroundColor(Color("darkColor"))
+                                /*
+                                if self.viewModel.getTodaysRose() != nil {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(Color("checkGreen"))
+                                        .font(.system(size: 19))
+                                }
+                                 */
+                            }
                             Text(self.paragraph)
+                                .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
                                 .foregroundColor(CustomColor.TextColor)
-                                .offset(y: 10)
-                            Spacer()
+                                .multilineTextAlignment(.leading)
+                    
                         }
+                        .padding([.top, .bottom, .trailing], 6.0)
+                        .offset(x: -10)
                         .foregroundColor(.black)
-                        .font(Font.custom("Poppins-Medium", size: CustomFontSize.standardFontSize))
-                        .padding()
-                )       .padding(.vertical, 8.0)
+                        
+                        
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(Color("veryLightColor"))
+                            .padding([.top, .bottom, .trailing])
+                            .font(.system(size: 24))
+                        
+                    }
+                )
+                .padding(.vertical, 8.0)
         }
     }
 }

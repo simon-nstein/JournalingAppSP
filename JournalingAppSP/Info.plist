@@ -5,6 +5,12 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Medium.ttf</string>
+<<<<<<< HEAD
+=======
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-SemiBold.ttf</string>
+		<string>Poppins-Bold.ttf</string>
+>>>>>>> ba64b0d6d0f4638d8123617d979fbde6769fdd1b
 	</array>
 </dict>
 </plist>

@@ -13,9 +13,9 @@ struct InputView: View {
     var type: String
     var headerText: String {
         switch self.type {
-            case "ROSE": return "Highlight a success, small win, or something positive that happened today or that you are planning for today."
-            case "BUD": return "A challenge you experienced or something you can use more support with."
-            case "THORN": return "New ideas that have blossomed or something you are looking forward to knowing more about or experiencing."
+            case "ROSE": return "Highlight a success or something positive today."
+            case "BUD": return "Describe a challenge you experienced today."
+            case "THORN": return "Explain something that you’re looking forward to."
             default: return "Default text"
         }
     }
@@ -23,9 +23,12 @@ struct InputView: View {
     @State var userInput = ""
     var body: some View {
         VStack {
+            //NavBarView()
             Text(headerText)
-                .padding(.leading)
-                .foregroundColor(CustomColor.TextColor)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(Color("darkColor"))
+                .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.largeFontSize))
         
             TextField(
                 "Start Typing...",
@@ -34,22 +37,25 @@ struct InputView: View {
             )
             .lineLimit(5...100)
             .padding()
+            .font(Font.custom("Poppins-Regular", size: 24))
     
             // Saving the data
-            .onChange(of: userInput) {
+            //onDisappear
+            //.onChange(of: userInput) {
+            .onDisappear {
                 if self.type == "ROSE" {
-                    self.viewModel.roseInput = $0
-                    self.viewModel.addRose(with: $0)
+                    self.viewModel.roseInput = self.userInput
+                    self.viewModel.addRose(with: self.userInput)
                 }
                 
                 if self.type == "BUD" {
-                    self.viewModel.budInput = $0
-                    self.viewModel.addBud(with: $0)
+                    self.viewModel.budInput = self.userInput
+                    self.viewModel.addBud(with: self.userInput)
                 }
                 
                 if self.type == "THORN" {
-                    self.viewModel.thornInput = $0
-                    self.viewModel.addThorn(with: $0)
+                    self.viewModel.thornInput = self.userInput
+                    self.viewModel.addThorn(with: self.userInput)
                 }
                 self.viewModel.saveData()
             }
@@ -67,16 +73,10 @@ struct InputView: View {
                 }
                 
             }
-            
             Spacer()
-            Image(systemName: "mic.circle.fill")
-                .offset(y: -20)
-                .font(.system(size: 60))
-                .foregroundColor(.black)
         }
-        .offset(y: 40)
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
-        
+        .navigationBarBackButtonHidden(true)
     }
 }
 
