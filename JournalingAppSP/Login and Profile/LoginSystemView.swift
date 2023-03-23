@@ -17,10 +17,7 @@ struct LoginSystemView: View {
         } else {
             
             VStack {
-                
-                Text("Rose, Bud, Thorn")
-                    .modifier(TitleStyle())
-                
+        
                 Button("Log in") {
                     login()
                 }

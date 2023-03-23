@@ -75,6 +75,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F209E0E29CBD1C700028B56 /* Test Views */ = {
+			isa = PBXGroup;
+			children = (
+				F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */,
+				F6E6D1E729BD4B8D00DF59B5 /* testView.swift */,
+				F64552CF29BF7B130054E7AF /* TestTwoView.swift */,
+			);
+			path = "Test Views";
+			sourceTree = "<group>";
+		};
+		3F209E0F29CBD20E00028B56 /* Model and Viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
+				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
+				3FBD98C129B2790100804A6A /* ContentModel.swift */,
+			);
+			path = "Model and Viewmodel";
+			sourceTree = "<group>";
+		};
+		3F209E1029CBD22400028B56 /* Login and Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3F322C5729C25CC500B62873 /* profileView.swift */,
+				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
+			);
+			path = "Login and Profile";
+			sourceTree = "<group>";
+		};
+		3F209E1129CBD24200028B56 /* Glance Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
+				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
+				F6E6D1E529BD111500DF59B5 /* HistoryView.swift */,
+			);
+			path = "Glance Views";
+			sourceTree = "<group>";
+		};
+		3F209E1229CBD25500028B56 /* User Input Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FDAECF529B7F69500C9A633 /* InputView.swift */,
+				F64552CB29BE99140054E7AF /* inputSwipeView.swift */,
+			);
+			path = "User Input Views";
+			sourceTree = "<group>";
+		};
+		3F209E1329CBD27F00028B56 /* MAIN */ = {
+			isa = PBXGroup;
+			children = (
+				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
+				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
+			);
+			path = MAIN;
+			sourceTree = "<group>";
+		};
 		3FC6E9B629C1960E004D9531 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,21 +164,12 @@
 			children = (
 				3FC6E9B029C18BF4004D9531 /* Info.plist */,
 				3FC6E9B229C18CE1004D9531 /* Poppins (1) */,
-				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
-				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
-				3F322C5729C25CC500B62873 /* profileView.swift */,
-				3FDAECF529B7F69500C9A633 /* InputView.swift */,
-				F6E6D1CD29B80C9A00DF59B5 /* NavBarView.swift */,
-				F6E6D1E729BD4B8D00DF59B5 /* testView.swift */,
-				F64552CF29BF7B130054E7AF /* TestTwoView.swift */,
-				F64552CB29BE99140054E7AF /* inputSwipeView.swift */,
-				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
-				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
-				F6E6D1E529BD111500DF59B5 /* HistoryView.swift */,
-				3FBD98BF29B278A700804A6A /* ContentViewModel.swift */,
-				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
-				3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */,
-				3FBD98C129B2790100804A6A /* ContentModel.swift */,
+				3F209E1329CBD27F00028B56 /* MAIN */,
+				3F209E1229CBD25500028B56 /* User Input Views */,
+				3F209E0E29CBD1C700028B56 /* Test Views */,
+				3F209E1129CBD24200028B56 /* Glance Views */,
+				3F209E0F29CBD20E00028B56 /* Model and Viewmodel */,
+				3F209E1029CBD22400028B56 /* Login and Profile */,
 				F6E6D1AD29B1A88A00DF59B5 /* Assets.xcassets */,
 				F6E6D1AF29B1A88A00DF59B5 /* Preview Content */,
 				3FC6E9BF29C19C6C004D9531 /* Auth0.plist */,
