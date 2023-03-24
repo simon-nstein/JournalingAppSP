@@ -17,6 +17,9 @@ struct CustomColor {
     static let TextColor = Color("TextColor")
     static let darkBlue = Color("darkBlue")
     static let darkButtonColor = Color("darkButtonColor")
+    static let mindfulnessBackground = Color("mindfulnessBackground")
+    static let darkTextColor = Color("darkTextColor")
+    static let subtextColor = Color("subtextColor")
 }
 
 struct CustomFontSize {

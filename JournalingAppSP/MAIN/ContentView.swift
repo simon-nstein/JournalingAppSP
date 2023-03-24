@@ -29,172 +29,79 @@ struct ContentView: View {
     //End take out
     
     func dateToString(date: Date) -> String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
-            return dateFormatter.string(from: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
+        return dateFormatter.string(from: date)
     }
     
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical) {
-                VStack {
-                    //Homepage Headers
-                    HStack {
-                        //Greeting
-                        TextView(
-                            text: self.viewModel.greeting,
-                            fontSize: CustomFontSize.largeFontSize,
-                            offset: 0,
-                            fontType: "Poppins-Bold"
-                        )
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color("darkColor"))
-                        .padding()
-                        
-                        // Profile
-                        NavigationLink(destination: profileView(userProfile: self.userProfile)){
-                            UserImage(urlString: userProfile.picture)
-                        }.padding()
-                    }
-                    
-                    
-                    
-                    TextView(
-                        text: "Daily Response",
-                        fontSize: CustomFontSize.inputFontSize,
-                        offset: 0,
-                        fontType: "Poppins-SemiBold"
-                    )
-                    .padding(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("darkColor"))
-                    
-                    TextView(
-                        text: "Take a moment to reflect and click each box to capture your thoughts...",
-                        fontSize: CustomFontSize.standardFontSize,
-                        offset: 0,
-                        fontType: "Poppins-Regular"
-                    )
-                    .padding(.top, -7)
-                    .padding(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color("LighterColor"))
-                    
-                    
-                    
-                    if (self.viewModel.getTodaysRose() != nil && self.viewModel.getTodaysBud() != nil && self.viewModel.getTodaysThorn() != nil) {
-                        
-                        NavigationLink(destination: HistoryView(viewModel: viewModel, date: getCurrentDate())){
-                            RoundedRectangle(cornerRadius: 15)
-                                .frame(width: 350, height: 100)
-                                .foregroundColor(Color("lightCard"))
-                                .overlay(
-                                    HStack{
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundColor(Color("checkGreen"))
-                                            .font(.system(size: 43))
-                                        Text("Your responses today are complete and recorded.")
-                                            .multilineTextAlignment(.leading)
-                                            .foregroundColor(CustomColor.TextColor)
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(Color("veryLightColor"))
-                                            .padding([.top, .bottom, .trailing])
-                                            .font(.system(size: 24))
-                                        
-                                    }
-                                        .padding(.top)
-                                        .padding(.bottom)
-                                        .padding(.trailing, -5)
-                                        .padding(.leading)
-                                )
-                            
-                        }
-                    } else{
-                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 0)){
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "Rose",
-                                paragraph: (
-                                    /*self.viewModel.getTodaysRose() != nil ? self.viewModel.getTodaysRose()! : */"Highlight a success or something positive today."),
-                                image: Image("roseIMG")
-                            )
-                            .hoverEffect(.lift)
-                        }
-                        
-                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 1)) {
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "Thorn",
-                                paragraph: (
-                                    /*self.viewModel.getTodaysThorn() != nil ? self.viewModel.getTodaysThorn()!  : */"Describe a challenge you experienced today."),
-                                image: Image("thornIMG")
-                                //imageName: "roseIMG"
-                            )
-                            .hoverEffect(.lift)
-                        }
-                        
-                        NavigationLink(destination: inputSwipeView(viewModel: JournalData(), selectedTab: 2)) {
-                            Cardify(
-                                viewModel:self.viewModel,
-                                title: "Bud",
-                                paragraph: (
-                                    /*self.viewModel.getTodaysBud() != nil ? self.viewModel.getTodaysBud()! : */"Explain something that you’re looking forward to."),
-                                image: Image("budIMG")
-                                //imageName: "roseIMG"
-                            )
-                            .hoverEffect(.lift)
-                        }
-                        
-                    }
-                    
-                    HStack{
-                        TextView(
-                            text: "Your Responses at a Glance",
-                            fontSize: CustomFontSize.inputFontSize,
-                            offset: 10,
-                            fontType: "Poppins-SemiBold"
-                        )
-                        .padding(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(Color("darkColor"))
-                        
-                        //Three dots that open calendar
-                        ZStack{
-                            //Text(dateToString(date: selectDate))
-                             Image(systemName: "ellipsis")
-                                 .font(.system(size: 24))
-                                 .padding(.top)
-                                 .padding(.trailing, 20)
-                                 .offset(y: 3)
-                                 .foregroundColor(Color("veryLightColor"))
-                                 .overlay {
-                                 DatePicker(
-                                     "",
-                                     selection: $selectDate,
-                                     in: startingDate...endingDate,
-                                     displayedComponents: [.date]
-                                    )
-                                    .blendMode(.destinationOver)
-                                     .onChange(of: selectDate) { newValue in
-                                         if viewModel.savedRoses.first(where: { $0.dateID == dateToString(date: selectDate) }) != nil {
-                                             navigate = true
-                                         }
-                                     }
-                            }
-                            NavigationLink(isActive: $navigate) {
-                                HistoryView(viewModel: viewModel, date: dateToString(date: selectDate))
-                            } label: {
-                                EmptyView()
-                            }
-                        } //end VStack
+            VStack {
+                homepageHeader
+                
+                NavigationLink(destination: aboutUs()){
+                    navigationBar
                 }
-                    GlanceView(viewModel: JournalData())
-                }
-            }
+                
+                ScrollView {
+                    NavigationLink(destination: aboutUs()) {
+                        MindfulnessJournal()
+                    }
+                    Spacer()
+                } //ScrollView
+            } //VStack
+        } // Navigation
+        .padding()
+    }
+    
+    var navigationBar: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(width: 375, height: 30)
+                .foregroundColor(CustomColor.TextColor)
             
-        }//end
+            HStack {
+                TextView(
+                    text: "Learn about the benefits of journaling",
+                    fontSize: 13,
+                    offset: 0,
+                    fontType: "Poppins-Regular"
+                ).foregroundColor(.white).frame(width: 300)
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 20, weight: .light))
+                    .foregroundColor(.white)
+            }
+        }
+        
+    }
+    
+    var homepageHeader: some View {
+        HStack {
+            //Today and the date
+            VStack {
+                TextView(
+                    text: "Today",
+                    fontSize: 35,
+                    offset: 0,
+                    fontType: "Poppins-Bold"
+                )
+                
+                TextView(
+                    text: dateToString(date: self.endingDate),
+                    fontSize: 25,
+                    offset: 0,
+                    fontType: "Poppins-Regular"
+                )
+            } //VStack
+            
+            Spacer()
+            
+            // User profile image
+            NavigationLink(destination: profileView(userProfile: self.userProfile)){
+                UserImage(urlString: userProfile.picture)
+            }.padding()
+        } //HStack
     }
     
     func getCurrentDate() -> String {

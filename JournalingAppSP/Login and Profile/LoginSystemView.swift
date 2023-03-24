@@ -8,12 +8,13 @@ struct LoginSystemView: View {
     @State private var isAuthenticated = false
     @State var userProfile = Profile.empty
     
+    /**
+     If the user is authenticated, it navigates to the homepage (ContentView)
+     */
     var body: some View {
         
         if isAuthenticated {
-            //UserImage(urlString: userProfile.picture)
             ContentView(viewModel: JournalData(), userProfile: self.userProfile)
-            
         } else {
             
             VStack {
