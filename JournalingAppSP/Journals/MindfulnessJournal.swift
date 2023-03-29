@@ -18,9 +18,9 @@ struct MindfulnessJournal: View {
                 VStack (alignment: .leading) {
                     HStack {
                         TextView(text: "Mindfulness Journal", fontSize: 20, offset: 0, fontType: "Poppins-Bold").foregroundColor(CustomColor.darkTextColor)
-                        Image(systemName: "arrow.right")
-                    }.padding([.top, .trailing], 80.0)
-                    TextView(text: "Share your daily highs, lows, and future", fontSize: 14, offset: 0, fontType: "Poppins-Regular").foregroundColor(CustomColor.subtextColor)
+                        Image(systemName: "arrow.right").foregroundColor(CustomColor.darkTextColor)
+                    }.offset(x: -15, y: 45)
+                    TextView(text: "Share your daily highs, lows, and future", fontSize: 14, offset: 0, fontType: "Poppins-Regular").foregroundColor(CustomColor.subtextColor).offset(x: -15, y: 45)
                 }
             }
         }

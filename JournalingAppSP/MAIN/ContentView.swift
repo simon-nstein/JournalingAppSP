@@ -28,80 +28,32 @@ struct ContentView: View {
     @State private var navigate = false
     //End take out
     
-    func dateToString(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d/yy" // the way the date is formatted in HistoryView
-        return dateFormatter.string(from: date)
-    }
-    
-    
     var body: some View {
-        NavigationView {
-            VStack {
-                homepageHeader
-                
-                NavigationLink(destination: aboutUs()){
-                    navigationBar
+        TabView {
+            HomepageView(viewModel: self.viewModel, userProfile: self.userProfile, endingDate: self.endingDate)
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
                 }
-                
-                ScrollView {
-                    NavigationLink(destination: aboutUs()) {
-                        MindfulnessJournal()
-                    }
-                    Spacer()
-                } //ScrollView
-            } //VStack
-        } // Navigation
-        .padding()
-    }
-    
-    var navigationBar: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(width: 375, height: 30)
-                .foregroundColor(CustomColor.TextColor)
             
-            HStack {
-                TextView(
-                    text: "Learn about the benefits of journaling",
-                    fontSize: 13,
-                    offset: 0,
-                    fontType: "Poppins-Regular"
-                ).foregroundColor(.white).frame(width: 300)
-                Image(systemName: "arrow.right")
-                    .font(.system(size: 20, weight: .light))
-                    .foregroundColor(.white)
-            }
+            aboutUs()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Calendar")
+                }
+            
+            aboutUs()
+                .tabItem {
+                    Image(systemName: "chart.bar")
+                    Text("Analyze")
+                }
+            
+            profileView(userProfile: self.userProfile)
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("Profile")
+                }
         }
-        
-    }
-    
-    var homepageHeader: some View {
-        HStack {
-            //Today and the date
-            VStack {
-                TextView(
-                    text: "Today",
-                    fontSize: 35,
-                    offset: 0,
-                    fontType: "Poppins-Bold"
-                )
-                
-                TextView(
-                    text: dateToString(date: self.endingDate),
-                    fontSize: 25,
-                    offset: 0,
-                    fontType: "Poppins-Regular"
-                )
-            } //VStack
-            
-            Spacer()
-            
-            // User profile image
-            NavigationLink(destination: profileView(userProfile: self.userProfile)){
-                UserImage(urlString: userProfile.picture)
-            }.padding()
-        } //HStack
     }
     
     func getCurrentDate() -> String {
@@ -152,13 +104,6 @@ struct ContentView: View {
                                 Text(self.title)
                                     .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
                                     .foregroundColor(Color("darkColor"))
-                                /*
-                                if self.viewModel.getTodaysRose() != nil {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundColor(Color("checkGreen"))
-                                        .font(.system(size: 19))
-                                }
-                                 */
                             }
                             Text(self.paragraph)
                                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))

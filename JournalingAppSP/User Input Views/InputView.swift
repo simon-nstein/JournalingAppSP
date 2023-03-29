@@ -16,6 +16,7 @@ struct InputView: View {
             case "ROSE": return "Highlight a success or something positive today."
             case "BUD": return "Describe a challenge you experienced today."
             case "THORN": return "Explain something that you’re looking forward to."
+            case "OPEN": return "No rules. Just let your thoughts run."
             default: return "Default text"
         }
     }
@@ -23,7 +24,7 @@ struct InputView: View {
     @State var userInput = ""
     var body: some View {
         VStack {
-            //NavBarView()
+            NavBarView()
             Text(headerText)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -39,9 +40,7 @@ struct InputView: View {
             .padding()
             .font(Font.custom("Poppins-Regular", size: 24))
     
-            // Saving the data
-            //onDisappear
-            //.onChange(of: userInput) {
+            // Saving data
             .onDisappear {
                 if self.type == "ROSE" {
                     self.viewModel.roseInput = self.userInput

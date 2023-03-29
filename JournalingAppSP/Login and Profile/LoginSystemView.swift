@@ -5,7 +5,7 @@ import Auth0
 
 struct LoginSystemView: View {
     
-    @State private var isAuthenticated = false
+    @State private var isAuthenticated = true
     @State var userProfile = Profile.empty
     
     /**

@@ -20,6 +20,8 @@ struct CustomColor {
     static let mindfulnessBackground = Color("mindfulnessBackground")
     static let darkTextColor = Color("darkTextColor")
     static let subtextColor = Color("subtextColor")
+    static let gratitudeBackground = Color("gratitudeBackground")
+    static let openJournalBackground = Color("openJournalBackground")
 }
 
 struct CustomFontSize {

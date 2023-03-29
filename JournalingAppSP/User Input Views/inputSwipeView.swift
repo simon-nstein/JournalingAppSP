@@ -10,12 +10,11 @@ import SwiftUI
 struct inputSwipeView: View {
     @ObservedObject var viewModel: JournalData;
     //var type: String
-    @State var selectedTab: Int
+    @State var selectedTab: Int = 0
     
     
     var body: some View {
         VStack{
-            NavBarView()
             TabView(selection: $selectedTab) {
                 InputView(viewModel: viewModel, type: "ROSE")
                     .tag(0)

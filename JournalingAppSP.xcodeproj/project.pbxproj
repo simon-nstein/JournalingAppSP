@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3F209E1529CBD9CF00028B56 /* aboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1429CBD9CF00028B56 /* aboutUs.swift */; };
 		3F209E1729CBDDBC00028B56 /* MindfulnessJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1629CBDDBC00028B56 /* MindfulnessJournal.swift */; };
+		3F209E1A29CD312B00028B56 /* GratitudeJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1929CD312B00028B56 /* GratitudeJournal.swift */; };
+		3F209E1C29CD328200028B56 /* OpenJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1B29CD328200028B56 /* OpenJournal.swift */; };
+		3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1D29CE2C2C00028B56 /* HomepageView.swift */; };
 		3F322C5829C25CC500B62873 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322C5729C25CC500B62873 /* profileView.swift */; };
 		3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */; };
 		3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F729B5A51200FAEB20 /* WeekGlance.swift */; };
@@ -37,6 +40,9 @@
 /* Begin PBXFileReference section */
 		3F209E1429CBD9CF00028B56 /* aboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aboutUs.swift; sourceTree = "<group>"; };
 		3F209E1629CBDDBC00028B56 /* MindfulnessJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulnessJournal.swift; sourceTree = "<group>"; };
+		3F209E1929CD312B00028B56 /* GratitudeJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratitudeJournal.swift; sourceTree = "<group>"; };
+		3F209E1B29CD328200028B56 /* OpenJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenJournal.swift; sourceTree = "<group>"; };
+		3F209E1D29CE2C2C00028B56 /* HomepageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageView.swift; sourceTree = "<group>"; };
 		3F322C5729C25CC500B62873 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
 		3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalCoreData.xcdatamodel; sourceTree = "<group>"; };
 		3F4814F729B5A51200FAEB20 /* WeekGlance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGlance.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 			children = (
 				F6E6D1A929B1A88800DF59B5 /* JournalingAppSPApp.swift */,
 				F6E6D1AB29B1A88800DF59B5 /* ContentView.swift */,
+				3F209E1D29CE2C2C00028B56 /* HomepageView.swift */,
 			);
 			path = MAIN;
 			sourceTree = "<group>";
@@ -141,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				3F209E1629CBDDBC00028B56 /* MindfulnessJournal.swift */,
+				3F209E1929CD312B00028B56 /* GratitudeJournal.swift */,
+				3F209E1B29CD328200028B56 /* OpenJournal.swift */,
 			);
 			path = Journals;
 			sourceTree = "<group>";
@@ -285,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
+				3F209E1A29CD312B00028B56 /* GratitudeJournal.swift in Sources */,
+				3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */,
 				F6E6D1E429BD04FA00DF59B5 /* GlanceView.swift in Sources */,
 				3F322C5829C25CC500B62873 /* profileView.swift in Sources */,
 				F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */,
@@ -299,6 +310,7 @@
 				3F209E1529CBD9CF00028B56 /* aboutUs.swift in Sources */,
 				F6E6D1E629BD111500DF59B5 /* HistoryView.swift in Sources */,
 				F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */,
+				3F209E1C29CD328200028B56 /* OpenJournal.swift in Sources */,
 				3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
 			);
