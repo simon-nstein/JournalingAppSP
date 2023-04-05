@@ -9,23 +9,24 @@ import SwiftUI
 
 struct inputSwipeView: View {
     @ObservedObject var viewModel: JournalData;
-    //var type: String
     @State var selectedTab: Int = 0
     
     
     var body: some View {
-        VStack{
-            TabView(selection: $selectedTab) {
-                InputView(viewModel: viewModel, type: "ROSE")
-                    .tag(0)
-                InputView(viewModel: viewModel, type: "BUD")
-                    .tag(1)
-                InputView(viewModel: viewModel, type: "THORN")
-                    .tag(2)
+        NavigationView {
+            VStack{
+                TabView(selection: $selectedTab) {
+                    InputView(viewModel: viewModel, type: "ROSE")
+                        .tag(0)
+                    InputView(viewModel: viewModel, type: "BUD")
+                        .tag(1)
+                    InputView(viewModel: viewModel, type: "THORN")
+                        .tag(2)
                 }
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        }
+                .tabViewStyle(PageTabViewStyle())
+                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            } //VStack
+        } //NavigationView
     }
 }
 

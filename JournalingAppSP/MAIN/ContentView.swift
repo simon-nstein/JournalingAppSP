@@ -32,24 +32,28 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
+            // Homepage
             HomepageView(viewModel: self.viewModel, userProfile: self.userProfile, endingDate: self.endingDate)
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
                 }
             
+            // Calendar
             aboutUs()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Calendar")
                 }
             
+            // Analyze
             aboutUs()
                 .tabItem {
                     Image(systemName: "chart.bar")
                     Text("Analyze")
                 }
             
+            // Profile
             profileView(userProfile: self.userProfile)
                 .tabItem {
                     Image(systemName: "person.crop.circle")
