@@ -24,7 +24,6 @@ struct InputView: View {
     @State var userInput = ""
     var body: some View {
         VStack {
-            NavBarView()
             Text(headerText)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -75,7 +74,7 @@ struct InputView: View {
             Spacer()
         }
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
-        .navigationBarBackButtonHidden(true)
+        //.navigationBarBackButtonHidden(true)
     }
 }
 

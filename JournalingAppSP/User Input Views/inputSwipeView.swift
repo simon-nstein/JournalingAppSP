@@ -10,11 +10,24 @@ import SwiftUI
 struct inputSwipeView: View {
     @ObservedObject var viewModel: JournalData;
     @State var selectedTab: Int = 0
+    @Environment(\.dismiss) private var dismiss
     
     
     var body: some View {
         NavigationView {
             VStack{
+                //NavBarView()
+                Button {
+                    dismiss()
+                } label: {
+                    HStack{
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(Color("darkColor"))
+                            .font(.system(size: 30))
+                        Spacer()
+                    }
+                }
+                    .padding(.top)
                 TabView(selection: $selectedTab) {
                     InputView(viewModel: viewModel, type: "ROSE")
                         .tag(0)
@@ -27,6 +40,7 @@ struct inputSwipeView: View {
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
             } //VStack
         } //NavigationView
+        .navigationBarBackButtonHidden(true)
     }
 }
 

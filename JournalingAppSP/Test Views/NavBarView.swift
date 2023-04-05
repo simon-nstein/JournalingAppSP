@@ -8,9 +8,6 @@
 
 import SwiftUI
 
-
-
-
 struct NavBarView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -28,8 +25,6 @@ struct NavBarView: View {
 
 
                 }
-
-
             .padding()
             //.background(Color("darkColor"))
         }
