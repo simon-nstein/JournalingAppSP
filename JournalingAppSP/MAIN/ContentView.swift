@@ -30,6 +30,7 @@ struct ContentView: View {
     //End take out
     
     var body: some View {
+        
         TabView {
             HomepageView(viewModel: self.viewModel, userProfile: self.userProfile, endingDate: self.endingDate)
                 .tabItem {

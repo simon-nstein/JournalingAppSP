@@ -12,19 +12,46 @@ import CoreData
 import SwiftUI
 import FirebaseCore
 import FirebaseDatabase
+import Firebase
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    let databaseRef = Database.database().reference()
-    databaseRef.child("Users").setValue(["username": "pmcslarrowwwwwwwwww"])
-    print("here???")
-    return true
-  }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool { return true }
+    
+    func addNewUser(username: String) {
+        let databaseRef = Database.database().reference()
+        let usersRef = databaseRef.child("Users")
+        let singleUserRef = usersRef.child(username)
+        let data = ["Mindfulness_Section": "",
+                    "Gratitude_Section": "",
+                    "Open_Section": "",
+                    "Notification": "false",
+                    "Notification_Time": "",
+                    "Goal": ""
+        ]
+        singleUserRef.setValue(data)
+        print("New User Added [+]")
+    }
+    
+    func userExists(username: String, completionHandler: @escaping (Bool) -> Void) {
+        FirebaseApp.configure()
+        let databaseRef = Database.database().reference()
+        databaseRef.child("Users/").getData(completion:  { error, snapshot in
+          guard error == nil else {
+            print(error!.localizedDescription)
+            return;
+          }
+            guard let value = snapshot?.value as? [String: Any] else { return }
+            if let _ = value[username] as? [String: Any] {
+                print("\(username) exists")
+                completionHandler(true)
+            } else {
+                print("\(username) doesn't exist")
+                completionHandler(false)
+            }
+        });
+    }
 }
-
 
 struct CustomColor {
     static let RoseColor = Color("RoseColor")

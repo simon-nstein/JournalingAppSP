@@ -5,37 +5,26 @@ import Auth0
 
 struct LoginSystemView: View {
     
-    @State private var isAuthenticated = true
+    @State private var isAuthenticated = false
     @State var userProfile = Profile.empty
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    /**
-     If the user is authenticated, it navigates to the homepage (ContentView)
-     */
     var body: some View {
         
         if isAuthenticated {
             ContentView(viewModel: JournalData(), userProfile: self.userProfile)
         } else {
-            
             VStack {
-        
                 Button("Log in") {
                     login()
                 }
                 .buttonStyle(MyButtonStyle())
-                
             } // VStack
-            
         } // if isAuthenticated
-        
     } // body
     
+    
     struct UserImage: View {
-        // Given the URL of the user’s picture, this view asynchronously
-        // loads that picture and displays it. It displays a “person”
-        // placeholder image while downloading the picture or if
-        // the picture has failed to download.
-        
         var urlString: String
         
         var body: some View {
@@ -54,9 +43,6 @@ struct LoginSystemView: View {
         }
     }
     
-    
-    // MARK: View modifiers
-    // --------------------
     
     struct TitleStyle: ViewModifier {
         let titleFontBold = Font.title.weight(.bold)
@@ -95,6 +81,21 @@ extension LoginSystemView {
                 case .success(let credentials):
                     self.isAuthenticated = true
                     self.userProfile = Profile.from(credentials.idToken)
+                    let str = userProfile.id
+                    let startIndex = str.index(str.startIndex, offsetBy: 6)
+                    let substr = str[startIndex...]
+                    let user = String(substr)
+                    
+                    // Check if user exists already or not
+                    delegate.userExists(username: user) { exists in
+                        if exists {
+                            print("User exists")
+                        } else {
+                            print("User does not exist")
+                            delegate.addNewUser(username: user)
+                        }
+                    }
+                    
                 }
             }
     }
@@ -112,7 +113,6 @@ extension LoginSystemView {
                     self.isAuthenticated = false
                     self.userProfile = Profile.empty
                 }
-                
             }
     }
     
