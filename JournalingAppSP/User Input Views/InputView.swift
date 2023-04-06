@@ -20,10 +20,19 @@ struct InputView: View {
             default: return "Default text"
         }
     }
+    var pageNumber: String {
+        switch self.type {
+            case "ROSE": return "1 of 3 responses"
+            case "BUD": return "2 of 3 responses"
+            case "THORN": return "3 of 3 responses"
+            default: return "Default text"
+        }
+    }
+    
     
     @State var userInput = ""
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(headerText)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -72,7 +81,10 @@ struct InputView: View {
                 
             }
             Spacer()
-        }
+            Text(pageNumber)
+                .padding(.leading, 20)
+            
+        }//end VStack
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
         //.navigationBarBackButtonHidden(true)
     }

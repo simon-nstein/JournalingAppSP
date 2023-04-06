@@ -36,8 +36,43 @@ struct inputSwipeView: View {
                     InputView(viewModel: viewModel, type: "THORN")
                         .tag(2)
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .overlay(
+                    HStack{
+                    
+                        Button(action: {
+                            let previousTab = (selectedTab - 1 + 4) % 4 // calculate index of previous tab
+                            selectedTab = previousTab
+                        }) {
+                            Image(systemName: "chevron.left")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .clipShape(Circle())
+                        }
+                        .opacity(selectedTab == 0 ? 0 : 1)
+                        .padding(.trailing, 20)
+                        .padding(.bottom, 20)
+                        
+                        Button(action: {
+                                    let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
+                                    selectedTab = nextTab
+                                }) {
+                                    Image(systemName: "chevron.right")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .clipShape(Circle())
+                                }
+                                .opacity(selectedTab == 2 ? 0 : 1)
+                                .padding(.trailing, 20)
+                                .padding(.bottom, 20)
+                        
+                        
+                    },alignment: .bottomTrailing
+                    
+                )
             } //VStack
         } //NavigationView
         .navigationBarBackButtonHidden(true)
