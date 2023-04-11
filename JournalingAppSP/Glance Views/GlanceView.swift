@@ -56,7 +56,7 @@ struct GlanceView: View {
                 .padding()
                 if selectedView == "Week" {
                     //Text("Week")
-                    WeekGlance(viewModel: JournalData())
+                    WeekGlance(viewModel: self.viewModel)
                 }
                 if selectedView == "Month" {
                     Text("Month")
@@ -89,6 +89,6 @@ struct GlanceView: View {
 
 struct GlanceView_Previews: PreviewProvider {
     static var previews: some View {
-        GlanceView(viewModel: JournalData())
+        GlanceView(viewModel: JournalData(UserProfile: Profile.empty))
     }
 }

@@ -20,16 +20,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func addNewUser(username: String) {
         let databaseRef = Database.database().reference()
-        let usersRef = databaseRef.child("Users")
-        let singleUserRef = usersRef.child(username)
-        let data = ["Mindfulness_Section": "",
-                    "Gratitude_Section": "",
-                    "Open_Section": "",
-                    "Notification": "false",
-                    "Notification_Time": "",
-                    "Goal": ""
-        ]
-        singleUserRef.setValue(data)
+        var DATE: String {
+            let today = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter.string(from: today)
+        }
+        let mindfulnessRef = databaseRef.child("Users/\(username)/Mindfulness_Section/\(DATE)")
+        let gratitudeRef = databaseRef.child("Users/\(username)/Gratitude_Section/\(DATE)")
+        let openRef = databaseRef.child("Users/\(username)/Open_Section/\(DATE)")
+
+        mindfulnessRef.child("Rose").setValue(["Message":"", "Favorite": ""])   // Adds new sections for Rose, Bud, Thorn, Gratitude, Open Journal, and Notifications
+        mindfulnessRef.child("Bud").setValue(["Message":"", "Favorite": ""])
+        mindfulnessRef.child("Thorn").setValue(["Message":"", "Favorite": ""])
+        gratitudeRef.setValue(["userInput":"", "favorite":""])
+        openRef.setValue(["userInput":"", "favorite":""])
+        databaseRef.child("Users/\(username)/Notifications").setValue("false")
         print("New User Added [+]")
     }
     
@@ -53,6 +59,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
+/* Custom Fonts and Colors */
 struct CustomColor {
     static let RoseColor = Color("RoseColor")
     static let BudColor = Color("BudColor")
@@ -76,17 +83,23 @@ struct CustomFontSize {
     static let extraLargeFont: CGFloat = 40;
 }
 
+
+
+/* JournalData ViewModel */
 class JournalData: ObservableObject {
     @Published var model = JournalModel()
     @Published var savedRoses: [RoseEntity] = []
     @Published var savedBuds: [BudEntity] = []
     @Published var savedThorns: [ThornEntity] = []
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    let UserProfile: Profile
 
     
     // Initialize Core Data
-    let CoreDataContainer: NSPersistentContainer
+    //let CoreDataContainer: NSPersistentContainer
     
-    init () {
+    init (UserProfile: Profile) {
+        /*
         CoreDataContainer = NSPersistentContainer(name: "JournalCoreData")
         CoreDataContainer.loadPersistentStores { (description, error) in
             if let error = error {
@@ -95,67 +108,24 @@ class JournalData: ObservableObject {
                 print("Successfully loaded core data. [+]")
             }
         }
+         */
+        self.UserProfile = UserProfile
         fetchRoses()
-        fetchBuds()
-        fetchThorns()
+        //fetchBuds()
+        //fetchThorns()
     }
 
+
     
-    // Functions
+// ROSE FUNCTIONS
     
-    // A function that deletes all the entries in your CoreData for each entity
-    func deleteAllEntries() {
-        let request = NSFetchRequest<RoseEntity>(entityName:"RoseEntity")
-        let request2 = NSFetchRequest<BudEntity>(entityName:"BudEntity")
-        let request3 = NSFetchRequest<ThornEntity>(entityName:"ThornEntity")
-        
-        do {
-            
-            savedRoses = try CoreDataContainer.viewContext.fetch(request)
-            for item in savedRoses {
-                CoreDataContainer.viewContext.delete(item)
-            }
-            
-            savedBuds = try CoreDataContainer.viewContext.fetch(request2)
-            for item in savedBuds {
-                CoreDataContainer.viewContext.delete(item)
-            }
-            
-            savedThorns = try CoreDataContainer.viewContext.fetch(request3)
-            for item in savedThorns {
-                CoreDataContainer.viewContext.delete(item)
-            }
-             
-            saveData()
-            print("all entries successfully deleted")
-        } catch {
-            print("Error deleting roses [-]. \(error)")
-        }
-    }
-    
-    // Saves all updated data and recalls the roses, buds, and thorns
-    func saveData() {
-        do {
-            try CoreDataContainer.viewContext.save()
-            fetchRoses()
-            fetchBuds()
-            fetchThorns()
-        } catch let error {
-            print("Error saving [-]. \(error)")
-        }
-    }
-    
-    // ROSE FUNCTIONS
     func fetchRoses() {
-        let request = NSFetchRequest<RoseEntity>(entityName: "RoseEntity")
+        // Get all the roses entered by a certain user
+        print("Fetching a user rose for user \(self.UserProfile.id_string)")
         
-        do {
-            savedRoses = try CoreDataContainer.viewContext.fetch(request)
-        } catch {
-            print("Error fetching roses [-]. \(error)")
-        }
     }
     
+    // Adds a new rose to the database
     func addRose(with message: String) {
         let todayDate = Date()
         let formatter = DateFormatter()
@@ -167,12 +137,10 @@ class JournalData: ObservableObject {
                 return
             }
         }
-        let roseObject = RoseEntity(context: CoreDataContainer.viewContext)
-        roseObject.roseMessage = message
-        roseObject.dateID = stringDate
-        roseObject.dateEntered = todayDate
+        // Update Firebase with new information below
     }
     
+    // Returns the rose that was typed today else nil if not exists
     func getTodaysRose() -> String? {
         let todayDate = Date()
         let formatter = DateFormatter()
@@ -182,92 +150,6 @@ class JournalData: ObservableObject {
         for i in 0..<self.savedRoses.count {
             if self.savedRoses[i].dateID == stringDate {
                 return self.savedRoses[i].roseMessage
-            }
-        }
-        return nil
-    }
-    
-    
-    // BUD FUNCTIONS
-    func fetchBuds() {
-        let request = NSFetchRequest<BudEntity>(entityName: "BudEntity")
-        
-        do {
-            savedBuds = try CoreDataContainer.viewContext.fetch(request)
-        } catch {
-            print("Error fetching buds [-]. \(error)")
-        }
-    }
-    
-    func addBud(with message: String) {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
-        for i in 0..<self.savedBuds.count {
-            if self.savedBuds[i].dateID == stringDate {
-                self.savedBuds[i].budMessage = message
-                return
-            }
-        }
-        let budObject = BudEntity(context: CoreDataContainer.viewContext)
-        budObject.budMessage = message
-        budObject.dateID = stringDate
-        budObject.dateEntered = todayDate
-    }
-    
-    func getTodaysBud() -> String? {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
-        
-        for i in 0..<self.savedBuds.count {
-            if self.savedBuds[i].dateID == stringDate {
-                return self.savedBuds[i].budMessage
-            }
-        }
-        return nil
-    }
-    
-
-    // THORN FUNCTIONS
-    func fetchThorns() {
-        let request = NSFetchRequest<ThornEntity>(entityName: "ThornEntity")
-        
-        do {
-            savedThorns = try CoreDataContainer.viewContext.fetch(request)
-        } catch {
-            print("Error fetching thorns [-]. \(error)")
-        }
-    }
-    
-    func addThorn(with message: String) {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
-        for i in 0..<self.savedThorns.count {
-            if self.savedThorns[i].dateID == stringDate {
-                self.savedThorns[i].thornMessage = message
-                return
-            }
-        }
-        let thornObject = ThornEntity(context: CoreDataContainer.viewContext)
-        thornObject.thornMessage = message
-        thornObject.dateID = stringDate
-        thornObject.dateEntered = todayDate
-    }
-    
-    func getTodaysThorn() -> String? {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
-        
-        for i in 0..<self.savedThorns.count {
-            if self.savedThorns[i].dateID == stringDate {
-                return self.savedThorns[i].thornMessage
             }
         }
         return nil

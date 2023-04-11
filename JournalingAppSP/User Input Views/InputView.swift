@@ -10,6 +10,7 @@ import Foundation
 
 struct InputView: View {
     @ObservedObject var viewModel: JournalData;
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var type: String
     var headerText: String {
         switch self.type {
@@ -54,39 +55,19 @@ struct InputView: View {
                     self.viewModel.roseInput = self.userInput
                     self.viewModel.addRose(with: self.userInput)
                 }
-                
-                if self.type == "BUD" {
-                    self.viewModel.budInput = self.userInput
-                    self.viewModel.addBud(with: self.userInput)
-                }
-                
-                if self.type == "THORN" {
-                    self.viewModel.thornInput = self.userInput
-                    self.viewModel.addThorn(with: self.userInput)
-                }
-                self.viewModel.saveData()
+            
             }
             .onAppear {
                 if self.type == "ROSE" {
                     self.userInput = self.viewModel.getTodaysRose() ?? ""
                 }
-                
-                if self.type == "BUD" {
-                    self.userInput = self.viewModel.getTodaysBud() ?? ""
-                }
-                
-                if self.type == "THORN" {
-                    self.userInput = self.viewModel.getTodaysThorn() ?? ""
-                }
-                
             }
             Spacer()
             Text(pageNumber)
                 .padding(.leading, 20)
             
-        }//end VStack
+        }//VStack
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
-        //.navigationBarBackButtonHidden(true)
     }
 }
 
@@ -94,7 +75,7 @@ struct InputView: View {
 struct InputView_Previews: PreviewProvider {
     static var previews: some View {
         InputView(
-            viewModel: JournalData(), type: "ROSE"
+            viewModel: JournalData(UserProfile: Profile.empty), type: "ROSE"
         )
         
     }

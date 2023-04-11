@@ -120,7 +120,8 @@ struct profileView_Previews: PreviewProvider {
             email: "pmcslarrow@icloud.com",
             emailVerified: "True",
             picture: "",
-            updatedAt: ""
+            updatedAt: "",
+            id_string: ""
         ))
     }
 }

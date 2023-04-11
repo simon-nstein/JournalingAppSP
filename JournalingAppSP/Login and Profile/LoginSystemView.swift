@@ -12,7 +12,7 @@ struct LoginSystemView: View {
     var body: some View {
         
         if isAuthenticated {
-            ContentView(viewModel: JournalData(), userProfile: self.userProfile)
+            ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
         } else {
             VStack {
                 Button("Log in") {
@@ -79,7 +79,6 @@ extension LoginSystemView {
                     print("Failed with: \(error)")
                     
                 case .success(let credentials):
-                    self.isAuthenticated = true
                     self.userProfile = Profile.from(credentials.idToken)
                     let str = userProfile.id
                     let startIndex = str.index(str.startIndex, offsetBy: 6)
@@ -87,7 +86,7 @@ extension LoginSystemView {
                     let user = String(substr)
                     
                     // Check if user exists already or not
-                    delegate.userExists(username: user) { exists in
+                    self.delegate.userExists(username: user) { exists in
                         if exists {
                             print("User exists")
                         } else {
@@ -95,6 +94,8 @@ extension LoginSystemView {
                             delegate.addNewUser(username: user)
                         }
                     }
+                    self.delegate.addNewUser(username: "Paul")
+                    self.isAuthenticated = true
                     
                 }
             }

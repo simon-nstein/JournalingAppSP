@@ -93,6 +93,6 @@ struct WeekGlance: View {
 
 struct WeekGlance_Previews: PreviewProvider {
     static var previews: some View {
-        WeekGlance(viewModel: JournalData())
+        WeekGlance(viewModel: JournalData(UserProfile: Profile.empty))
     }
 }

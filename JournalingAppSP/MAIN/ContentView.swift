@@ -174,6 +174,6 @@ struct TextView: View {
 
 struct ContentView_Previews: PreviewProvider {    
     static var previews: some View {
-        ContentView(viewModel: JournalData(), userProfile: Profile.empty)
+        ContentView(viewModel: JournalData(UserProfile: Profile.empty), userProfile: Profile.empty)
     }
 }

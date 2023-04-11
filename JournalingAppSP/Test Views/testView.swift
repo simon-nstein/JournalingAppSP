@@ -74,6 +74,6 @@ struct testView: View {
 
 struct testView_Previews: PreviewProvider {
     static var previews: some View {
-        testView(viewModel: JournalData())
+        testView(viewModel: JournalData(UserProfile: Profile.empty))
     }
 }

@@ -101,7 +101,7 @@ struct HistoryView: View {
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView(
-            viewModel: JournalData(), date: "3/7/23"
+            viewModel: JournalData(UserProfile: Profile.empty), date: "3/7/23"
         )
     }
 }

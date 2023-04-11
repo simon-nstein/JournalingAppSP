@@ -101,6 +101,6 @@ struct HomepageView: View {
 
 struct HomepageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomepageView(viewModel: JournalData(), userProfile: Profile.empty, endingDate: Date())
+        HomepageView(viewModel: JournalData(UserProfile: Profile.empty), userProfile: Profile.empty, endingDate: Date())
     }
 }

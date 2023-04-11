@@ -81,6 +81,6 @@ struct inputSwipeView: View {
 
 struct inputSwipeView_Previews: PreviewProvider {
     static var previews: some View {
-        inputSwipeView(viewModel: JournalData(), selectedTab: 0)
+        inputSwipeView(viewModel: JournalData(UserProfile: Profile.empty), selectedTab: 0)
     }
 }

@@ -19,28 +19,28 @@ struct JournalModel {
 
 /*  Model for login system  */
 struct Profile {
-  
-  let id: String
-  let name: String
-  let email: String
-  let emailVerified: String
-  let picture: String
-  let updatedAt: String
-
+    let id: String
+    let name: String
+    let email: String
+    let emailVerified: String
+    let picture: String
+    let updatedAt: String
+    let id_string: String
 }
 
 extension Profile {
   
-  static var empty: Self {
-    return Profile(
-      id: "",
-      name: "",
-      email: "",
-      emailVerified: "",
-      picture: "",
-      updatedAt: ""
-    )
-  }
+    static var empty: Self {
+        return Profile(
+          id: "",
+          name: "",
+          email: "",
+          emailVerified: "",
+          picture: "",
+          updatedAt: "",
+          id_string: ""
+        )
+    }
     
     static func from(_ idToken: String) -> Self {
         guard
@@ -55,13 +55,23 @@ extension Profile {
             return .empty
         }
         
+        var ID_STRING: String {
+            let str = id
+            let startIndex = str.index(str.startIndex, offsetBy: 6)
+            let substr = str[startIndex...]
+            let user = String(substr)
+            return user
+        }
+    
+        
         return Profile(
             id: id,
             name: name,
             email: email,
             emailVerified: String(describing: emailVerified),
             picture: picture,
-            updatedAt: updatedAt
+            updatedAt: updatedAt,
+            id_string: ID_STRING
         )
     }
     
