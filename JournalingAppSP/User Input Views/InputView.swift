@@ -51,15 +51,35 @@ struct InputView: View {
     
             // Saving data
             .onDisappear {
-                if self.type == "ROSE" {
-                    self.viewModel.roseInput = self.userInput
-                    self.viewModel.addRose(with: self.userInput)
+                switch self.type {
+                    case "ROSE":
+                        self.viewModel.roseInput = self.userInput
+                        self.viewModel.addRose(with: self.userInput)
+                    case "BUD":
+                        self.viewModel.budInput = self.userInput
+                        self.viewModel.addBud(with: self.userInput)
+                    case "THORN":
+                        self.viewModel.thornInput = self.userInput
+                        self.viewModel.addThorn(with: self.userInput)
+                    default:
+                        break;
                 }
+
             
             }
             .onAppear {
-                if self.type == "ROSE" {
-                    self.userInput = self.viewModel.getTodaysRose() ?? ""
+                switch self.type {
+                    case "ROSE":
+                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedRoses) ?? ""
+
+                    case "BUD":
+                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedBuds) ?? ""
+
+                    case "THORN":
+                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedThorns) ?? ""
+
+                    default:
+                        break;
                 }
             }
             Spacer()

@@ -52,7 +52,7 @@ struct HistoryView: View {
                         .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
                         .foregroundColor(Color("darkColor"))
                 ) {
-                        Text(matchingRose?.roseMessage ?? "Hi")
+                    Text(matchingRose?.message ?? "Hi")
                             .font(Font.custom("Poppins-Regular", size: 18))
                             .foregroundColor(Color("darkColor"))
                     }
@@ -67,7 +67,7 @@ struct HistoryView: View {
                         .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
                         .foregroundColor(Color("darkColor"))
                 ) {
-                        Text(matchingBud?.budMessage ?? "Hi")
+                        Text(matchingBud?.message ?? "Hi")
                             .font(Font.custom("Poppins-Regular", size: 18))
                             .foregroundColor(Color("darkColor"))
                     }
@@ -84,7 +84,7 @@ struct HistoryView: View {
                         .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
                         .foregroundColor(Color("darkColor"))
                 ) {
-                        Text(matchingThorn?.thornMessage ?? "Hi")
+                        Text(matchingThorn?.message ?? "Hi")
                             .font(Font.custom("Poppins-Regular", size: 18))
                             .foregroundColor(Color("darkColor"))
                     }

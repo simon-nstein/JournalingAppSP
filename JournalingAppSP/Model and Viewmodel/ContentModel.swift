@@ -76,3 +76,26 @@ extension Profile {
     }
     
 }
+
+protocol RBTObject {
+    var dateID: String { get }
+    var message: String { get }
+}
+
+struct RoseObject: Hashable, RBTObject {
+    var message: String
+    var favorite: String
+    var dateID: String
+}
+
+struct BudObject: Hashable, RBTObject {
+    var message: String
+    var favorite: String
+    var dateID: String
+}
+
+struct ThornObject: Hashable, RBTObject {
+    var message: String
+    var favorite: String
+    var dateID: String
+}

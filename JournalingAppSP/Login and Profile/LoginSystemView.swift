@@ -94,7 +94,6 @@ extension LoginSystemView {
                             delegate.addNewUser(username: user)
                         }
                     }
-                    self.delegate.addNewUser(username: "Paul")
                     self.isAuthenticated = true
                     
                 }

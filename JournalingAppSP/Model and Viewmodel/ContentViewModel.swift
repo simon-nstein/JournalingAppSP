@@ -21,10 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func addNewUser(username: String) {
         let databaseRef = Database.database().reference()
         var DATE: String {
-            let today = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            return formatter.string(from: today)
+            return getTodaysDate()
         }
         let mindfulnessRef = databaseRef.child("Users/\(username)/Mindfulness_Section/\(DATE)")
         let gratitudeRef = databaseRef.child("Users/\(username)/Gratitude_Section/\(DATE)")
@@ -59,105 +56,177 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-/* Custom Fonts and Colors */
-struct CustomColor {
-    static let RoseColor = Color("RoseColor")
-    static let BudColor = Color("BudColor")
-    static let ThornColor = Color("ThornColor")
-    static let TextColor = Color("TextColor")
-    static let darkBlue = Color("darkBlue")
-    static let darkButtonColor = Color("darkButtonColor")
-    static let mindfulnessBackground = Color("mindfulnessBackground")
-    static let darkTextColor = Color("darkTextColor")
-    static let subtextColor = Color("subtextColor")
-    static let gratitudeBackground = Color("gratitudeBackground")
-    static let openJournalBackground = Color("openJournalBackground")
-}
-
-struct CustomFontSize {
-    static let tinyFontSize: CGFloat = 8;
-    static let smallFontSize: CGFloat = 12;
-    static let standardFontSize: CGFloat = 15;
-    static let inputFontSize: CGFloat = 22;
-    static let largeFontSize: CGFloat = 30;
-    static let extraLargeFont: CGFloat = 40;
-}
-
-
 
 /* JournalData ViewModel */
 class JournalData: ObservableObject {
     @Published var model = JournalModel()
-    @Published var savedRoses: [RoseEntity] = []
-    @Published var savedBuds: [BudEntity] = []
-    @Published var savedThorns: [ThornEntity] = []
+    @Published var savedRoses: [RoseObject] = []
+    @Published var savedBuds: [BudObject] = []
+    @Published var savedThorns: [ThornObject] = []
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
 
-    
-    // Initialize Core Data
-    //let CoreDataContainer: NSPersistentContainer
-    
     init (UserProfile: Profile) {
-        /*
-        CoreDataContainer = NSPersistentContainer(name: "JournalCoreData")
-        CoreDataContainer.loadPersistentStores { (description, error) in
-            if let error = error {
-                print("Error loading data [-]. \(error)")
-            } else {
-                print("Successfully loaded core data. [+]")
-            }
-        }
-         */
         self.UserProfile = UserProfile
         fetchRoses()
-        //fetchBuds()
-        //fetchThorns()
+        fetchBuds()
+        fetchThorns()
     }
-
-
     
-// ROSE FUNCTIONS
+                                                                /* ROSE FUNCTIONS */
     
     func fetchRoses() {
-        // Get all the roses entered by a certain user
         print("Fetching a user rose for user \(self.UserProfile.id_string)")
-        
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        ref.observe(.value, with: { snapshot in
+          //print(snapshot.value as Any)
+            if let data = snapshot.value as? [String: Any] {
+                    if let mindfulnessSection = data["Mindfulness_Section"] as? [String: Any] {
+                        for (dateString, dateSection) in mindfulnessSection {
+                            if let currentDateSection = dateSection as? [String: Any],
+                               let roseSection = currentDateSection["Rose"] as? [String: Any] {
+                                let roseFavorite = roseSection["Favorite"] as? String ?? ""
+                                let roseMessage = roseSection["Message"] as? String ?? ""
+                                let roseObject = RoseObject(message: roseMessage, favorite: roseFavorite, dateID: dateString)
+                                print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
+                                self.savedRoses.append(roseObject)
+                            }
+                        }
+                    }
+                }
+        })
     }
     
     // Adds a new rose to the database
     func addRose(with message: String) {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
         for i in 0..<self.savedRoses.count {
             if self.savedRoses[i].dateID == stringDate {
-                self.savedRoses[i].roseMessage = message
-                return
+                self.savedRoses[i].message = message
             }
         }
-        // Update Firebase with new information below
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Rose/Message"
+        ref.child(path).setValue(message)
+        print("Added a new Rose [+]")
+        fetchRoses()
     }
     
-    // Returns the rose that was typed today else nil if not exists
-    func getTodaysRose() -> String? {
-        let todayDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        let stringDate = formatter.string(from: todayDate)
+    func getTodaysRBT(with array: [RBTObject]) -> String? {
+        let stringDate = getTodaysDate()
         
-        for i in 0..<self.savedRoses.count {
-            if self.savedRoses[i].dateID == stringDate {
-                return self.savedRoses[i].roseMessage
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                return array[i].message
             }
         }
         return nil
     }
     
+
+    func getTodaysRose() -> String? {
+        let stringDate = getTodaysDate()
+        
+        for i in 0..<self.savedRoses.count {
+            if self.savedRoses[i].dateID == stringDate {
+                return self.savedRoses[i].message
+            }
+        }
+        return nil
+    }
     
-    // Variables
+                                                                    /* BUD FUNCTIONS */
+    func fetchBuds() {
+        print("Fetching a user bud for user \(self.UserProfile.id_string)")
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                    if let mindfulnessSection = data["Mindfulness_Section"] as? [String: Any] {
+                        for (dateString, dateSection) in mindfulnessSection {
+                            if let currentDateSection = dateSection as? [String: Any],
+                               let budSection = currentDateSection["Bud"] as? [String: Any] {
+                                let budFavorite = budSection["Favorite"] as? String ?? ""
+                                let budMessage = budSection["Message"] as? String ?? ""
+                                let budObject = BudObject(message: budMessage, favorite: budFavorite, dateID: dateString)
+                                print("Date: \(dateString), Bud Favorite: \(budFavorite), Bud Message: \(budMessage)")
+                                self.savedBuds.append(budObject)
+                            }
+                        }
+                    }
+                }
+        })
+    }
     
+    // Adds a new rose to the database
+    func addBud(with message: String) {
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<self.savedBuds.count {
+            if self.savedBuds[i].dateID == stringDate {
+                self.savedBuds[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Bud/Message"
+        ref.child(path).setValue(message)
+        print("Added a new Bud [+]")
+        fetchBuds()
+    }
+    
+                                                                    /* THORN FUNCTIONS*/
+    func fetchThorns() {
+        print("Fetching a user thorn for user \(self.UserProfile.id_string)")
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                    if let mindfulnessSection = data["Mindfulness_Section"] as? [String: Any] {
+                        for (dateString, dateSection) in mindfulnessSection {
+                            if let currentDateSection = dateSection as? [String: Any],
+                               let thornSection = currentDateSection["Thorn"] as? [String: Any] {
+                                let thornFavorite = thornSection["Favorite"] as? String ?? ""
+                                let thornMessage = thornSection["Message"] as? String ?? ""
+                                let thornObject = ThornObject(message: thornMessage, favorite: thornFavorite, dateID: dateString)
+                                print("Date: \(dateString), Thorn Favorite: \(thornFavorite), Thorn Message: \(thornMessage)")
+                                self.savedThorns.append(thornObject)
+                            }
+                        }
+                    }
+                }
+        })
+    }
+    
+    // Adds a new rose to the database
+    func addThorn(with message: String) {
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<self.savedThorns.count {
+            if self.savedThorns[i].dateID == stringDate {
+                self.savedThorns[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Thorn/Message"
+        ref.child(path).setValue(message)
+        print("Added a new Thorn [+]")
+        fetchThorns()
+    }
+    
+    
+                                                                    /* Variables and Functions */
+
     var roseInput: String {
         get { return model.roseInput }
         set { model.roseInput = newValue }
@@ -189,4 +258,37 @@ class JournalData: ObservableObject {
             return "Good Evening"
         }
     }
+}
+
+func getTodaysDate() -> String {
+    let today = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.string(from: today)
+}
+
+
+
+                                                                /* Custom Fonts and Colors */
+struct CustomColor {
+    static let RoseColor = Color("RoseColor")
+    static let BudColor = Color("BudColor")
+    static let ThornColor = Color("ThornColor")
+    static let TextColor = Color("TextColor")
+    static let darkBlue = Color("darkBlue")
+    static let darkButtonColor = Color("darkButtonColor")
+    static let mindfulnessBackground = Color("mindfulnessBackground")
+    static let darkTextColor = Color("darkTextColor")
+    static let subtextColor = Color("subtextColor")
+    static let gratitudeBackground = Color("gratitudeBackground")
+    static let openJournalBackground = Color("openJournalBackground")
+}
+
+struct CustomFontSize {
+    static let tinyFontSize: CGFloat = 8;
+    static let smallFontSize: CGFloat = 12;
+    static let standardFontSize: CGFloat = 15;
+    static let inputFontSize: CGFloat = 22;
+    static let largeFontSize: CGFloat = 30;
+    static let extraLargeFont: CGFloat = 40;
 }

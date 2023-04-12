@@ -22,9 +22,9 @@ struct WeekGlance: View {
                         ForEach(viewModel.savedRoses, id: \.self) { rose in
                             NavigationLink(destination: HistoryView(viewModel: viewModel, date: rose.dateID)){
                                 HStack {
-                                    Text(rose.roseMessage ?? "")
+                                    Text(rose.message)
                                     Spacer()
-                                    Text(rose.dateID!)
+                                    Text(rose.dateID)
                                 }
                                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
                                 .foregroundColor(Color("darkColor"))
@@ -46,9 +46,9 @@ struct WeekGlance: View {
                         ForEach(viewModel.savedBuds, id: \.self) { bud in
                             NavigationLink(destination: HistoryView(viewModel: viewModel, date: bud.dateID)){
                                 HStack {
-                                    Text(bud.budMessage ?? "")
+                                    Text(bud.message)
                                     Spacer()
-                                    Text(bud.dateID!)
+                                    Text(bud.dateID)
                                 }
                                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
                                 .foregroundColor(Color("darkColor"))
@@ -70,9 +70,9 @@ struct WeekGlance: View {
                         ForEach(viewModel.savedThorns, id: \.self) { thorn in
                             NavigationLink(destination: HistoryView(viewModel: viewModel, date: thorn.dateID)){
                                 HStack {
-                                    Text(thorn.thornMessage ?? "")
+                                    Text(thorn.message)
                                     Spacer()
-                                    Text(thorn.dateID!)
+                                    Text(thorn.dateID)
                                 }
                                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
                                 .foregroundColor(Color("darkColor"))
