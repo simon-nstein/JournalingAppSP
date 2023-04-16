@@ -80,6 +80,7 @@ extension Profile {
 protocol RBTObject {
     var dateID: String { get }
     var message: String { get }
+    var favorite: String { get }
 }
 
 struct RoseObject: Hashable, RBTObject {

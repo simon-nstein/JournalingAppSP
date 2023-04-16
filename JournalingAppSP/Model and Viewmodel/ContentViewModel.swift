@@ -63,6 +63,7 @@ class JournalData: ObservableObject {
     @Published var savedRoses: [RoseObject] = []
     @Published var savedBuds: [BudObject] = []
     @Published var savedThorns: [ThornObject] = []
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
 
@@ -86,11 +87,17 @@ class JournalData: ObservableObject {
                         for (dateString, dateSection) in mindfulnessSection {
                             if let currentDateSection = dateSection as? [String: Any],
                                let roseSection = currentDateSection["Rose"] as? [String: Any] {
-                                let roseFavorite = roseSection["Favorite"] as? String ?? ""
+                                
+                                let roseFavorite = roseSection["Favorite"] as? String ?? ""  //print("roseFavorite", roseFavorite)
                                 let roseMessage = roseSection["Message"] as? String ?? ""
+                                
                                 let roseObject = RoseObject(message: roseMessage, favorite: roseFavorite, dateID: dateString)
-                                print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
+                                //print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
                                 self.savedRoses.append(roseObject)
+                                
+                                //print("FETCH ALL", self.savedRoses)
+                                //print("FETCH [0]", self.savedRoses[0])
+                                //print("FETCH [0].favorite", self.savedRoses[0].favorite)
                             }
                         }
                     }
@@ -113,6 +120,13 @@ class JournalData: ObservableObject {
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         let path = "Mindfulness_Section/\(stringDate)/Rose/Message"
         ref.child(path).setValue(message)
+        
+        /*
+        // auto setting favorite to be false
+        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
+        ref.child(path).setValue("false")
+         */
+        
         print("Added a new Rose [+]")
         fetchRoses()
     }
@@ -133,8 +147,11 @@ class JournalData: ObservableObject {
         let stringDate = getTodaysDate()
         
         for i in 0..<self.savedRoses.count {
+            print("saved Rose", self.savedRoses[i])
             if self.savedRoses[i].dateID == stringDate {
+                //print("IN", self.savedRoses[i].favorite)
                 return self.savedRoses[i].message
+                
             }
         }
         return nil
@@ -154,7 +171,7 @@ class JournalData: ObservableObject {
                                 let budFavorite = budSection["Favorite"] as? String ?? ""
                                 let budMessage = budSection["Message"] as? String ?? ""
                                 let budObject = BudObject(message: budMessage, favorite: budFavorite, dateID: dateString)
-                                print("Date: \(dateString), Bud Favorite: \(budFavorite), Bud Message: \(budMessage)")
+                                //print("Date: \(dateString), Bud Favorite: \(budFavorite), Bud Message: \(budMessage)")
                                 self.savedBuds.append(budObject)
                             }
                         }
@@ -178,6 +195,13 @@ class JournalData: ObservableObject {
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         let path = "Mindfulness_Section/\(stringDate)/Bud/Message"
         ref.child(path).setValue(message)
+        
+        /*
+        // auto setting favorite to be false
+        let path = "Mindfulness_Section/\(stringDate)/Bud/Favorite"
+        ref.child(path).setValue("false")
+         */
+        
         print("Added a new Bud [+]")
         fetchBuds()
     }
@@ -196,7 +220,7 @@ class JournalData: ObservableObject {
                                 let thornFavorite = thornSection["Favorite"] as? String ?? ""
                                 let thornMessage = thornSection["Message"] as? String ?? ""
                                 let thornObject = ThornObject(message: thornMessage, favorite: thornFavorite, dateID: dateString)
-                                print("Date: \(dateString), Thorn Favorite: \(thornFavorite), Thorn Message: \(thornMessage)")
+                                //print("Date: \(dateString), Thorn Favorite: \(thornFavorite), Thorn Message: \(thornMessage)")
                                 self.savedThorns.append(thornObject)
                             }
                         }
@@ -220,12 +244,165 @@ class JournalData: ObservableObject {
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         let path = "Mindfulness_Section/\(stringDate)/Thorn/Message"
         ref.child(path).setValue(message)
+        
+        /*
+        let path = "Mindfulness_Section/\(stringDate)/Thorn/Favoirte"
+        ref.child(path).setValue("false")
+         */
+        
+        
         print("Added a new Thorn [+]")
         fetchThorns()
     }
     
+    /*
+    func addFavoriteRose() {
+     //OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!!
+        //pass in a date
+        let stringDate = getTodaysDate()
+        
+        print("before", Getfavorite(with: savedRoses))
+        
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
+        
+        //check if the date's favorite rose is either true or false,
+        //switch it to the other
+        if Getfavorite(with: savedRoses) == "true" {
+            ref.child(path).setValue("false")
+            //fetchRoses()
+            //print("inside func 2 TRUE", Getfavorite(with: savedRoses))
+        } else { //"false" or ""
+            ref.child(path).setValue("true")
+            //fetchRoses()
+            //print("inside func 2 FALSE", Getfavorite(with: savedRoses))
+
+        }
+        print("after", Getfavorite(with: savedRoses))
+        
+        //HOW TO USE IN OTHER VIEWS: self.viewModel.favoriteRose()
+    }
+     */
     
-                                                                    /* Variables and Functions */
+    func addFavoriteRose(stringDate: String){
+        //add in what type, either Rose, Bud, or Thorn
+        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
+        
+        //let stringDate = getTodaysDate()
+        print("DATE", stringDate)
+        var value = ""
+        
+        if Getfavorite(with: savedRoses, stringDate: stringDate) == "true" {
+            value = "false"
+        } else { //"false" or ""
+            value = "true"
+        }
+        
+        //Update savedRoses
+        for i in 0..<self.savedRoses.count {
+            if self.savedRoses[i].dateID == stringDate {
+                self.savedRoses[i].favorite = value
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
+        ref.child(path).setValue(value)
+    }
+    
+    func addFavoriteBud(stringDate: String){
+        //add in what type, either Rose, Bud, or Thorn
+        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
+        
+        //let stringDate = getTodaysDate()
+        print("DATE", stringDate)
+        var value = ""
+        
+        if Getfavorite(with: savedBuds, stringDate: stringDate) == "true" {
+            value = "false"
+        } else { //"false" or ""
+            value = "true"
+        }
+        
+        //Update savedBuds
+        for i in 0..<self.savedBuds.count {
+            if self.savedBuds[i].dateID == stringDate {
+                self.savedBuds[i].favorite = value
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Bud/Favorite"
+        ref.child(path).setValue(value)
+    }
+    
+    
+    func addFavoriteThorn(stringDate: String){
+        //add in what type, either Rose, Bud, or Thorn
+        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
+        
+        //let stringDate = getTodaysDate()
+        print("DATE", stringDate)
+        var value = ""
+        
+        if Getfavorite(with: savedThorns, stringDate: stringDate) == "true" {
+            value = "false"
+        } else { //"false" or ""
+            value = "true"
+        }
+        
+        //Update savedBuds
+        for i in 0..<self.savedThorns.count {
+            if self.savedThorns[i].dateID == stringDate {
+                self.savedThorns[i].favorite = value
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Mindfulness_Section/\(stringDate)/Thorn/Favorite"
+        ref.child(path).setValue(value)
+    }
+    
+     
+    func Getfavorite(with array: [RBTObject], stringDate: String) -> String? {
+        //getTodaysRose modified
+        //let stringDate = getTodaysDate()
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                //print("GETFAV", array[i].favorite)
+                //print("GetFavorite", array[i].favorite)
+                return array[i].favorite
+            }
+        }
+        return nil
+        //HOW TO USE: self.viewModel.GetfavoriteRose(with: self.viewModel.savedRoses))
+        //CHANGE savedRoses
+    }
+    
+    
+    func getRBT(with array: [RBTObject], stringDate: String) -> [String: String]? {
+        //gets the message and favorite for a specific day
+        //depends on which array you pass in - savedRoses - savedBuds - savedThorns
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                //print("GETFAV", array[i].favorite)
+                //print("GetFavorite", array[i].favorite)
+                //return array[i].favorite
+                return ["message": array[i].message, "favorite": array[i].favorite]
+            }
+        }
+        return nil
+    }
+    
+
+    
+    
+    
+    /* Variables and Functions */
 
     var roseInput: String {
         get { return model.roseInput }

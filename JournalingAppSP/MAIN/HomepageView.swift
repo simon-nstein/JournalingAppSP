@@ -39,6 +39,10 @@ struct HomepageView: View {
                     NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
                         OpenJournal()
                     }
+                    
+                    NavigationLink(destination: TestThreeView(viewModel: self.viewModel)) {
+                        OpenJournal()
+                    }
                 } //ScrollView
             } //VStack
         } // Navigation
