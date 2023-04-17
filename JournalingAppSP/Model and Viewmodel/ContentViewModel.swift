@@ -63,6 +63,7 @@ class JournalData: ObservableObject {
     @Published var savedRoses: [RoseObject] = []
     @Published var savedBuds: [BudObject] = []
     @Published var savedThorns: [ThornObject] = []
+    @Published var savedOpens: [OpenObject] = []
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
@@ -72,6 +73,7 @@ class JournalData: ObservableObject {
         fetchRoses()
         fetchBuds()
         fetchThorns()
+        fetchOpens()
     }
     
                                                                 /* ROSE FUNCTIONS */
@@ -137,6 +139,17 @@ class JournalData: ObservableObject {
         for i in 0..<array.count {
             if array[i].dateID == stringDate {
                 return array[i].message
+            }
+        }
+        return nil
+    }
+    
+    func getTodaysOpen(with array: [TheOpenObject]) -> String? {
+        let stringDate = getTodaysDate()
+        
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                return array[i].userInput
             }
         }
         return nil
@@ -255,35 +268,51 @@ class JournalData: ObservableObject {
         fetchThorns()
     }
     
-    /*
-    func addFavoriteRose() {
-     //OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!! OLD!!!
-        //pass in a date
+    func fetchOpens() {
+        print("Fetching open data for user \(self.UserProfile.id_string)")
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)/Open_Section")
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                for (dateString, dateSection) in data {
+                    if let currentDateSection = dateSection as? [String: Any] {
+                        let openFavorite = currentDateSection["favorite"] as? String ?? ""
+                        let openMessage = currentDateSection["userInput"] as? String ?? ""
+                        let openObject = OpenObject(userInput: openMessage, favorite: openFavorite, dateID: dateString)
+                        //print("openObject", openObject)
+                        self.savedOpens.append(openObject)
+                        //print("print(self.savedOpens)", self.savedOpens)
+                    }
+                }
+            }
+        })
+    }
+    
+    
+    // Adds a new OPEN to the database
+    func addOpen(with message: String) {
         let stringDate = getTodaysDate()
         
-        print("before", Getfavorite(with: savedRoses))
-        
+        //Update existing roses
+        for i in 0..<self.savedOpens.count {
+            if self.savedOpens[i].dateID == stringDate {
+                self.savedOpens[i].userInput = message
+            }
+        }
+        //Updates the database
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
-        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
+        let path = "Open_Section/\(stringDate)/userInput"
+        ref.child(path).setValue(message)
         
-        //check if the date's favorite rose is either true or false,
-        //switch it to the other
-        if Getfavorite(with: savedRoses) == "true" {
-            ref.child(path).setValue("false")
-            //fetchRoses()
-            //print("inside func 2 TRUE", Getfavorite(with: savedRoses))
-        } else { //"false" or ""
-            ref.child(path).setValue("true")
-            //fetchRoses()
-            //print("inside func 2 FALSE", Getfavorite(with: savedRoses))
-
-        }
-        print("after", Getfavorite(with: savedRoses))
-        
-        //HOW TO USE IN OTHER VIEWS: self.viewModel.favoriteRose()
+        print("Added a new Open [+]")
+        fetchOpens()
     }
-     */
+     
+    
+    
+    
+    
     
     func addFavoriteRose(stringDate: String){
         //add in what type, either Rose, Bud, or Thorn
@@ -417,6 +446,11 @@ class JournalData: ObservableObject {
     var thornInput: String {
         get { return model.thornInput }
         set { model.thornInput = newValue }
+    }
+    
+    var openInput: String {
+        get { return model.openInput }
+        set { model.openInput = newValue }
         
     }
     

@@ -105,7 +105,7 @@ struct TestThreeView: View {
         //THORN
         if viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) != nil{
             VStack{
-                Text("Thorn")
+                Text("ThornT")
                 HStack{
                     Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "")
                     Button(action: {

@@ -26,7 +26,7 @@ struct InputView: View {
             case "ROSE": return "1 of 3 responses"
             case "BUD": return "2 of 3 responses"
             case "THORN": return "3 of 3 responses"
-            default: return "Default text"
+            default: return ""
         }
     }
     
@@ -61,6 +61,9 @@ struct InputView: View {
                     case "THORN":
                         self.viewModel.thornInput = self.userInput
                         self.viewModel.addThorn(with: self.userInput)
+                    case "OPEN":
+                        self.viewModel.openInput = self.userInput
+                        self.viewModel.addOpen(with: self.userInput)
                     default:
                         break;
                 }
@@ -77,6 +80,9 @@ struct InputView: View {
 
                     case "THORN":
                         self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedThorns) ?? ""
+                    
+                    case "OPEN":
+                        self.userInput = self.viewModel.getTodaysOpen(with: self.viewModel.savedOpens) ?? ""
 
                     default:
                         break;
