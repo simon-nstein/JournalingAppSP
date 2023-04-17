@@ -27,8 +27,32 @@ struct TestThreeView: View {
     
     var body: some View {
         
+        Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "")
+        
+        
+        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
+            VStack{
+                Text("Open Journal")
+                HStack{
+                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "")
+                    Button(action: {
+                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                        } else {
+                            Image(systemName: "heart")
+                        }
+                    }
+                }
+                
+            } //end VStack
+        }//end IF
+        
+        
+        
+        
         HStack{
-            
             ZStack{
                 //Text(dateToString(date: selectDate))
                 Image(systemName: "calendar")

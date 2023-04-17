@@ -154,7 +154,6 @@ class JournalData: ObservableObject {
         }
         return nil
     }
-    
 
     func getTodaysRose() -> String? {
         let stringDate = getTodaysDate()
@@ -308,11 +307,6 @@ class JournalData: ObservableObject {
         print("Added a new Open [+]")
         fetchOpens()
     }
-     
-    
-    
-    
-    
     
     func addFavoriteRose(stringDate: String){
         //add in what type, either Rose, Bud, or Thorn
@@ -425,6 +419,44 @@ class JournalData: ObservableObject {
             }
         }
         return nil
+    }
+    
+    //OPEN
+    func getOpen(with array: [TheOpenObject], stringDate: String) -> [String: String]? {
+        //gets the message and favorite for a specific day
+        //depends on which array you pass in - savedRoses - savedBuds - savedThorns
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                return ["message": array[i].userInput, "favorite": array[i].favorite]
+            }
+        }
+        return nil
+    }
+    
+    func addFavoriteOpen(stringDate: String){
+        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
+        
+        //let stringDate = getTodaysDate()
+        //print("DATE", stringDate)
+        var value = ""
+        
+        if getOpen(with: savedOpens, stringDate: stringDate)?["favorite"] == "true" {
+            value = "false"
+        } else { //"false" or ""
+            value = "true"
+        }
+        
+        //Update savedBuds
+        for i in 0..<self.savedOpens.count {
+            if self.savedOpens[i].dateID == stringDate {
+                self.savedOpens[i].favorite = value
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Open_Section/\(stringDate)/favorite"
+        ref.child(path).setValue(value)
     }
     
 
