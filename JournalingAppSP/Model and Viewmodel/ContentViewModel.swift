@@ -178,21 +178,8 @@ class JournalData: ObservableObject {
         return nil
     }
 
-    func getTodaysRose() -> String? {
-        let stringDate = getTodaysDate()
-        
-        for i in 0..<self.savedRoses.count {
-            print("saved Rose", self.savedRoses[i])
-            if self.savedRoses[i].dateID == stringDate {
-                //print("IN", self.savedRoses[i].favorite)
-                return self.savedRoses[i].message
-                
-            }
-        }
-        return nil
-    }
     
-                                                                    /* BUD FUNCTIONS */
+    /* BUD FUNCTIONS */
     func fetchBuds() {
         print("Fetching a user bud for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
