@@ -561,6 +561,8 @@ class JournalData: ObservableObject {
     func addFavoriteGrat(stringDate: String, whichInput: String){
         //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
         
+        print("HERE", getGrat(array: savedGratitudes, stringDate: stringDate, whichInput: whichInput)?["favorite"] ?? "")
+        
         var value = ""
         
         if getGrat(array: savedGratitudes, stringDate: stringDate, whichInput: whichInput)?["favorite"] == "true" {
@@ -671,6 +673,7 @@ struct CustomColor {
     static let subtextColor = Color("subtextColor")
     static let gratitudeBackground = Color("gratitudeBackground")
     static let openJournalBackground = Color("openJournalBackground")
+    static let heartRed = Color("HeartRed")
 }
 
 struct CustomFontSize {

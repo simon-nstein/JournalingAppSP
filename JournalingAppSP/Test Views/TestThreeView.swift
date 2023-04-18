@@ -74,10 +74,11 @@ struct TestThreeView: View {
                         if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
-                                .foregroundColor(CustomColor.mindfulnessBackground)
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     Text(viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
@@ -98,10 +99,11 @@ struct TestThreeView: View {
                         if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
-                                .foregroundColor(CustomColor.mindfulnessBackground)
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     Text(viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
@@ -121,35 +123,14 @@ struct TestThreeView: View {
                         if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
-                                .foregroundColor(CustomColor.mindfulnessBackground)
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }//end IF
-        
-        //OPEN
-        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
-            VStack(alignment: .leading){
-                Text("Open Journal").font(.system(size: 26))
-                HStack{
-                    Button(action: {
-                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 18))
-                        } else {
-                            Image(systemName: "heart")
-                                .font(.system(size: 18))
-                        }
-                    }
-                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -168,9 +149,11 @@ struct TestThreeView: View {
                         if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["favorite"] == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     
@@ -185,9 +168,11 @@ struct TestThreeView: View {
                         if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input2")?["favorite"] == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     
@@ -202,9 +187,11 @@ struct TestThreeView: View {
                         if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input3")?["favorite"] == "true" {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 18))
+                                .foregroundColor(CustomColor.heartRed)
                         } else {
                             Image(systemName: "heart")
                                 .font(.system(size: 18))
+                                .foregroundColor(Color.black)
                         }
                     }
                     
@@ -213,6 +200,31 @@ struct TestThreeView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         } //END GRAT
+        
+        
+        //OPEN
+        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
+            VStack(alignment: .leading){
+                Text("Open Journal").font(.system(size: 26))
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(CustomColor.heartRed)
+                        } else {
+                            Image(systemName: "heart")
+                                .font(.system(size: 18))
+                                .foregroundColor(Color.black)
+                        }
+                    }
+                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }//end IF
         
         
         
