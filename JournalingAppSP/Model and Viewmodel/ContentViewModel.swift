@@ -552,6 +552,60 @@ class JournalData: ObservableObject {
         fetchGrat()
     }
     
+    
+    func getGrat(array: [TheGratitudeObject], stringDate: String, whichInput: String) -> [String: String]? {
+        //gets the message and favorite for a specific day
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                if whichInput == "Input1"{
+                    return ["message": array[i].message1, "favorite": array[i].favorite1]
+                }
+                if whichInput == "Input2"{
+                    return ["message": array[i].message2, "favorite": array[i].favorite2]
+                }
+                if whichInput == "Input3"{
+                    return ["message": array[i].message3, "favorite": array[i].favorite3]
+                }
+            }
+        }
+        return nil
+    }
+    
+    func addFavoriteGrat(stringDate: String, whichInput: String){
+        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
+        
+        var value = ""
+        
+        if getGrat(array: savedGratitudes, stringDate: stringDate, whichInput: whichInput)?["favorite"] == "true" {
+            value = "false"
+        } else { //"false" or ""
+            value = "true"
+        }
+        
+        //Update savedBuds
+        for i in 0..<self.savedOpens.count {
+            if self.savedOpens[i].dateID == stringDate {
+                
+                if whichInput == "Input1"{
+                    self.savedGratitudes[i].favorite1 = value
+                }
+                
+                if whichInput == "Input2"{
+                    self.savedGratitudes[i].favorite2 = value
+                }
+                
+                if whichInput == "Input3"{
+                    self.savedGratitudes[i].favorite3 = value
+                }
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Gratitude_Section/\(stringDate)/\(whichInput)/Favorite"
+        ref.child(path).setValue(value)
+    }
+    
 
     
     /* Variables and Functions */

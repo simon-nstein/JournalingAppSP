@@ -26,7 +26,7 @@ struct TestThreeView: View {
     
     
     var body: some View {
-
+        
         HStack{
             ZStack{
                 //Text(dateToString(date: selectDate))
@@ -65,87 +65,150 @@ struct TestThreeView: View {
         
         //ROSE
         if viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) != nil{
-            HStack(alignment: .firstTextBaseline){
-                Button(action: {
-                    self.viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate))
-                }) {
-                    if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 22))
-                            .foregroundColor(CustomColor.mindfulnessBackground)
-                    } else {
-                        Image(systemName: "heart")
-                            .font(.system(size: 20))
+            VStack(alignment: .leading){
+                Text("Rose").font(.system(size: 26))
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
+                            Image(systemName: "heart.fill")
+                                .font(.system(size: 22))
+                                .foregroundColor(CustomColor.mindfulnessBackground)
+                        } else {
+                            Image(systemName: "heart")
+                                .font(.system(size: 20))
+                        }
                     }
-                }
-                
-                VStack{
-                    Text("Rose").font(.system(size: 26))
                     Text(viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
                 }
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
         
         //BUD
         if viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) != nil{
-            HStack(alignment: .firstTextBaseline){
-                Button(action: {
-                    self.viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate))
-                }) {
-                    if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
-                        Image(systemName: "heart.fill")
-                    } else {
-                        Image(systemName: "heart")
+            VStack(alignment: .leading){
+                Text("Bud").font(.system(size: 26))
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
+                            Image(systemName: "heart.fill")
+                                .font(.system(size: 22))
+                                .foregroundColor(CustomColor.mindfulnessBackground)
+                        } else {
+                            Image(systemName: "heart")
+                                .font(.system(size: 20))
+                        }
                     }
-                }
-                VStack{
-                    Text("Bud").font(.system(size: 26))
                     Text(viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
                 }
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
         //THORN
         if viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) != nil{
-            HStack(alignment: .firstTextBaseline){
-                Button(action: {
-                    self.viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate))
-                }) {
-                    if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
-                        Image(systemName: "heart.fill")
-                    } else {
-                        Image(systemName: "heart")
+            VStack(alignment: .leading){
+                Text("Thorn").font(.system(size: 26))
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
+                            Image(systemName: "heart.fill")
+                                .font(.system(size: 22))
+                                .foregroundColor(CustomColor.mindfulnessBackground)
+                        } else {
+                            Image(systemName: "heart")
+                                .font(.system(size: 20))
+                        }
                     }
-                }
-                VStack{
-                    Text("Thorn").font(.system(size: 26))
                     Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
                 }
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
         //OPEN
         if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
-            HStack(alignment: .firstTextBaseline){
-                Button(action: {
-                    self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
-                }) {
-                    if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
-                        Image(systemName: "heart.fill")
-                    } else {
-                        Image(systemName: "heart")
+            VStack(alignment: .leading){
+                Text("Open Journal").font(.system(size: 26))
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
+                    }) {
+                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                        } else {
+                            Image(systemName: "heart")
+                        }
                     }
-                }
-                VStack{
-                    Text("Open Journal").font(.system(size: 26))
                     Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
                 }
-            }.frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
-    
-
+        //GRAT
+        if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["message"] != nil{
+            VStack(alignment: .leading){
+                Text("Gratitude Responses").font(.system(size: 26))
+                
+                //Input1
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteGrat(stringDate: dateToString(date: selectDate), whichInput: "Input1")
+                    }) {
+                        if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                        } else {
+                            Image(systemName: "heart")
+                        }
+                    }
+                    
+                    Text(viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["message"] ?? "").font(.system(size: 22))
+                }//end HStack
+                
+                //Input2
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteGrat(stringDate: dateToString(date: selectDate), whichInput: "Input2")
+                    }) {
+                        if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input2")?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                        } else {
+                            Image(systemName: "heart")
+                        }
+                    }
+                    
+                    Text(viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input2")?["message"] ?? "").font(.system(size: 22))
+                }//end HStack
+                
+                //Input3
+                HStack{
+                    Button(action: {
+                        self.viewModel.addFavoriteGrat(stringDate: dateToString(date: selectDate), whichInput: "Input3")
+                    }) {
+                        if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input3")?["favorite"] == "true" {
+                            Image(systemName: "heart.fill")
+                        } else {
+                            Image(systemName: "heart")
+                        }
+                    }
+                    
+                    Text(viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input3")?["message"] ?? "").font(.system(size: 22))
+                }//end HStack
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        } //END GRAT
+        
+        
+        
+        
     }
 }
 
