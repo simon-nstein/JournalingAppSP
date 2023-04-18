@@ -32,7 +32,7 @@ struct HomepageView: View {
                         MindfulnessJournal()
                     }
                     
-                    NavigationLink(destination: aboutUs()) {
+                    NavigationLink(destination: gratSwipeView(viewModel: self.viewModel)) {
                         GratitudeJournal()
                     }
                     

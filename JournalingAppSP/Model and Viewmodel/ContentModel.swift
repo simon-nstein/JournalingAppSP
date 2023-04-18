@@ -13,8 +13,12 @@ struct JournalModel {
     var budInput  = ""
     var thornInput = ""
     var openInput = ""
+    var gratitude1Input = ""
+    var gratitude2Input = ""
+    var gratitude3Input = ""
     var dateEntered: Date?
     var greeting = ""
+    
 }
 
 
@@ -90,6 +94,12 @@ protocol TheOpenObject {
     var favorite: String { get }
 }
 
+protocol GratitudeObject {
+    var dateID: String { get }
+    var message: String { get }
+    var favorite: String { get }
+}
+
 struct RoseObject: Hashable, RBTObject {
     var message: String
     var favorite: String
@@ -111,6 +121,25 @@ struct ThornObject: Hashable, RBTObject {
 
 struct OpenObject: Hashable, TheOpenObject {
     var userInput: String
+    var favorite: String
+    var dateID: String
+}
+
+struct Gratitude1Object: Hashable, GratitudeObject {
+    var message: String
+    var favorite: String
+    var dateID: String
+}
+
+struct Gratitude2Object: Hashable, GratitudeObject {
+    var message: String
+    var favorite: String
+    var dateID: String
+}
+
+
+struct Gratitude3Object: Hashable, GratitudeObject {
+    var message: String
     var favorite: String
     var dateID: String
 }

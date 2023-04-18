@@ -30,7 +30,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         mindfulnessRef.child("Rose").setValue(["Message":"", "Favorite": ""])   // Adds new sections for Rose, Bud, Thorn, Gratitude, Open Journal, and Notifications
         mindfulnessRef.child("Bud").setValue(["Message":"", "Favorite": ""])
         mindfulnessRef.child("Thorn").setValue(["Message":"", "Favorite": ""])
-        gratitudeRef.setValue(["userInput":"", "favorite":""])
+        gratitudeRef.child("Input1").setValue(["Message":"", "Favorite": ""])
+        gratitudeRef.child("Input2").setValue(["Message":"", "Favorite": ""])
+        gratitudeRef.child("Input3").setValue(["Message":"", "Favorite": ""])
         openRef.setValue(["userInput":"", "favorite":""])
         databaseRef.child("Users/\(username)/Notifications").setValue("false")
         print("New User Added [+]")
@@ -64,6 +66,9 @@ class JournalData: ObservableObject {
     @Published var savedBuds: [BudObject] = []
     @Published var savedThorns: [ThornObject] = []
     @Published var savedOpens: [OpenObject] = []
+    @Published var savedGratitude1: [Gratitude1Object] = []
+    @Published var savedGratitude2: [Gratitude2Object] = []
+    @Published var savedGratitude3: [Gratitude3Object] = []
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
@@ -74,10 +79,12 @@ class JournalData: ObservableObject {
         fetchBuds()
         fetchThorns()
         fetchOpens()
+        fetchGrat(type: "one")
+        fetchGrat(type: "two")
+        fetchGrat(type: "three")
     }
     
-                                                                /* ROSE FUNCTIONS */
-    
+    /* ROSE FUNCTIONS */
     func fetchRoses() {
         print("Fetching a user rose for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
@@ -150,6 +157,17 @@ class JournalData: ObservableObject {
         for i in 0..<array.count {
             if array[i].dateID == stringDate {
                 return array[i].userInput
+            }
+        }
+        return nil
+    }
+    
+    func getTodaysGratitude(with array: [GratitudeObject]) -> String? {
+        let stringDate = getTodaysDate()
+        
+        for i in 0..<array.count {
+            if array[i].dateID == stringDate {
+                return array[i].message
             }
         }
         return nil
@@ -459,6 +477,138 @@ class JournalData: ObservableObject {
         ref.child(path).setValue(value)
     }
     
+    
+    func fetchGratitude1(type: String) {
+        print("Fetching grat 1 data for user \(self.UserProfile.id_string)")
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)/Gratitude_Section")
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                for (dateString, dateSection) in data {
+                    if let currentDateSection = dateSection as? [String: Any] {
+                        let gratFavorite = currentDateSection["favorite"] as? String ?? ""
+                        let gratMessage = currentDateSection["message"] as? String ?? ""
+                        
+                        if type == "one"{
+                            let gratObject = Gratitude1Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                            self.savedGratitude1.append(gratObject)
+                        }
+                        if type == "two"{
+                            let gratObject = Gratitude2Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                            self.savedGratitude2.append(gratObject)
+                        }
+                        if type == "three"{
+                            let gratObject = Gratitude3Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                            self.savedGratitude3.append(gratObject)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    func fetchGrat(type: String) {
+        print("Fetching a user thorn for user \(self.UserProfile.id_string)")
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                    if let gratSection = data["Gratitude_Section"] as? [String: Any] {
+                        if type == "one" {
+                            for (dateString, dateSection) in gratSection {
+                                if let currentDateSection = dateSection as? [String: Any],
+                                   let smallerSection = currentDateSection["Input1"] as? [String: Any] {
+                                    let gratFavorite = smallerSection["Favorite"] as? String ?? ""
+                                    let gratMessage = smallerSection["Message"] as? String ?? ""
+                                    let gratObject = Gratitude1Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                                    self.savedGratitude1.append(gratObject)
+                                }
+                            }
+                        }
+                        if type == "two" {
+                            for (dateString, dateSection) in gratSection {
+                                if let currentDateSection = dateSection as? [String: Any],
+                                   let smallerSection = currentDateSection["Input2"] as? [String: Any] {
+                                    let gratFavorite = smallerSection["Favorite"] as? String ?? ""
+                                    let gratMessage = smallerSection["Message"] as? String ?? ""
+                                    let gratObject = Gratitude2Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                                    self.savedGratitude2.append(gratObject)
+                                }
+                            }
+                        }
+                        if type == "three" {
+                            for (dateString, dateSection) in gratSection {
+                                if let currentDateSection = dateSection as? [String: Any],
+                                   let smallerSection = currentDateSection["Input3"] as? [String: Any] {
+                                    let gratFavorite = smallerSection["Favorite"] as? String ?? ""
+                                    let gratMessage = smallerSection["Message"] as? String ?? ""
+                                    let gratObject = Gratitude3Object(message: gratMessage, favorite: gratFavorite, dateID: dateString)
+                                    self.savedGratitude3.append(gratObject)
+                                }
+                            }
+                        }
+                    }
+                }
+        })
+    }
+    
+    func addGrat1(with message: String) {
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<self.savedGratitude1.count {
+            if self.savedGratitude1[i].dateID == stringDate {
+                self.savedGratitude1[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Gratitude_Section/\(stringDate)/Input1/Message"
+        ref.child(path).setValue(message)
+        
+        print("Added a new Grat 1 [+]")
+        fetchRoses()
+    }
+    
+    func addGrat2(with message: String) {
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<self.savedGratitude2.count {
+            if self.savedGratitude2[i].dateID == stringDate {
+                self.savedGratitude2[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Gratitude_Section/\(stringDate)/Input2/Message"
+        ref.child(path).setValue(message)
+        
+        print("Added a new Grat 2 [+]")
+        fetchRoses()
+    }
+    
+    func addGrat3(with message: String) {
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<self.savedGratitude3.count {
+            if self.savedGratitude3[i].dateID == stringDate {
+                self.savedGratitude3[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Gratitude_Section/\(stringDate)/Input3/Message"
+        ref.child(path).setValue(message)
+        
+        print("Added a new Grat 3 [+]")
+        fetchRoses()
+    }
+    
 
     
     
@@ -483,7 +633,21 @@ class JournalData: ObservableObject {
     var openInput: String {
         get { return model.openInput }
         set { model.openInput = newValue }
-        
+    }
+    
+    var gratitude1Input: String {
+        get { return model.gratitude1Input }
+        set { model.gratitude1Input = newValue }
+    }
+    
+    var gratitude2Input: String {
+        get { return model.gratitude1Input }
+        set { model.gratitude1Input = newValue }
+    }
+    
+    var gratitude3Input: String {
+        get { return model.gratitude1Input }
+        set { model.gratitude1Input = newValue }
     }
     
     var dateEntered: Date? {

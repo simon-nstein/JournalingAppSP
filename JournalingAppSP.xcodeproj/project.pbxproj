@@ -31,6 +31,8 @@
 		3FC6E9C029C19C6C004D9531 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9BF29C19C6C004D9531 /* Auth0.plist */; };
 		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
 		F62567A129E735C0005411BF /* TestThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A029E735C0005411BF /* TestThreeView.swift */; };
+		F62567A329EE193B005411BF /* TestFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A229EE193B005411BF /* TestFourView.swift */; };
+		F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A429EE3B65005411BF /* gratSwipeView.swift */; };
 		F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CB29BE99140054E7AF /* inputSwipeView.swift */; };
 		F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CF29BF7B130054E7AF /* TestTwoView.swift */; };
 		F6A0C25729DD3F0F00C0E96F /* Poppins (1) in Resources */ = {isa = PBXBuildFile; fileRef = F6A0C25629DD3F0E00C0E96F /* Poppins (1) */; };
@@ -66,6 +68,8 @@
 		3FC6E9BF29C19C6C004D9531 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F62567A029E735C0005411BF /* TestThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestThreeView.swift; sourceTree = "<group>"; };
+		F62567A229EE193B005411BF /* TestFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFourView.swift; sourceTree = "<group>"; };
+		F62567A429EE3B65005411BF /* gratSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gratSwipeView.swift; sourceTree = "<group>"; };
 		F64552CB29BE99140054E7AF /* inputSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputSwipeView.swift; sourceTree = "<group>"; };
 		F64552CF29BF7B130054E7AF /* TestTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTwoView.swift; sourceTree = "<group>"; };
 		F6A0C25629DD3F0E00C0E96F /* Poppins (1) */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Poppins (1)"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				F6E6D1E729BD4B8D00DF59B5 /* testView.swift */,
 				F64552CF29BF7B130054E7AF /* TestTwoView.swift */,
 				F62567A029E735C0005411BF /* TestThreeView.swift */,
+				F62567A229EE193B005411BF /* TestFourView.swift */,
 			);
 			path = "Test Views";
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			children = (
 				3FDAECF529B7F69500C9A633 /* InputView.swift */,
 				F64552CB29BE99140054E7AF /* inputSwipeView.swift */,
+				F62567A429EE3B65005411BF /* gratSwipeView.swift */,
 			);
 			path = "User Input Views";
 			sourceTree = "<group>";
@@ -320,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
+				F62567A329EE193B005411BF /* TestFourView.swift in Sources */,
 				3F209E1A29CD312B00028B56 /* GratitudeJournal.swift in Sources */,
 				3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */,
 				F6E6D1E429BD04FA00DF59B5 /* GlanceView.swift in Sources */,
@@ -341,6 +348,7 @@
 				3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
 				F62567A129E735C0005411BF /* TestThreeView.swift in Sources */,
+				F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

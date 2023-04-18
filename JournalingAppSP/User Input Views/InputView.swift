@@ -18,6 +18,10 @@ struct InputView: View {
             case "BUD": return "Describe a challenge you experienced today."
             case "THORN": return "Explain something that you’re looking forward to."
             case "OPEN": return "No rules. Just let your thoughts run."
+            case "GRAT1": return "I am most grateful for..."
+            case "GRAT2": return "I am most grateful for..."
+            case "GRAT3": return "I am most grateful for..."
+            
             default: return "Default text"
         }
     }
@@ -26,6 +30,10 @@ struct InputView: View {
             case "ROSE": return "1 of 3 responses"
             case "BUD": return "2 of 3 responses"
             case "THORN": return "3 of 3 responses"
+            
+            case "GRAT1": return "1 of 3 responses"
+            case "GRAT2": return "2 of 3 responses"
+            case "GRAT3": return "3 of 3 responses"
             default: return ""
         }
     }
@@ -64,6 +72,20 @@ struct InputView: View {
                     case "OPEN":
                         self.viewModel.openInput = self.userInput
                         self.viewModel.addOpen(with: self.userInput)
+                    
+                    
+                    //NEED TO CHANGE
+                    case "GRAT1":
+                        self.viewModel.gratitude1Input = self.userInput
+                        self.viewModel.addGrat1(with: self.userInput)
+                    case "GRAT2":
+                        self.viewModel.gratitude2Input = self.userInput
+                        self.viewModel.addGrat2(with: self.userInput)
+                    case "GRAT3":
+                        self.viewModel.gratitude3Input = self.userInput
+                        self.viewModel.addGrat3(with: self.userInput)
+                    
+                    
                     default:
                         break;
                 }
@@ -83,6 +105,16 @@ struct InputView: View {
                     
                     case "OPEN":
                         self.userInput = self.viewModel.getTodaysOpen(with: self.viewModel.savedOpens) ?? ""
+                    
+                    //NEED TO CHANGE
+                    case "GRAT1":
+                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude1) ?? ""
+
+                    case "GRAT2":
+                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude2) ?? ""
+
+                    case "GRAT3":
+                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude3) ?? ""
 
                     default:
                         break;

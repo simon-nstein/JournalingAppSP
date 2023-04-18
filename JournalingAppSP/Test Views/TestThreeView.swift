@@ -26,32 +26,7 @@ struct TestThreeView: View {
     
     
     var body: some View {
-        
-        Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "")
-        
-        
-        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
-            VStack{
-                Text("Open Journal")
-                HStack{
-                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "")
-                    Button(action: {
-                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
-                            Image(systemName: "heart.fill")
-                        } else {
-                            Image(systemName: "heart")
-                        }
-                    }
-                }
-                
-            } //end VStack
-        }//end IF
-        
-        
-        
-        
+
         HStack{
             ZStack{
                 //Text(dateToString(date: selectDate))
@@ -72,8 +47,8 @@ struct TestThreeView: View {
                             if viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == nil
                                 && viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == nil
                                 && viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == nil {
-                                    //if they select a date that they don't have responses for
-                                    selectDate = previousDate
+                                //if they select a date that they don't have responses for
+                                selectDate = previousDate
                             } else{
                                 previousDate = selectDate
                             }
@@ -82,73 +57,94 @@ struct TestThreeView: View {
                     }
             }
             
-            Text(dateToString(date: selectDate))
+            Text(dateToString(date: selectDate)).font(.system(size: 30))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
         
         
         //ROSE
         if viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) != nil{
-            VStack{
-                Text("Rose")
-                HStack{
-                    Text(viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate))?["message"] ?? "")
-                    Button(action: {
-                        self.viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                        } else {
-                            Image(systemName: "heart")
-                        }
+            HStack(alignment: .firstTextBaseline){
+                Button(action: {
+                    self.viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate))
+                }) {
+                    if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(CustomColor.mindfulnessBackground)
+                    } else {
+                        Image(systemName: "heart")
+                            .font(.system(size: 20))
                     }
                 }
                 
-            } //end VStack
+                VStack{
+                    Text("Rose").font(.system(size: 26))
+                    Text(viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
+        
         
         //BUD
         if viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) != nil{
-            VStack{
-                Text("Bud")
-                HStack{
-                    Text(viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate))?["message"] ?? "")
-                    Button(action: {
-                        self.viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                        } else {
-                            Image(systemName: "heart")
-                        }
+            HStack(alignment: .firstTextBaseline){
+                Button(action: {
+                    self.viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate))
+                }) {
+                    if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
+                        Image(systemName: "heart.fill")
+                    } else {
+                        Image(systemName: "heart")
                     }
                 }
-                
-            } //end VStack
+                VStack{
+                    Text("Bud").font(.system(size: 26))
+                    Text(viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
         //THORN
         if viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) != nil{
-            VStack{
-                Text("ThornT")
-                HStack{
-                    Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "")
-                    Button(action: {
-                        self.viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                        } else {
-                            Image(systemName: "heart")
-                        }
+            HStack(alignment: .firstTextBaseline){
+                Button(action: {
+                    self.viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate))
+                }) {
+                    if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
+                        Image(systemName: "heart.fill")
+                    } else {
+                        Image(systemName: "heart")
                     }
                 }
-                
-            } //end VStack
+                VStack{
+                    Text("Thorn").font(.system(size: 26))
+                    Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
         }//end IF
         
+        //OPEN
+        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
+            HStack(alignment: .firstTextBaseline){
+                Button(action: {
+                    self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
+                }) {
+                    if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
+                        Image(systemName: "heart.fill")
+                    } else {
+                        Image(systemName: "heart")
+                    }
+                }
+                VStack{
+                    Text("Open Journal").font(.system(size: 26))
+                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
+        }//end IF
         
-        
-        
+    
 
     }
 }
