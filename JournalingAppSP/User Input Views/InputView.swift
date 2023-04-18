@@ -77,13 +77,13 @@ struct InputView: View {
                     //NEED TO CHANGE
                     case "GRAT1":
                         self.viewModel.gratitude1Input = self.userInput
-                        self.viewModel.addGrat1(with: self.userInput)
+                        self.viewModel.addGrat(message: self.userInput, whichInput: "Input1")
                     case "GRAT2":
                         self.viewModel.gratitude2Input = self.userInput
-                        self.viewModel.addGrat2(with: self.userInput)
+                        self.viewModel.addGrat(message: self.userInput, whichInput: "Input2")
                     case "GRAT3":
                         self.viewModel.gratitude3Input = self.userInput
-                        self.viewModel.addGrat3(with: self.userInput)
+                        self.viewModel.addGrat(message: self.userInput, whichInput: "Input3")
                     
                     
                     default:
@@ -108,13 +108,13 @@ struct InputView: View {
                     
                     //NEED TO CHANGE
                     case "GRAT1":
-                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude1) ?? ""
+                    self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input1") ?? ""
 
                     case "GRAT2":
-                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude2) ?? ""
+                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input2") ?? ""
 
                     case "GRAT3":
-                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitude3) ?? ""
+                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input3") ?? ""
 
                     default:
                         break;

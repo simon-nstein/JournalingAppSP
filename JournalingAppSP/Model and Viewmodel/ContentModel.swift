@@ -94,10 +94,14 @@ protocol TheOpenObject {
     var favorite: String { get }
 }
 
-protocol GratitudeObject {
+protocol TheGratitudeObject {
     var dateID: String { get }
-    var message: String { get }
-    var favorite: String { get }
+    var message1: String { get }
+    var favorite1: String { get }
+    var message2: String { get }
+    var favorite2: String { get }
+    var message3: String { get }
+    var favorite3: String { get }
 }
 
 struct RoseObject: Hashable, RBTObject {
@@ -125,21 +129,14 @@ struct OpenObject: Hashable, TheOpenObject {
     var dateID: String
 }
 
-struct Gratitude1Object: Hashable, GratitudeObject {
-    var message: String
-    var favorite: String
+struct GratitudeObject: Hashable, TheGratitudeObject {
     var dateID: String
-}
-
-struct Gratitude2Object: Hashable, GratitudeObject {
-    var message: String
-    var favorite: String
-    var dateID: String
+    var message1: String
+    var favorite1: String
+    var message2: String
+    var favorite2: String
+    var message3: String
+    var favorite3: String
 }
 
 
-struct Gratitude3Object: Hashable, GratitudeObject {
-    var message: String
-    var favorite: String
-    var dateID: String
-}
