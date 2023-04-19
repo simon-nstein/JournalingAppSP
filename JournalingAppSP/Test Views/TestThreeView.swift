@@ -7,6 +7,37 @@
 
 import SwiftUI
 
+struct CalView: View {
+    let title: String
+    let message: String
+    let isFavorite: Bool
+    let onToggleFavorite: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title).font(.system(size: 26))
+            HStack{
+                Button(action: {
+                    onToggleFavorite()
+                }) {
+                    if isFavorite {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 18))
+                            .foregroundColor(CustomColor.heartRed)
+                    } else {
+                        Image(systemName: "heart")
+                            .font(.system(size: 18))
+                            .foregroundColor(Color.black)
+                    }
+                }
+                Text(message).font(.system(size: 22))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+
 struct TestThreeView: View {
     @ObservedObject var viewModel: JournalData;
     
@@ -62,79 +93,35 @@ struct TestThreeView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         
         
-        
         //ROSE
-        if viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) != nil{
-            VStack(alignment: .leading){
-                Text("Rose").font(.system(size: 26))
-                HStack{
-                    Button(action: {
-                        self.viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(CustomColor.heartRed)
-                        } else {
-                            Image(systemName: "heart")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                    Text(viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
-                }
+        if let roseData = viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) {
+                CalView(
+                    title: "Rose",
+                    message: roseData["message"] ?? "",
+                    isFavorite: viewModel.Getfavorite(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true",
+                    onToggleFavorite: { viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate)) }
+                )
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }//end IF
-        
         
         //BUD
-        if viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) != nil{
-            VStack(alignment: .leading){
-                Text("Bud").font(.system(size: 26))
-                HStack{
-                    Button(action: {
-                        self.viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(CustomColor.heartRed)
-                        } else {
-                            Image(systemName: "heart")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                    Text(viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }//end IF
+        if let budData = viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) {
+            CalView(
+                title: "Bud",
+                message: budData["message"] ?? "",
+                isFavorite: viewModel.Getfavorite(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true",
+                onToggleFavorite: { viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate)) }
+            )
+        }
         
         //THORN
-        if viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) != nil{
-            VStack(alignment: .leading){
-                Text("Thorn").font(.system(size: 26))
-                HStack{
-                    Button(action: {
-                        self.viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if self.viewModel.Getfavorite(with: self.viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true" {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(CustomColor.heartRed)
-                        } else {
-                            Image(systemName: "heart")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                    Text(viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }//end IF
+        if let thornData = viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) {
+            CalView(
+                title: "Thorn",
+                message: thornData["message"] ?? "",
+                isFavorite: viewModel.Getfavorite(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true",
+                onToggleFavorite: { viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate)) }
+            )
+        }
         
         //GRAT
         if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["message"] != nil{
@@ -145,6 +132,8 @@ struct TestThreeView: View {
                 HStack{
                     Button(action: {
                         self.viewModel.addFavoriteGrat(stringDate: dateToString(date: selectDate), whichInput: "Input1")
+                        //HERE
+                        //self.viewModel.getWeekRBT(array: viewModel.savedRoses)
                     }) {
                         if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["favorite"] == "true" {
                             Image(systemName: "heart.fill")
@@ -201,31 +190,15 @@ struct TestThreeView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         } //END GRAT
         
-        
         //OPEN
-        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] != nil{
-            VStack(alignment: .leading){
-                Text("Open Journal").font(.system(size: 26))
-                HStack{
-                    Button(action: {
-                        self.viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate))
-                    }) {
-                        if viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true" {
-                            Image(systemName: "heart.fill")
-                                .font(.system(size: 18))
-                                .foregroundColor(CustomColor.heartRed)
-                        } else {
-                            Image(systemName: "heart")
-                                .font(.system(size: 18))
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                    Text(viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["message"] ?? "").font(.system(size: 22))
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }//end IF
-        
+        if let OpenData = viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate)) {
+            CalView(
+                title: "Open Journal",
+                message: OpenData["message"] ?? "",
+                isFavorite: viewModel.getOpen(with: viewModel.savedOpens, stringDate: dateToString(date: selectDate))?["favorite"] == "true",
+                onToggleFavorite: { viewModel.addFavoriteOpen(stringDate: dateToString(date: selectDate)) }
+            )
+        }
         
         
         

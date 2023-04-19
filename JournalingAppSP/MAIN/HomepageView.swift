@@ -40,7 +40,7 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
-                    NavigationLink(destination: TestThreeView(viewModel: self.viewModel)) {
+                    NavigationLink(destination: TestFourView(viewModel: self.viewModel)) {
                         OpenJournal()
                     }
                 } //ScrollView

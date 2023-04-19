@@ -67,6 +67,20 @@ class JournalData: ObservableObject {
     @Published var savedThorns: [ThornObject] = []
     @Published var savedOpens: [OpenObject] = []
     @Published var savedGratitudes: [GratitudeObject] = []
+    
+    @Published var test2: [RoseObject] = []
+    
+    @Published var weekRoses: [RoseObject] = []
+    @Published var weekBuds: [BudObject] = []
+    @Published var weekThorns: [ThornObject] = []
+    @Published var weekOpens: [OpenObject] = []
+    @Published var weekGratitudes: [GratitudeObject] = []
+    
+    @Published var monthRoses: [RoseObject] = []
+    @Published var monthBuds: [BudObject] = []
+    @Published var monthThorns: [ThornObject] = []
+    @Published var monthOpens: [OpenObject] = []
+    @Published var monthGratitudes: [GratitudeObject] = []
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
@@ -78,7 +92,39 @@ class JournalData: ObservableObject {
         fetchThorns()
         fetchOpens()
         fetchGrat()
+        //week()
     }
+    
+    
+    /*
+    func week(){
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let weekday = calendar.component(.weekday, from: Date())
+        let weekRoses = []
+        
+        for i in (1..<weekday).reversed() {
+            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let previousDate = dateFormatter.string(from: previousDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == previousDate {
+                        weekRoses.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+    }
+     */
+    
+    
+    
     
     /* ROSE FUNCTIONS */
     func fetchRoses() {
@@ -100,9 +146,6 @@ class JournalData: ObservableObject {
                                 //print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
                                 self.savedRoses.append(roseObject)
                                 
-                                //print("FETCH ALL", self.savedRoses)
-                                //print("FETCH [0]", self.savedRoses[0])
-                                //print("FETCH [0].favorite", self.savedRoses[0].favorite)
                             }
                         }
                     }
@@ -595,10 +638,43 @@ class JournalData: ObservableObject {
         ref.child(path).setValue(value)
     }
     
-
+    
+    func getWeekRBT(array: [RBTObject]) -> [[String: Any]]{
+        //returns an array of either Roses, Buds, OR Thorns
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let weekday = calendar.component(.weekday, from: Date())
+        var weekRBT = [[String: Any]]()
+        
+        for i in (0..<weekday).reversed() {
+            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let previousDate = dateFormatter.string(from: previousDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == previousDate {
+                        print("array[i]", array[i])
+                        weekRBT.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
+                        //weekRBT.append(array[i])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        print("getWeekRoses", weekRBT)
+        return weekRBT
+        
+    }
+    
+    
+    
     
     /* Variables and Functions */
-
     var roseInput: String {
         get { return model.roseInput }
         set { model.roseInput = newValue }
