@@ -40,14 +40,16 @@ struct ContentView: View {
                 }
             
             // Calendar
-            aboutUs()
+            TestThreeView(viewModel: self.viewModel)
+            //aboutUs()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Calendar")
                 }
             
             // Analyze
-            aboutUs()
+            //aboutUs()
+            TestFourView(viewModel: self.viewModel)
                 .tabItem {
                     Image(systemName: "chart.bar")
                     Text("Analyze")

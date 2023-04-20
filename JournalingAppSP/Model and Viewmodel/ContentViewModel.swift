@@ -656,7 +656,7 @@ class JournalData: ObservableObject {
                 for i in 0..<array.count {
                     //if date exists in saved roses
                     if array[i].dateID == previousDate {
-                        print("array[i]", array[i])
+                        //print("array[i]", array[i])
                         weekRBT.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
                         //weekRBT.append(array[i])
                     }
@@ -666,9 +666,165 @@ class JournalData: ObservableObject {
             }
         }
         
-        print("getWeekRoses", weekRBT)
+        //print("getWeekRoses", weekRBT)
         return weekRBT
+    }
+    
+    func getMonthRBT(array: [RBTObject]) -> [[String: Any]]{
+        //returns an array of either Roses, Buds, OR Thorns
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let month = calendar.component(.month, from: currentDay)
+        let year = calendar.component(.year, from: currentDay)
+        let range = calendar.range(of: .day, in: .month, for: currentDay)!
+        let numDays = range.count
+        var monthRBT = [[String: Any]]()
         
+        for i in 1...numDays {
+            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let currentDate = dateFormatter.string(from: currentDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == currentDate {
+                        monthRBT.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        return monthRBT
+    }
+    
+    
+    func getWeekGRAT() -> [[String: Any]]{
+        let array = savedGratitudes
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let weekday = calendar.component(.weekday, from: Date())
+        var weekGRAT = [[String: Any]]()
+        
+        for i in (0..<weekday).reversed() {
+            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let previousDate = dateFormatter.string(from: previousDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == previousDate {
+                        //print("array[i]", array[i])
+                        //let gratObject = GratitudeObject(dateID: dateString, message1: input1Message, favorite1: input1Favorite, message2: input2Message, favorite2: input2Favorite, message3: input3Message, favorite3: input3Favorite)
+                        weekGRAT.append(["message1": array[i].message1, "favorite1": array[i].favorite1, "message2": array[i].message2, "favorite2": array[i].favorite2, "message3": array[i].message3, "favorite3": array[i].favorite3,"date": array[i].dateID])
+                        //weekRBT.append(array[i])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        //print("getWeekRoses", weekRBT)
+        return weekGRAT
+    }
+    
+    func getMonthGRAT() -> [[String: Any]]{
+        let array = savedGratitudes
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let month = calendar.component(.month, from: currentDay)
+        let year = calendar.component(.year, from: currentDay)
+        let range = calendar.range(of: .day, in: .month, for: currentDay)!
+        let numDays = range.count
+        var monthGRAT = [[String: Any]]()
+        
+        for i in 1...numDays {
+            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let currentDate = dateFormatter.string(from: currentDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == currentDate {
+                        monthGRAT.append(["message1": array[i].message1, "favorite1": array[i].favorite1, "message2": array[i].message2, "favorite2": array[i].favorite2, "message3": array[i].message3, "favorite3": array[i].favorite3,"date": array[i].dateID])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        return monthGRAT
+    }
+    
+    func getWeekOPEN() -> [[String: Any]]{
+        let array = savedOpens
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let weekday = calendar.component(.weekday, from: Date())
+        var weekOPEN = [[String: Any]]()
+        
+        for i in (0..<weekday).reversed() {
+            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let previousDate = dateFormatter.string(from: previousDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == previousDate {
+                        print("IN", array[i])
+                        weekOPEN.append(["userInput": array[i].userInput, "favorite": array[i].favorite, "date": array[i].dateID])
+                        //weekRBT.append(array[i])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        //print("getWeekRoses", weekRBT)
+        return weekOPEN
+    }
+    
+    func getMonthOPEN() -> [[String: Any]]{
+        let array = savedOpens
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let month = calendar.component(.month, from: currentDay)
+        let year = calendar.component(.year, from: currentDay)
+        let range = calendar.range(of: .day, in: .month, for: currentDay)!
+        let numDays = range.count
+        var monthOPEN = [[String: Any]]()
+        
+        for i in 1...numDays {
+            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let currentDate = dateFormatter.string(from: currentDay)
+                
+                //looping though saved roses
+                for i in 0..<array.count {
+                    //if date exists in saved roses
+                    if array[i].dateID == currentDate {
+                        monthOPEN.append(["userInput": array[i].userInput, "favorite": array[i].favorite, "date": array[i].dateID])
+                    }
+                }
+            } else {
+                print("Invalid date")
+            }
+        }
+        
+        return monthOPEN
     }
     
     
