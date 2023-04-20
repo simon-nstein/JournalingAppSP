@@ -40,9 +40,6 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
-                    NavigationLink(destination: TestFourView(viewModel: self.viewModel)) {
-                        OpenJournal()
-                    }
                 } //ScrollView
             } //VStack
         } // Navigation
