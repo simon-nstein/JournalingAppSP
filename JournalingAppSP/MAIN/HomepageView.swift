@@ -13,6 +13,12 @@ func dateToString(date: Date) -> String {
     return dateFormatter.string(from: date)
 }
 
+func HPshowDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d"
+        return dateFormatter.string(from: date)
+}
+
 struct HomepageView: View {
     var viewModel: JournalData
     var userProfile: Profile
@@ -40,6 +46,9 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
+                    NavigationLink(destination: TestFiveView(viewModel: self.viewModel)) {
+                        OpenJournal()
+                    }
                 } //ScrollView
             } //VStack
         } // Navigation
@@ -79,7 +88,7 @@ struct HomepageView: View {
                 )
                 
                 TextView(
-                    text: dateToString(date: self.endingDate),
+                    text: HPshowDate(date: self.endingDate),
                     fontSize: 25,
                     offset: 0,
                     fontType: "Poppins-Regular"
@@ -90,8 +99,7 @@ struct HomepageView: View {
             
             // Favorites Page
             Image(systemName: "heart")
-                .resizable()
-                .frame(width: 40, height: 35)
+                .font(.system(size: 30))
                 .padding()
                 .onTapGesture {
                     // Navigate to the favorites page

@@ -97,9 +97,9 @@ struct TestFourView: View {
                                     HStack(){
                                         Button(action: {
                                             let date = ROSEperiod[index]["date"] as? String ?? ""
-                                            print("date", date)
+                                            //print("date", date)
                                             viewModel.addFavoriteRose(stringDate: date)
-                                            print("2", ROSEperiod[index]["favorite"] as? String ?? "" )
+                                            //print("2", ROSEperiod[index]["favorite"] as? String ?? "" )
                                             
                                         }) {
                                             if viewModel.Getfavorite(with: viewModel.savedRoses, stringDate: ROSEperiod[index]["date"] as? String ?? "") == "true" {

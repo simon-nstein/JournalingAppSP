@@ -40,7 +40,8 @@ struct ContentView: View {
                 }
             
             // Calendar
-            TestThreeView(viewModel: self.viewModel)
+            //TestThreeView(viewModel: self.viewModel)
+            CalendarView(viewModel: self.viewModel)
             //aboutUs()
                 .tabItem {
                     Image(systemName: "calendar")
@@ -49,7 +50,8 @@ struct ContentView: View {
             
             // Analyze
             //aboutUs()
-            TestFourView(viewModel: self.viewModel)
+            //TestFourView(viewModel: self.viewModel)
+            AnalyzeView(viewModel: self.viewModel)
                 .tabItem {
                     Image(systemName: "chart.bar")
                     Text("Analyze")

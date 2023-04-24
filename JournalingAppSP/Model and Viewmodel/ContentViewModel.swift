@@ -92,10 +92,11 @@ class JournalData: ObservableObject {
         fetchThorns()
         fetchOpens()
         fetchGrat()
+        //isDateInCurrentWeek(dateString: "2023-04-01")
         //week()
     }
     
-    
+
     /*
     func week(){
         let calendar = Calendar.current
@@ -123,6 +124,10 @@ class JournalData: ObservableObject {
     }
      */
     
+    func test(message: String) {
+        print("YOU ARE NOW WITNISING", savedRoses)
+    }
+    
     
     
     
@@ -144,7 +149,10 @@ class JournalData: ObservableObject {
                                 
                                 let roseObject = RoseObject(message: roseMessage, favorite: roseFavorite, dateID: dateString)
                                 //print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
-                                self.savedRoses.append(roseObject)
+                                if !(self.savedRoses.contains(roseObject)) {
+                                    self.savedRoses.append(roseObject)
+                                }
+                                
                                 
                             }
                         }
@@ -285,7 +293,7 @@ class JournalData: ObservableObject {
                                 let thornFavorite = thornSection["Favorite"] as? String ?? ""
                                 let thornMessage = thornSection["Message"] as? String ?? ""
                                 let thornObject = ThornObject(message: thornMessage, favorite: thornFavorite, dateID: dateString)
-                                print("PRINT", thornObject)
+                                //print("PRINT", thornObject)
                                 //print("Date: \(dateString), Thorn Favorite: \(thornFavorite), Thorn Message: \(thornMessage)")
                                 self.savedThorns.append(thornObject)
                             }
@@ -669,6 +677,14 @@ class JournalData: ObservableObject {
         //print("getWeekRoses", weekRBT)
         return weekRBT
     }
+    /*
+    func validWeek(date: String) -> Bool{
+        let calendar = Calendar.current
+        let currentDay = Date()
+        let weekday = calendar.component(.weekday, from: Date())
+        
+    }
+     */
     
     func getMonthRBT(array: [RBTObject]) -> [[String: Any]]{
         //returns an array of either Roses, Buds, OR Thorns
@@ -827,6 +843,52 @@ class JournalData: ObservableObject {
         return monthOPEN
     }
     
+    /*
+    func getAllFavorite(array: [RBTObject]) -> [[String: Any]]{
+        var favorites = [[String: Any]]()
+        for i in 0..<array.count {
+            //print("in", array[i])
+            if array[i].favorite == "true"{
+                favorites.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
+            }
+        }
+        return favorites
+    }
+     */
+    /*
+    func isDateInCurrentWeek(dateString: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dateString) {
+            let calendar = Calendar.current
+            let currentDate = Date()
+            let currentWeek = calendar.component(.weekOfYear, from: currentDate)
+            let givenWeek = calendar.component(.weekOfYear, from: date)
+            return currentWeek == givenWeek
+        }
+        return false
+    }
+     */
+    
+    func isDateInCurrentPeriod(dateString: String, period: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dateString) {
+            let calendar = Calendar.current
+            let currentDate = Date()
+            if period == "week"{
+                let currentWeek = calendar.component(.weekOfYear, from: currentDate)
+                let givenWeek = calendar.component(.weekOfYear, from: date)
+                return currentWeek == givenWeek
+            } else{
+                let currentMonth = calendar.component(.month, from: currentDate)
+                let givenMonth = calendar.component(.month, from: date)
+                return currentMonth == givenMonth
+            }
+        }
+        return false
+    }
+    
     
     
     
@@ -906,6 +968,8 @@ struct CustomColor {
     static let gratitudeBackground = Color("gratitudeBackground")
     static let openJournalBackground = Color("openJournalBackground")
     static let heartRed = Color("HeartRed")
+    
+    static let NEWbackground = Color("NEWbackground")
 }
 
 struct CustomFontSize {
