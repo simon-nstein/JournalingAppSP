@@ -906,6 +906,8 @@ struct CustomColor {
     static let gratitudeBackground = Color("gratitudeBackground")
     static let openJournalBackground = Color("openJournalBackground")
     static let heartRed = Color("HeartRed")
+    static let darkBackground = Color("darkBackground")
+    static let lightButtonColor = Color("lightButtonColor")
 }
 
 struct CustomFontSize {

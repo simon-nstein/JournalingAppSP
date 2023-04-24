@@ -24,6 +24,7 @@
 		3F4814F629B59D0700FAEB20 /* JournalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F429B59D0700FAEB20 /* JournalCoreData.xcdatamodeld */; };
 		3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4814F729B5A51200FAEB20 /* WeekGlance.swift */; };
 		3F4E39A629DBA803000FC2DC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E39A529DBA803000FC2DC /* CalendarView.swift */; };
+		3F78EB2629F6036400285E7F /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F78EB2529F6036400285E7F /* GoalView.swift */; };
 		3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98BF29B278A700804A6A /* ContentViewModel.swift */; };
 		3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD98C129B2790100804A6A /* ContentModel.swift */; };
 		3FC6E9B529C18E10004D9531 /* LoginSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */; };
@@ -57,6 +58,7 @@
 		3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalCoreData.xcdatamodel; sourceTree = "<group>"; };
 		3F4814F729B5A51200FAEB20 /* WeekGlance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGlance.swift; sourceTree = "<group>"; };
 		3F4E39A529DBA803000FC2DC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		3F78EB2529F6036400285E7F /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		3FBD98BF29B278A700804A6A /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		3FBD98C129B2790100804A6A /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 		3FBD98C629B2879800804A6A /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				F64552CF29BF7B130054E7AF /* TestTwoView.swift */,
 				F62567A029E735C0005411BF /* TestThreeView.swift */,
 				F62567A229EE193B005411BF /* TestFourView.swift */,
+				3F78EB2529F6036400285E7F /* GoalView.swift */,
 			);
 			path = "Test Views";
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			files = (
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
 				F62567A329EE193B005411BF /* TestFourView.swift in Sources */,
+				3F78EB2629F6036400285E7F /* GoalView.swift in Sources */,
 				3F209E1A29CD312B00028B56 /* GratitudeJournal.swift in Sources */,
 				3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */,
 				F6E6D1E429BD04FA00DF59B5 /* GlanceView.swift in Sources */,
