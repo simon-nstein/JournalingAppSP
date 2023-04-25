@@ -10,8 +10,10 @@ import SwiftUI
 struct ReminderView: View {
     var viewModel: JournalData
     var userProfile: Profile
+    let notifyHandler = NotificationHandler()
     @State private var selectedTime = Date()
     @State private var selection: String? = nil
+    
     
     var body: some View {
         
@@ -34,11 +36,13 @@ struct ReminderView: View {
                         HStack {
                             Image(systemName: "clock")
                                 .foregroundColor(.white)
+                                .padding(.leading, 50.0)
                             Spacer()
 
-                            DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
+                            DatePicker("", selection: $selectedTime, displayedComponents: [ .hourAndMinute])
                                 .labelsHidden()
                                 .accentColor(.white)
+                                .padding(.trailing, 50.0)
 
                         }.padding()
                         
@@ -54,7 +58,7 @@ struct ReminderView: View {
                         Spacer()
                         
                         NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile).onAppear {
-                            self.viewModel.scheduleDailyReminder(selectedTime: self.selectedTime)
+                            self.notifyHandler.askPermission(date: self.selectedTime, type: "time", title: "Time to reflect", body: "Our app is here to help you keep track of your thoughts and emotions, and provide a safe space to express yourself freely.")
                         }) {
                             Text("Schedule Reminder")
                         }.foregroundColor(.white).padding(.trailing, 25.0)

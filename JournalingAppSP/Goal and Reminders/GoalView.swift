@@ -97,7 +97,6 @@ struct GoalView: View {
                                                                                         // Submit button and Adding goals to database
                         NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile).onAppear {
                             self.viewModel.addGoal(goalsArray: array, textField: userTextField)
-                            
                         }) {
                             Text("Submit")
                         }

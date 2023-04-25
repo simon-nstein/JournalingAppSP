@@ -140,29 +140,6 @@ class JournalData: ObservableObject {
         print("added new goals [+]")
     }
     
-    func scheduleDailyReminder(selectedTime: Date) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted {
-                print("Permission granted")
-            } else {
-                print("Permission denied")
-                return
-            }
-        }
-        print("Creating reminder [+]")
-        let content = UNMutableNotificationContent()
-        content.title = "Daily Reminder"
-        content.body =  "Time to reflect on your day!"
-        content.sound = UNNotificationSound.default
-
-        let components = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
-    }
-
-    
     
     /* ROSE FUNCTIONS */
     func fetchRoses() {
@@ -962,4 +939,37 @@ struct CustomFontSize {
     static let inputFontSize: CGFloat = 22;
     static let largeFontSize: CGFloat = 30;
     static let extraLargeFont: CGFloat = 40;
+}
+
+class NotificationHandler {
+    func askPermission(date: Date, type: String, timeInterval: Double=10, title: String, body: String) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                print("Permission granted")
+                self.sendNotification(date: date, type: type, title: title, body: body)
+            } else {
+                print("Permission denied")
+                return
+            }
+        }
+    }
+    
+    func sendNotification(date: Date, type: String, timeInterval: Double=10, title: String, body: String) {
+        var trigger: UNNotificationTrigger?
+        
+        if type == "date" {
+            let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
+            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        } else if type == "time" {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
 }
