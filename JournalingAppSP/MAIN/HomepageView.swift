@@ -19,7 +19,6 @@ struct HomepageView: View {
     var endingDate: Date
     
     var body: some View {
-        NavigationView {
             VStack {
                 homepageHeader
                 
@@ -41,8 +40,7 @@ struct HomepageView: View {
                     }
                     
                 } //ScrollView
-            } //VStack
-        } // Navigation
+            }.navigationBarBackButtonHidden(true).navigationBarHidden(true) //VStack
         .padding()
     }
     

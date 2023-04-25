@@ -6,13 +6,19 @@ import Auth0
 struct LoginSystemView: View {
     
     @State private var isAuthenticated = false
+    @State private var userNeedsGoals = false
     @State var userProfile = Profile.empty
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some View {
         
         if isAuthenticated {
-            ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+            if userNeedsGoals {
+                GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+            } else {
+                GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+                //ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+            }
         } else {
             VStack {
                 Button("Log in") {
@@ -88,14 +94,15 @@ extension LoginSystemView {
                     // Check if user exists already or not
                     self.delegate.userExists(username: user) { exists in
                         if exists {
-                            print("User exists")
+                            print("User exists -- No need to go to the Goal View")
                         } else {
-                            print("User does not exist")
+                            print("User does not exist -- We need to go to the Goal View")
                             delegate.addNewUser(username: user)
+                            self.userNeedsGoals = true
+                            
                         }
                     }
                     self.isAuthenticated = true
-                    
                 }
             }
     }

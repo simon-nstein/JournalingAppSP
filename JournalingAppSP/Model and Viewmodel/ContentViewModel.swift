@@ -123,7 +123,45 @@ class JournalData: ObservableObject {
     }
      */
     
+    func addGoal(goalsArray: [String], textField: String) -> Void {
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Goals/"
+        
+        // Adding array items
+        for (_, element) in goalsArray.enumerated() {
+            ref.child(path).childByAutoId().setValue(element)
+        }
+        
+        // Adding text field
+        if ( textField != "" ) {
+            ref.child(path).childByAutoId().setValue(textField)
+        }
+        print("added new goals [+]")
+    }
     
+    func scheduleDailyReminder(selectedTime: Date) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                print("Permission granted")
+            } else {
+                print("Permission denied")
+                return
+            }
+        }
+        print("Creating reminder [+]")
+        let content = UNMutableNotificationContent()
+        content.title = "Daily Reminder"
+        content.body =  "Time to reflect on your day!"
+        content.sound = UNNotificationSound.default
+
+        let components = Calendar.current.dateComponents([.hour, .minute], from: selectedTime)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
+
     
     
     /* ROSE FUNCTIONS */
@@ -892,6 +930,10 @@ func getTodaysDate() -> String {
 
 
 
+
+
+
+
                                                                 /* Custom Fonts and Colors */
 struct CustomColor {
     static let RoseColor = Color("RoseColor")
@@ -908,6 +950,9 @@ struct CustomColor {
     static let heartRed = Color("HeartRed")
     static let darkBackground = Color("darkBackground")
     static let lightButtonColor = Color("lightButtonColor")
+    static let activeButtonColor = Color("activeButtonColor")
+    static let reminderBackground = Color("reminderBackground")
+    static let reminderInsideBackground = Color("reminderInsideBackground")
 }
 
 struct CustomFontSize {
