@@ -96,9 +96,26 @@ class JournalData: ObservableObject {
         //week()
         
     }
-    
     func test(message: String) {
         print(message)
+    }
+    
+    func addGoal(goalsArray: [String], textField: String) -> Void {
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Goals/"
+        
+        // Adding array items
+        for (_, element) in goalsArray.enumerated() {
+            ref.child(path).childByAutoId().setValue(element)
+        }
+        
+        // Adding text field
+        if ( textField != "" ) {
+            ref.child(path).childByAutoId().setValue(textField)
+        }
+        print("added new goals [+]")
+//>>>>>>> main
     }
     
     
@@ -654,7 +671,6 @@ func getTodaysDate() -> String {
 }
 
 
-
                                                                 /* Custom Fonts and Colors */
 struct CustomColor {
     static let RoseColor = Color("RoseColor")
@@ -671,6 +687,13 @@ struct CustomColor {
     static let heartRed = Color("HeartRed")
     
     static let NEWbackground = Color("NEWbackground")
+//=======
+    static let darkBackground = Color("darkBackground")
+    static let lightButtonColor = Color("lightButtonColor")
+    static let activeButtonColor = Color("activeButtonColor")
+    static let reminderBackground = Color("reminderBackground")
+    static let reminderInsideBackground = Color("reminderInsideBackground")
+//>>>>>>> main
 }
 
 struct CustomFontSize {
@@ -680,4 +703,37 @@ struct CustomFontSize {
     static let inputFontSize: CGFloat = 22;
     static let largeFontSize: CGFloat = 30;
     static let extraLargeFont: CGFloat = 40;
+}
+
+class NotificationHandler {
+    func askPermission(date: Date, type: String, timeInterval: Double=10, title: String, body: String) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                print("Permission granted")
+                self.sendNotification(date: date, type: type, title: title, body: body)
+            } else {
+                print("Permission denied")
+                return
+            }
+        }
+    }
+    
+    func sendNotification(date: Date, type: String, timeInterval: Double=10, title: String, body: String) {
+        var trigger: UNNotificationTrigger?
+        
+        if type == "date" {
+            let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
+            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        } else if type == "time" {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
 }

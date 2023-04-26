@@ -25,7 +25,6 @@ struct HomepageView: View {
     var endingDate: Date
     
     var body: some View {
-        NavigationView {
             VStack {
                 
                 homepageHeader
