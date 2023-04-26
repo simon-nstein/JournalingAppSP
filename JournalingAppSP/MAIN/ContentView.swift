@@ -53,7 +53,7 @@ struct ContentView: View {
             
             VStack{
                 Spacer()
-                TestSixView(selectedTab: $selectedTab)
+                CustomNavBarView(selectedTab: $selectedTab)
             }
             
         }

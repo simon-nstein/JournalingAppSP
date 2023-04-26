@@ -7,31 +7,23 @@
 
 import SwiftUI
 
-/*
 enum Tab: String, CaseIterable {
     case house
     case calendar
     case leaf
     case person
 }
- */
 
-struct TestSixView: View {
-    
-    /*
+struct CustomNavBarView: View {
     
     @Binding var selectedTab: Tab
     private var imageName: String {
             selectedTab.rawValue
         }
-     */
     
     
     var body: some View {
         
-        Text("Hello World")
-        
-        /*
         VStack{
             HStack{
                 ForEach(Tab.allCases, id: \.rawValue){ tab in
@@ -53,14 +45,12 @@ struct TestSixView: View {
             .cornerRadius(10)
             .padding()
         }
-        */
         
     }
 }
 
-struct TestSixView_Previews: PreviewProvider {
+struct CustomNavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        //TestSixView(selectedTab: .constant(.house))
-        TestSixView()
+        CustomNavBarView(selectedTab: .constant(.house))
     }
 }
