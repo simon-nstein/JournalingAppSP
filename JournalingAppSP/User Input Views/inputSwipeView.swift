@@ -85,7 +85,7 @@ struct inputSwipeView: View {
                                 }
                                 .opacity(selectedTab == 2 ? 0 : 1)
                                 .padding(.trailing, 20)
-                                .padding(.bottom, 20)
+                                .padding(.bottom, 80)
                         
                         
                     },alignment: .bottomTrailing
