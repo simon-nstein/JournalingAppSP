@@ -671,6 +671,11 @@ func getTodaysDate() -> String {
 }
 
 
+
+
+
+
+
                                                                 /* Custom Fonts and Colors */
 struct CustomColor {
     static let RoseColor = Color("RoseColor")
