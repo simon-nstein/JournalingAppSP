@@ -42,7 +42,7 @@ struct ContentView: View {
                     
                     // Analyze
                     AnalyzeView(viewModel: self.viewModel)
-                        .tag(Tab.leaf)
+                        .tag(Tab.chartBar)
                     
                     // Profile
                     profileView(userProfile: self.userProfile)

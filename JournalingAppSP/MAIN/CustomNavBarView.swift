@@ -10,16 +10,31 @@ import SwiftUI
 enum Tab: String, CaseIterable {
     case house
     case calendar
-    case leaf
+    case chartBar
     case person
+
+    var sfSymbolName: String {
+        switch self {
+        case .house:
+            return "house"
+        case .calendar:
+            return "calendar"
+        case .chartBar:
+            return "chart.bar"
+        case .person:
+            return "person"
+        }
+    }
 }
+
 
 struct CustomNavBarView: View {
     
     @Binding var selectedTab: Tab
+    
     private var imageName: String {
-            selectedTab.rawValue
-        }
+                selectedTab.sfSymbolName
+            }
     
     
     var body: some View {
@@ -28,7 +43,7 @@ struct CustomNavBarView: View {
             HStack{
                 ForEach(Tab.allCases, id: \.rawValue){ tab in
                     Spacer()
-                    Image(systemName: selectedTab == tab ? imageName: tab.rawValue)
+                    Image(systemName: selectedTab == tab ? imageName: tab.sfSymbolName)
                         .foregroundColor(selectedTab == tab ? .red : .gray)
                         .font(.system(size: 22))
                         .onTapGesture {
