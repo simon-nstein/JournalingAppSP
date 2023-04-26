@@ -44,7 +44,7 @@ struct CustomNavBarView: View {
                 ForEach(Tab.allCases, id: \.rawValue){ tab in
                     Spacer()
                     Image(systemName: selectedTab == tab ? imageName: tab.sfSymbolName)
-                        .foregroundColor(selectedTab == tab ? .red : .gray)
+                        .foregroundColor(selectedTab == tab ? Color("HeaderColor") : .gray)
                         .font(.system(size: 22))
                         .onTapGesture {
                             withAnimation(.easeIn(duration: 0.1)) {
