@@ -13,6 +13,14 @@ struct GratitudeJournal: View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(CustomColor.gratitudeBackground)
                 .frame(width: 350, height: 175)
+                .overlay(
+                        Image("GratImage")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 350, height: 175)
+                            .offset(x: 100, y: 20)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    )
             
             HStack {
                 VStack (alignment: .leading) {
@@ -22,6 +30,7 @@ struct GratitudeJournal: View {
                     }.offset(x: -20, y: 45)
                     TextView(text: "Reflect about what you’re grateful for", fontSize: 14, offset: 0, fontType: "Poppins-Regular").foregroundColor(CustomColor.subtextColor).offset(x: -20, y: 45)
                 }
+                .offset(x: -12)
             }
         }
     }

@@ -33,6 +33,9 @@ struct TestFourView: View {
     
     
     var body: some View {
+        
+        Text("Hello World")
+        /*
         NavigationView {
             VStack{
                 
@@ -265,7 +268,7 @@ struct TestFourView: View {
                             
                             HStack{
                                 Button(action: {
-                                    print("HERE", self.viewModel.getWeekGRAT())
+                                    //print("HERE", self.viewModel.getWeekGRAT())
                                     GRATperiod = self.viewModel.getWeekGRAT()
                                 }) {
                                     Text("Week")
@@ -424,7 +427,7 @@ struct TestFourView: View {
                                 HStack(){
                                     Button(action: {
                                         let date = OPENperiod[index]["date"] as? String ?? ""
-                                        print("date", date)
+                                        //print("date", date)
                                         viewModel.addFavoriteOpen(stringDate: date)
                                         //print("2", ROSEperiod[index]["favorite"] as? String ?? "" )
                                         
@@ -471,6 +474,7 @@ struct TestFourView: View {
             }//end VStack
             
         } //end NavView
+         */
     }
 }
 

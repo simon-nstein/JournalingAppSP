@@ -51,6 +51,9 @@ struct CalendarView: View {
     @State private var isDateAllowed = false
     @State var previousDate: Date = Date()
     
+    @State private var showRBT = false
+    @State private var showGRAT = false
+    
     let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
     let endingDate: Date = Date()
     
@@ -118,38 +121,46 @@ struct CalendarView: View {
                 
                 //ROSE
                 if let roseData = viewModel.getRBT(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) {
+                    //showRBT = true
                     CView(
                         title: "Rose",
                         message: roseData["message"] ?? "",
                         isFavorite: viewModel.Getfavorite(with: viewModel.savedRoses, stringDate: dateToString(date: selectDate)) == "true",
-                        onToggleFavorite: { viewModel.addFavoriteRose(stringDate: dateToString(date: selectDate)) }
+                        onToggleFavorite: { viewModel.addFavoriteRBT(stringDate: dateToString(date: selectDate), path: "Rose", savedType: &viewModel.savedRoses) }
                     )
                 }
                 
                 //BUD
                 if let budData = viewModel.getRBT(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) {
+                    //showRBT = true
                     CView(
                         title: "Bud",
                         message: budData["message"] ?? "",
                         isFavorite: viewModel.Getfavorite(with: viewModel.savedBuds, stringDate: dateToString(date: selectDate)) == "true",
-                        onToggleFavorite: { viewModel.addFavoriteBud(stringDate: dateToString(date: selectDate)) }
+                        onToggleFavorite: { viewModel.addFavoriteRBT(stringDate: dateToString(date: selectDate), path: "Bud", savedType: &viewModel.savedBuds) }
                     )
                 }
                 
                 //THORN
                 if let thornData = viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) {
+                    //showRBT = true
                     CView(
                         title: "Thorn",
                         message: thornData["message"] ?? "",
                         isFavorite: viewModel.Getfavorite(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) == "true",
-                        onToggleFavorite: { viewModel.addFavoriteThorn(stringDate: dateToString(date: selectDate)) }
+                        onToggleFavorite: { viewModel.addFavoriteRBT(stringDate: dateToString(date: selectDate), path: "Thorn", savedType: &viewModel.savedThorns) }
                     )
                 }
                 
-                VStack(spacing: 0) {
-                    Divider().background(Color("lineColor")).frame(height: 10)
-                    //height does nothing
+                
+                //DIVIDER
+                if let one = viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) {
+                    VStack(spacing: 0) {
+                        Divider().background(Color("lineColor")).frame(height: 10)
+                        //height does nothing
+                    }
                 }
+                
                 
                 //GRAT
                 if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["message"] != nil{
@@ -229,9 +240,13 @@ struct CalendarView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 } //END GRAT
                 
-                VStack(spacing: 0) {
-                    Divider().background(Color("lineColor")).frame(height: 10)
-                    //height does nothing
+                
+                //DIVIDER
+                if viewModel.getGrat(array: viewModel.savedGratitudes, stringDate: dateToString(date: selectDate), whichInput: "Input1")?["message"] != nil{
+                    VStack(spacing: 0) {
+                        Divider().background(Color("lineColor")).frame(height: 10)
+                        //height does nothing
+                    }
                 }
                 
                 //OPEN

@@ -41,13 +41,14 @@ struct InputView: View {
     
     @State var userInput = ""
     var body: some View {
+        
         VStack(alignment: .leading) {
             Text(headerText)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color("darkColor"))
+                .foregroundColor(Color("HeaderColor"))
                 .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.largeFontSize))
-        
+            
             TextField(
                 "Start Typing...",
                 text: $userInput,
@@ -56,76 +57,94 @@ struct InputView: View {
             .lineLimit(5...100)
             .padding()
             .font(Font.custom("Poppins-Regular", size: 24))
-    
+            .foregroundColor(Color("StartTypingColor"))
+            
             // Saving data
             .onDisappear {
                 switch self.type {
-                    case "ROSE":
+                case "ROSE":
+                    //only saves if they type something
+                    if self.userInput != "" {
                         self.viewModel.roseInput = self.userInput
                         self.viewModel.addRose(with: self.userInput)
-                    case "BUD":
+                        //self.viewModel.addRBT(message: self.userInput, path: "Rose", savedType: &viewModel.savedBuds)
+                    }
+                case "BUD":
+                    //only saves if they type something
+                    if self.userInput != "" {
                         self.viewModel.budInput = self.userInput
                         self.viewModel.addBud(with: self.userInput)
-                    case "THORN":
+                    }
+                    
+                case "THORN":
+                    if self.userInput != "" {
                         self.viewModel.thornInput = self.userInput
                         self.viewModel.addThorn(with: self.userInput)
-                    case "OPEN":
+                    }
+                case "OPEN":
+                    if self.userInput != "" {
                         self.viewModel.openInput = self.userInput
                         self.viewModel.addOpen(with: self.userInput)
+                    }
                     
                     
                     //NEED TO CHANGE
-                    case "GRAT1":
+                case "GRAT1":
+                    if self.userInput != "" {
                         self.viewModel.gratitude1Input = self.userInput
                         self.viewModel.addGrat(message: self.userInput, whichInput: "Input1")
-                    case "GRAT2":
+                    }
+                case "GRAT2":
+                    if self.userInput != "" {
                         self.viewModel.gratitude2Input = self.userInput
                         self.viewModel.addGrat(message: self.userInput, whichInput: "Input2")
-                    case "GRAT3":
+                    }
+                case "GRAT3":
+                    if self.userInput != "" {
                         self.viewModel.gratitude3Input = self.userInput
                         self.viewModel.addGrat(message: self.userInput, whichInput: "Input3")
+                    }
                     
                     
-                    default:
-                        break;
+                default:
+                    break;
                 }
-
-            
+                
+                
             }
             .onAppear {
                 switch self.type {
-                    case "ROSE":
-                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedRoses) ?? ""
-
-                    case "BUD":
-                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedBuds) ?? ""
-
-                    case "THORN":
-                        self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedThorns) ?? ""
+                case "ROSE":
+                    self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedRoses) ?? ""
                     
-                    case "OPEN":
-                        self.userInput = self.viewModel.getTodaysOpen(with: self.viewModel.savedOpens) ?? ""
+                case "BUD":
+                    self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedBuds) ?? ""
+                    
+                case "THORN":
+                    self.userInput = self.viewModel.getTodaysRBT(with: self.viewModel.savedThorns) ?? ""
+                    
+                case "OPEN":
+                    self.userInput = self.viewModel.getTodaysOpen(with: self.viewModel.savedOpens) ?? ""
                     
                     //NEED TO CHANGE
-                    case "GRAT1":
+                case "GRAT1":
                     self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input1") ?? ""
-
-                    case "GRAT2":
-                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input2") ?? ""
-
-                    case "GRAT3":
-                        self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input3") ?? ""
-
-                    default:
-                        break;
+                    
+                case "GRAT2":
+                    self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input2") ?? ""
+                    
+                case "GRAT3":
+                    self.userInput = self.viewModel.getTodaysGratitude(with: self.viewModel.savedGratitudes, with: "Input3") ?? ""
+                    
+                default:
+                    break;
                 }
             }
             Spacer()
-            Text(pageNumber)
-                .padding(.leading, 20)
             
         }//VStack
         .font(Font.custom("Poppins-Medium", size: CustomFontSize.inputFontSize))
+        .background(Color("NEWbackground"))
     }
 }
 

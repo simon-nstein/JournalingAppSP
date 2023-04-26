@@ -94,50 +94,20 @@ class JournalData: ObservableObject {
         fetchGrat()
         //isDateInCurrentWeek(dateString: "2023-04-01")
         //week()
-    }
-    
-
-    /*
-    func week(){
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let weekday = calendar.component(.weekday, from: Date())
-        let weekRoses = []
         
-        for i in (1..<weekday).reversed() {
-            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let previousDate = dateFormatter.string(from: previousDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == previousDate {
-                        weekRoses.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
     }
-     */
     
     func test(message: String) {
-        print("YOU ARE NOW WITNISING", savedRoses)
+        print(message)
     }
-    
-    
     
     
     /* ROSE FUNCTIONS */
     func fetchRoses() {
-        print("Fetching a user rose for user \(self.UserProfile.id_string)")
+        //print("Fetching a user rose for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         ref.observe(.value, with: { snapshot in
-          //print(snapshot.value as Any)
             if let data = snapshot.value as? [String: Any] {
                     if let mindfulnessSection = data["Mindfulness_Section"] as? [String: Any] {
                         for (dateString, dateSection) in mindfulnessSection {
@@ -152,7 +122,7 @@ class JournalData: ObservableObject {
                                 if !(self.savedRoses.contains(roseObject)) {
                                     self.savedRoses.append(roseObject)
                                 }
-                                
+                                //print("INNNNNNN", self.savedRoses)
                                 
                             }
                         }
@@ -177,15 +147,33 @@ class JournalData: ObservableObject {
         let path = "Mindfulness_Section/\(stringDate)/Rose/Message"
         ref.child(path).setValue(message)
         
-        /*
-        // auto setting favorite to be false
-        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
-        ref.child(path).setValue("false")
-         */
-        
-        print("Added a new Rose [+]")
+        print("Added/Updating a new Rose [+]")
         fetchRoses()
     }
+    
+    
+    /*
+     //KEEEEEEP
+    func addRBT<T: RBTObject>(message: String, path: String, savedType: inout [T]){
+        let stringDate = getTodaysDate()
+        
+        //Update existing roses
+        for i in 0..<savedType.count {
+            if savedType[i].dateID == stringDate {
+                savedType[i].message = message
+            }
+        }
+        //Updates the database
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let NewPath = "Mindfulness_Section/\(stringDate)/\(path)/Message"
+        ref.child(NewPath).setValue(message)
+        
+        print("Added/Updating a new \(path) [+]")
+        fetchRoses()
+        
+    }
+     */
     
     func getTodaysRBT(with array: [RBTObject]) -> String? {
         let stringDate = getTodaysDate()
@@ -232,7 +220,7 @@ class JournalData: ObservableObject {
     
     /* BUD FUNCTIONS */
     func fetchBuds() {
-        print("Fetching a user bud for user \(self.UserProfile.id_string)")
+        //print("Fetching a user bud for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         ref.observe(.value, with: { snapshot in
@@ -245,7 +233,9 @@ class JournalData: ObservableObject {
                                 let budMessage = budSection["Message"] as? String ?? ""
                                 let budObject = BudObject(message: budMessage, favorite: budFavorite, dateID: dateString)
                                 //print("Date: \(dateString), Bud Favorite: \(budFavorite), Bud Message: \(budMessage)")
-                                self.savedBuds.append(budObject)
+                                if !(self.savedBuds.contains(budObject)) {
+                                    self.savedBuds.append(budObject)
+                                }
                             }
                         }
                     }
@@ -269,19 +259,13 @@ class JournalData: ObservableObject {
         let path = "Mindfulness_Section/\(stringDate)/Bud/Message"
         ref.child(path).setValue(message)
         
-        /*
-        // auto setting favorite to be false
-        let path = "Mindfulness_Section/\(stringDate)/Bud/Favorite"
-        ref.child(path).setValue("false")
-         */
-        
         print("Added a new Bud [+]")
         fetchBuds()
     }
     
                                                                     /* THORN FUNCTIONS*/
     func fetchThorns() {
-        print("Fetching a user thorn for user \(self.UserProfile.id_string)")
+        //print("Fetching a user thorn for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         ref.observe(.value, with: { snapshot in
@@ -293,16 +277,16 @@ class JournalData: ObservableObject {
                                 let thornFavorite = thornSection["Favorite"] as? String ?? ""
                                 let thornMessage = thornSection["Message"] as? String ?? ""
                                 let thornObject = ThornObject(message: thornMessage, favorite: thornFavorite, dateID: dateString)
-                                //print("PRINT", thornObject)
-                                //print("Date: \(dateString), Thorn Favorite: \(thornFavorite), Thorn Message: \(thornMessage)")
-                                self.savedThorns.append(thornObject)
+                                if !(self.savedThorns.contains(thornObject)) {
+                                    self.savedThorns.append(thornObject)
+                                }
                             }
                         }
                     }
                 }
         })
     }
-    
+
     // Adds a new rose to the database
     func addThorn(with message: String) {
         let stringDate = getTodaysDate()
@@ -330,7 +314,7 @@ class JournalData: ObservableObject {
     }
     
     func fetchOpens() {
-        print("Fetching open data for user \(self.UserProfile.id_string)")
+        //print("Fetching open data for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)/Open_Section")
         ref.observe(.value, with: { snapshot in
@@ -341,7 +325,10 @@ class JournalData: ObservableObject {
                         let openMessage = currentDateSection["userInput"] as? String ?? ""
                         let openObject = OpenObject(userInput: openMessage, favorite: openFavorite, dateID: dateString)
                         //print("openObject", openObject)
-                        self.savedOpens.append(openObject)
+                        if !(self.savedOpens.contains(openObject)) {
+                            self.savedOpens.append(openObject)
+                        }
+                        
                         //print("print(self.savedOpens)", self.savedOpens)
                     }
                 }
@@ -370,86 +357,27 @@ class JournalData: ObservableObject {
         fetchOpens()
     }
     
-    func addFavoriteRose(stringDate: String){
-        //add in what type, either Rose, Bud, or Thorn
-        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
-        
-        //let stringDate = getTodaysDate()
-        print("DATE", stringDate)
+    //func addFavorites(stringDate: String, path: String){
+    func addFavoriteRBT<T: RBTObject>(stringDate: String, path: String, savedType: inout [T]){
         var value = ""
         
-        if Getfavorite(with: savedRoses, stringDate: stringDate) == "true" {
+        if Getfavorite(with: savedType, stringDate: stringDate) == "true" {
             value = "false"
         } else { //"false" or ""
             value = "true"
         }
         
-        //Update savedRoses
-        for i in 0..<self.savedRoses.count {
-            if self.savedRoses[i].dateID == stringDate {
-                self.savedRoses[i].favorite = value
-            }
-        }
-        //Updates the database
+        for i in 0..<savedType.count {
+               if savedType[i].dateID == stringDate {
+                   savedType[i].favorite = value
+               }
+           }
+        
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
-        let path = "Mindfulness_Section/\(stringDate)/Rose/Favorite"
-        ref.child(path).setValue(value)
-    }
-    
-    func addFavoriteBud(stringDate: String){
-        //add in what type, either Rose, Bud, or Thorn
-        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
-        
-        //let stringDate = getTodaysDate()
-        print("DATE", stringDate)
-        var value = ""
-        
-        if Getfavorite(with: savedBuds, stringDate: stringDate) == "true" {
-            value = "false"
-        } else { //"false" or ""
-            value = "true"
-        }
-        
-        //Update savedBuds
-        for i in 0..<self.savedBuds.count {
-            if self.savedBuds[i].dateID == stringDate {
-                self.savedBuds[i].favorite = value
-            }
-        }
-        //Updates the database
-        let rootRef = Database.database().reference()
-        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
-        let path = "Mindfulness_Section/\(stringDate)/Bud/Favorite"
-        ref.child(path).setValue(value)
-    }
-    
-    
-    func addFavoriteThorn(stringDate: String){
-        //add in what type, either Rose, Bud, or Thorn
-        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
-        
-        //let stringDate = getTodaysDate()
-        print("DATE", stringDate)
-        var value = ""
-        
-        if Getfavorite(with: savedThorns, stringDate: stringDate) == "true" {
-            value = "false"
-        } else { //"false" or ""
-            value = "true"
-        }
-        
-        //Update savedBuds
-        for i in 0..<self.savedThorns.count {
-            if self.savedThorns[i].dateID == stringDate {
-                self.savedThorns[i].favorite = value
-            }
-        }
-        //Updates the database
-        let rootRef = Database.database().reference()
-        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
-        let path = "Mindfulness_Section/\(stringDate)/Thorn/Favorite"
-        ref.child(path).setValue(value)
+        let NewPath = "Mindfulness_Section/\(stringDate)/\(path)/Favorite"
+        ref.child(NewPath).setValue(value)
+         
     }
     
      
@@ -496,10 +424,6 @@ class JournalData: ObservableObject {
     }
     
     func addFavoriteOpen(stringDate: String){
-        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
-        
-        //let stringDate = getTodaysDate()
-        //print("DATE", stringDate)
         var value = ""
         
         if getOpen(with: savedOpens, stringDate: stringDate)?["favorite"] == "true" {
@@ -523,7 +447,7 @@ class JournalData: ObservableObject {
     
     //@Published var savedGratitudes: [GratitudeObject] = []
     func fetchGrat() {
-        print("Fetching a user grat for user \(self.UserProfile.id_string)")
+        //print("Fetching a user grat for user \(self.UserProfile.id_string)")
         let rootRef = Database.database().reference()
         let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
         ref.observe(.value, with: { snapshot in
@@ -545,7 +469,10 @@ class JournalData: ObservableObject {
                                 
                                 let gratObject = GratitudeObject(dateID: dateString, message1: input1Message, favorite1: input1Favorite, message2: input2Message, favorite2: input2Favorite, message3: input3Message, favorite3: input3Favorite)
                                 //print("Date: \(dateString), Rose Favorite: \(roseFavorite), Rose Message: \(roseMessage)")
-                                self.savedGratitudes.append(gratObject)
+                                
+                                if !(self.savedGratitudes.contains(gratObject)) {
+                                    self.savedGratitudes.append(gratObject)
+                                }
                             }
                         }
                     }
@@ -610,9 +537,6 @@ class JournalData: ObservableObject {
     }
     
     func addFavoriteGrat(stringDate: String, whichInput: String){
-        //NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!! NEW!!!
-        
-        print("HERE", getGrat(array: savedGratitudes, stringDate: stringDate, whichInput: whichInput)?["favorite"] ?? "")
         
         var value = ""
         
@@ -623,8 +547,8 @@ class JournalData: ObservableObject {
         }
         
         //Update savedBuds
-        for i in 0..<self.savedOpens.count {
-            if self.savedOpens[i].dateID == stringDate {
+        for i in 0..<self.savedGratitudes.count {
+            if self.savedGratitudes[i].dateID == stringDate {
                 
                 if whichInput == "Input1"{
                     self.savedGratitudes[i].favorite1 = value
@@ -646,229 +570,6 @@ class JournalData: ObservableObject {
         ref.child(path).setValue(value)
     }
     
-    
-    func getWeekRBT(array: [RBTObject]) -> [[String: Any]]{
-        //returns an array of either Roses, Buds, OR Thorns
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let weekday = calendar.component(.weekday, from: Date())
-        var weekRBT = [[String: Any]]()
-        
-        for i in (0..<weekday).reversed() {
-            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let previousDate = dateFormatter.string(from: previousDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == previousDate {
-                        //print("array[i]", array[i])
-                        weekRBT.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
-                        //weekRBT.append(array[i])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        //print("getWeekRoses", weekRBT)
-        return weekRBT
-    }
-    /*
-    func validWeek(date: String) -> Bool{
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let weekday = calendar.component(.weekday, from: Date())
-        
-    }
-     */
-    
-    func getMonthRBT(array: [RBTObject]) -> [[String: Any]]{
-        //returns an array of either Roses, Buds, OR Thorns
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let month = calendar.component(.month, from: currentDay)
-        let year = calendar.component(.year, from: currentDay)
-        let range = calendar.range(of: .day, in: .month, for: currentDay)!
-        let numDays = range.count
-        var monthRBT = [[String: Any]]()
-        
-        for i in 1...numDays {
-            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let currentDate = dateFormatter.string(from: currentDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == currentDate {
-                        monthRBT.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        return monthRBT
-    }
-    
-    
-    func getWeekGRAT() -> [[String: Any]]{
-        let array = savedGratitudes
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let weekday = calendar.component(.weekday, from: Date())
-        var weekGRAT = [[String: Any]]()
-        
-        for i in (0..<weekday).reversed() {
-            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let previousDate = dateFormatter.string(from: previousDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == previousDate {
-                        //print("array[i]", array[i])
-                        //let gratObject = GratitudeObject(dateID: dateString, message1: input1Message, favorite1: input1Favorite, message2: input2Message, favorite2: input2Favorite, message3: input3Message, favorite3: input3Favorite)
-                        weekGRAT.append(["message1": array[i].message1, "favorite1": array[i].favorite1, "message2": array[i].message2, "favorite2": array[i].favorite2, "message3": array[i].message3, "favorite3": array[i].favorite3,"date": array[i].dateID])
-                        //weekRBT.append(array[i])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        //print("getWeekRoses", weekRBT)
-        return weekGRAT
-    }
-    
-    func getMonthGRAT() -> [[String: Any]]{
-        let array = savedGratitudes
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let month = calendar.component(.month, from: currentDay)
-        let year = calendar.component(.year, from: currentDay)
-        let range = calendar.range(of: .day, in: .month, for: currentDay)!
-        let numDays = range.count
-        var monthGRAT = [[String: Any]]()
-        
-        for i in 1...numDays {
-            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let currentDate = dateFormatter.string(from: currentDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == currentDate {
-                        monthGRAT.append(["message1": array[i].message1, "favorite1": array[i].favorite1, "message2": array[i].message2, "favorite2": array[i].favorite2, "message3": array[i].message3, "favorite3": array[i].favorite3,"date": array[i].dateID])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        return monthGRAT
-    }
-    
-    func getWeekOPEN() -> [[String: Any]]{
-        let array = savedOpens
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let weekday = calendar.component(.weekday, from: Date())
-        var weekOPEN = [[String: Any]]()
-        
-        for i in (0..<weekday).reversed() {
-            if let previousDay = calendar.date(byAdding: .day, value: -i, to: currentDay) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let previousDate = dateFormatter.string(from: previousDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == previousDate {
-                        print("IN", array[i])
-                        weekOPEN.append(["userInput": array[i].userInput, "favorite": array[i].favorite, "date": array[i].dateID])
-                        //weekRBT.append(array[i])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        //print("getWeekRoses", weekRBT)
-        return weekOPEN
-    }
-    
-    func getMonthOPEN() -> [[String: Any]]{
-        let array = savedOpens
-        let calendar = Calendar.current
-        let currentDay = Date()
-        let month = calendar.component(.month, from: currentDay)
-        let year = calendar.component(.year, from: currentDay)
-        let range = calendar.range(of: .day, in: .month, for: currentDay)!
-        let numDays = range.count
-        var monthOPEN = [[String: Any]]()
-        
-        for i in 1...numDays {
-            if let currentDay = calendar.date(from: DateComponents(year: year, month: month, day: i)) {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let currentDate = dateFormatter.string(from: currentDay)
-                
-                //looping though saved roses
-                for i in 0..<array.count {
-                    //if date exists in saved roses
-                    if array[i].dateID == currentDate {
-                        monthOPEN.append(["userInput": array[i].userInput, "favorite": array[i].favorite, "date": array[i].dateID])
-                    }
-                }
-            } else {
-                print("Invalid date")
-            }
-        }
-        
-        return monthOPEN
-    }
-    
-    /*
-    func getAllFavorite(array: [RBTObject]) -> [[String: Any]]{
-        var favorites = [[String: Any]]()
-        for i in 0..<array.count {
-            //print("in", array[i])
-            if array[i].favorite == "true"{
-                favorites.append(["message": array[i].message, "favorite": array[i].favorite, "date": array[i].dateID])
-            }
-        }
-        return favorites
-    }
-     */
-    /*
-    func isDateInCurrentWeek(dateString: String) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        if let date = dateFormatter.date(from: dateString) {
-            let calendar = Calendar.current
-            let currentDate = Date()
-            let currentWeek = calendar.component(.weekOfYear, from: currentDate)
-            let givenWeek = calendar.component(.weekOfYear, from: date)
-            return currentWeek == givenWeek
-        }
-        return false
-    }
-     */
     
     func isDateInCurrentPeriod(dateString: String, period: String) -> Bool {
         let dateFormatter = DateFormatter()

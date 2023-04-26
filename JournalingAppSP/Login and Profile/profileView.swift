@@ -16,8 +16,10 @@ struct profileView: View {
             
             // User picture, name, and email
             
+            /*
             UserImage(urlString: userProfile.picture)
                 .padding()
+             */
             
             Spacer()
         

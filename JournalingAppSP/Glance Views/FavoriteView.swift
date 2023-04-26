@@ -1,13 +1,7 @@
-//
-//  TestFiveView.swift
-//  JournalingAppSP
-//
-//  Created by Simon Neuwirth-Stein on 4/19/23.
-//
+
 
 import SwiftUI
 
-/*
 struct header: View {
     let type: String
     let show: Bool
@@ -31,9 +25,8 @@ struct header: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
- */
 
-struct TestFiveView: View {
+struct FavoriteView: View {
     @ObservedObject var viewModel: JournalData;
     
     @State private var showOpen = true
@@ -42,18 +35,32 @@ struct TestFiveView: View {
     @State private var showRoses = true
     @State private var showBuds = true
     @State private var showThorns = true
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
-        Text("Hello World")
-        /*
         ScrollView {
+            
+            Button {
+                dismiss()
+            } label: {
+                HStack{
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color("responseColor"))
+                        .font(.system(size: 30))
+                    Spacer()
+                }
+            }
+                .padding(.bottom)
+            
+        
             VStack{
                 
                 Text("Favorited Responses")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.custom("Poppins-SemiBold", size: 28))
                     .padding(.bottom, 3)
+                    .foregroundColor(Color("HeaderColor"))
                 
                 //START RBT
                 VStack{
@@ -173,18 +180,45 @@ struct TestFiveView: View {
                         } //end IF showGrateful
                     }//end GRAT VStack
                 
+                
+                //OPEN
+                VStack{
+                    
+                    openClose(title: "Open Journal Responses", show: showOpen, toggle: { showOpen.toggle() })
+                    
+                    /*
+                    VStack{
+                        if showOpen {
+                 
+                            ForEach(self.viewModel.savedOpens, id: \.self) { opens in
+                                
+                                mainH(stringDate: opens.dateID,
+                                      isFavorite: self.viewModel.getOpen(with: self.viewModel.savedOpens, stringDate: opens.dateID)?["favorite"] == "true",
+                                      message: opens.message,
+                                      addFavorite: { self.viewModel.addFavoriteOpen(stringDate: opens.dateID) })
+                                
+                                VStack(spacing: 0) { Divider().background(Color("lineColor")).frame(height: 10) }
+                                
+                            }//end ForEach
+                        }//end IF
+                    }//end VStack
+                     */
+                }//end VStack OPENS
+                
+                
             }//end VStack
         }//end ScrollView
         .padding(.top, 10)
-        .padding(.horizontal, 15)
+        .padding(.horizontal, 10)
         .background(Color("NEWbackground"))
-         */
+        .navigationBarBackButtonHidden(true)
+         
     
     }
 }
 
-struct TestFiveView_Previews: PreviewProvider {
+struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        TestFiveView(viewModel: JournalData(UserProfile: Profile.empty))
+        FavoriteView(viewModel: JournalData(UserProfile: Profile.empty))
     }
 }

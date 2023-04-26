@@ -16,7 +16,6 @@ struct gratSwipeView: View {
     var body: some View {
         NavigationView {
             VStack{
-                //NavBarView()
                 Button {
                     dismiss()
                 } label: {
@@ -37,7 +36,13 @@ struct gratSwipeView: View {
                         .tag(2)
                 }
                 .overlay(
-                    HStack{
+                    HStack(alignment: .lastTextBaseline){
+                        
+                        if selectedTab == 0 { pageNumber(page: "1 of 3 responses") }
+                        if selectedTab == 1 { pageNumber(page: "2 of 3 responses") }
+                        if selectedTab == 2 { pageNumber(page: "3 of 3 responses") }
+                        
+                        
                     
                         Button(action: {
                             let previousTab = (selectedTab - 1 + 4) % 4 // calculate index of previous tab
@@ -45,9 +50,9 @@ struct gratSwipeView: View {
                         }) {
                             Image(systemName: "chevron.left")
                                         .font(.title)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("NextArrowForegroundColor"))
                                         .padding()
-                                        .background(Color.blue)
+                                        .background(Color("NextArrowBackgroundColor"))
                                         .clipShape(Circle())
                         }
                         .opacity(selectedTab == 0 ? 0 : 1)
@@ -60,9 +65,10 @@ struct gratSwipeView: View {
                                 }) {
                                     Image(systemName: "chevron.right")
                                         .font(.title)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("NextArrowForegroundColor"))
                                         .padding()
-                                        .background(Color.blue)
+                                        .background(Color("NextArrowBackgroundColor"))
+                                    
                                         .clipShape(Circle())
                                 }
                                 .opacity(selectedTab == 2 ? 0 : 1)

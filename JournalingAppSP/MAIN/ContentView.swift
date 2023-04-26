@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-//poppins font
 
 struct ContentView: View {
     @ObservedObject var viewModel: JournalData;
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var userProfile: Profile
-    @State var selectedDate = Date()
+    //@State var selectedDate = Date()
     
     
-    let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
+    //let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
     let endingDate = Date()
     
     var dateFormatter: DateFormatter {
@@ -40,17 +39,14 @@ struct ContentView: View {
                 }
             
             // Calendar
-            //TestThreeView(viewModel: self.viewModel)
             CalendarView(viewModel: self.viewModel)
-            //aboutUs()
                 .tabItem {
+                    //Label("Calendar", systemImage: "calendar")
                     Image(systemName: "calendar")
                     Text("Calendar")
                 }
             
             // Analyze
-            //aboutUs()
-            //TestFourView(viewModel: self.viewModel)
             AnalyzeView(viewModel: self.viewModel)
                 .tabItem {
                     Image(systemName: "chart.bar")
@@ -63,7 +59,15 @@ struct ContentView: View {
                     Image(systemName: "person.crop.circle")
                     Text("Profile")
                 }
+            
         }
+        //EDIT
+        //.accentColor(.red)
+        //.background(Color.white) // add a white background to the TabView
+        //.edgesIgnoringSafeArea(.all)
+        
+         
+        
     }
     
     func getCurrentDate() -> String {
@@ -74,68 +78,6 @@ struct ContentView: View {
         return dateFormatter.string(from: currentDate)
     }
     
-    
-    // A View that allows you to easily reuse code to turn values into a "card"
-    struct Cardify: View {
-        let viewModel: JournalData
-        let title: String
-        let paragraph: String
-        let image: Image
-        //let imageName: String
-        
-        var cardColor: Color {
-            switch(title) {
-                case "Rose":
-                    return CustomColor.RoseColor
-                case "Thorn":
-                    return CustomColor.BudColor
-                case "Bud":
-                    return CustomColor.ThornColor
-                default:
-                    return CustomColor.TextColor
-            }
-        }
-        
-
-        
-        var body: some View {
-            RoundedRectangle(cornerRadius: 15)
-                .frame(width: 350, height: 100)
-                .foregroundColor(self.cardColor)
-                .overlay(
-                    HStack{
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100.0)
-                        
-                        VStack(alignment: .leading) {
-                            HStack{
-                                Text(self.title)
-                                    .font(Font.custom("Poppins-SemiBold", size: CustomFontSize.inputFontSize))
-                                    .foregroundColor(Color("darkColor"))
-                            }
-                            Text(self.paragraph)
-                                .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
-                                .foregroundColor(CustomColor.TextColor)
-                                .multilineTextAlignment(.leading)
-                    
-                        }
-                        .padding([.top, .bottom, .trailing], 6.0)
-                        .offset(x: -10)
-                        .foregroundColor(.black)
-                        
-                        
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(Color("veryLightColor"))
-                            .padding([.top, .bottom, .trailing])
-                            .font(.system(size: 24))
-                        
-                    }
-                )
-                .padding(.vertical, 8.0)
-        }
-    }
 }
 
 struct UserImage: View {

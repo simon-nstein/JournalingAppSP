@@ -39,6 +39,8 @@
 		F62567B929F4613C005411BF /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F62567AC29F45706005411BF /* Poppins-Medium.ttf */; };
 		F62567BA29F4613F005411BF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F62567AA29F45706005411BF /* Poppins-Regular.ttf */; };
 		F62567BB29F46142005411BF /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F62567AD29F45706005411BF /* Poppins-SemiBold.ttf */; };
+		F62567BD29F643F6005411BF /* TestSixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567BC29F643F6005411BF /* TestSixView.swift */; };
+		F62567BF29F83399005411BF /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567BE29F83399005411BF /* FavoriteView.swift */; };
 		F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CB29BE99140054E7AF /* inputSwipeView.swift */; };
 		F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64552CF29BF7B130054E7AF /* TestTwoView.swift */; };
 		F6A0C25729DD3F0F00C0E96F /* Poppins (1) in Resources */ = {isa = PBXBuildFile; fileRef = F6A0C25629DD3F0E00C0E96F /* Poppins (1) */; };
@@ -81,6 +83,8 @@
 		F62567AB29F45706005411BF /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		F62567AC29F45706005411BF /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		F62567AD29F45706005411BF /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		F62567BC29F643F6005411BF /* TestSixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSixView.swift; sourceTree = "<group>"; };
+		F62567BE29F83399005411BF /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		F64552CB29BE99140054E7AF /* inputSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputSwipeView.swift; sourceTree = "<group>"; };
 		F64552CF29BF7B130054E7AF /* TestTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTwoView.swift; sourceTree = "<group>"; };
 		F6A0C25629DD3F0E00C0E96F /* Poppins (1) */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Poppins (1)"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				F62567A029E735C0005411BF /* TestThreeView.swift */,
 				F62567A229EE193B005411BF /* TestFourView.swift */,
 				F62567A629F0FD08005411BF /* TestFiveView.swift */,
+				F62567BC29F643F6005411BF /* TestSixView.swift */,
 			);
 			path = "Test Views";
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				3F4814F729B5A51200FAEB20 /* WeekGlance.swift */,
 				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
 				F6E6D1E529BD111500DF59B5 /* HistoryView.swift */,
+				F62567BE29F83399005411BF /* FavoriteView.swift */,
 				F62567A829F1ECEB005411BF /* AnalyzeView.swift */,
 				3F4E39A529DBA803000FC2DC /* CalendarView.swift */,
 			);
@@ -363,6 +369,7 @@
 				F64552CC29BE99140054E7AF /* inputSwipeView.swift in Sources */,
 				3FC6E9B529C18E10004D9531 /* LoginSystemView.swift in Sources */,
 				F62567A929F1ECEB005411BF /* AnalyzeView.swift in Sources */,
+				F62567BF29F83399005411BF /* FavoriteView.swift in Sources */,
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
 				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
 				3F209E1529CBD9CF00028B56 /* aboutUs.swift in Sources */,
@@ -370,6 +377,7 @@
 				F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */,
 				3F209E1C29CD328200028B56 /* OpenJournal.swift in Sources */,
 				3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */,
+				F62567BD29F643F6005411BF /* TestSixView.swift in Sources */,
 				3FBD98C229B2790100804A6A /* ContentModel.swift in Sources */,
 				F62567A129E735C0005411BF /* TestThreeView.swift in Sources */,
 				F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */,

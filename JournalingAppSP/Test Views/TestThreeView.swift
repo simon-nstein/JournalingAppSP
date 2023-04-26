@@ -57,6 +57,9 @@ struct TestThreeView: View {
     
     
     var body: some View {
+        
+        Text("Hello World")
+        /*
         NavigationView {
             VStack{
                 
@@ -204,6 +207,7 @@ struct TestThreeView: View {
                 Spacer()
             }//end VStack
         }//end NavView
+         */
     }
 }
 

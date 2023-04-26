@@ -214,7 +214,7 @@ struct AnalyzeView: View {
                                         mainH(stringDate: rose.dateID,
                                               isFavorite: viewModel.Getfavorite(with: viewModel.savedRoses, stringDate: rose.dateID) == "true",
                                               message: rose.message,
-                                              addFavorite: {viewModel.addFavoriteRose(stringDate: rose.dateID)} )
+                                              addFavorite: {viewModel.addFavoriteRBT(stringDate: rose.dateID, path: "Rose", savedType: &viewModel.savedRoses)} )
                                     }//end IF
                                 }//end ForEach
                             } //end IF
@@ -232,15 +232,18 @@ struct AnalyzeView: View {
                                       toggle: { showBuds.toggle() })
                             
                             if showBuds{
+                                
                                 ForEach(self.viewModel.savedBuds, id: \.self) { bud in
                                     if viewModel.isDateInCurrentPeriod(dateString: bud.dateID, period: RBTperiod){
+    
                                         
                                         mainH(stringDate: bud.dateID,
                                               isFavorite: viewModel.Getfavorite(with: viewModel.savedBuds, stringDate: bud.dateID) == "true",
                                               message: bud.message,
-                                              addFavorite: {viewModel.addFavoriteBud(stringDate: bud.dateID)} )
+                                              addFavorite: {viewModel.addFavoriteRBT(stringDate: bud.dateID, path: "Bud", savedType: &viewModel.savedBuds)} )
                                     }//end IF
                                 }//end ForEach
+
                             } //end IF
                         } //end VStack
                         
@@ -262,7 +265,7 @@ struct AnalyzeView: View {
                                         mainH(stringDate: thorn.dateID,
                                               isFavorite: viewModel.Getfavorite(with: viewModel.savedThorns, stringDate: thorn.dateID) == "true",
                                               message: thorn.message,
-                                              addFavorite: {viewModel.addFavoriteThorn(stringDate: thorn.dateID)} )
+                                              addFavorite: {viewModel.addFavoriteRBT(stringDate: thorn.dateID, path: "Thorn", savedType: &viewModel.savedThorns)} )
                                     }//end IF
                                 }//end ForEach
                             } //end IF
@@ -315,21 +318,21 @@ struct AnalyzeView: View {
                                         VStack{
                                             gratHStack(
                                                        message: grat.message1,
-                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "input1") },
+                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "Input1") },
                                                        isFavorite: self.viewModel.getGrat(array: self.viewModel.savedGratitudes,
-                                                    stringDate: grat.dateID, whichInput: "input1")?["favorite1"] == "true")
+                                                    stringDate: grat.dateID, whichInput: "Input1")?["favorite"] == "true")
                                             
                                             gratHStack(
                                                        message: grat.message2,
-                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "input2") },
+                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "Input2") },
                                                        isFavorite: self.viewModel.getGrat(array: self.viewModel.savedGratitudes,
-                                                       stringDate: grat.dateID, whichInput: "input1")?["favorite2"] == "true")
+                                                       stringDate: grat.dateID, whichInput: "Input2")?["favorite"] == "true")
                                             
                                             gratHStack(
                                                        message: grat.message3,
-                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "input3") },
+                                                       addFavorite: { self.viewModel.addFavoriteGrat(stringDate: grat.dateID, whichInput: "Input3") },
                                                        isFavorite: self.viewModel.getGrat(array: self.viewModel.savedGratitudes,
-                                                       stringDate: grat.dateID, whichInput: "input3")?["favorite3"] == "true")
+                                                       stringDate: grat.dateID, whichInput: "Input3")?["favorite"] == "true")
                                             
                                         } //end VStack
                                         let dateString = grat.dateID
@@ -408,15 +411,13 @@ struct AnalyzeView: View {
         .padding(.top, 10)
         .padding(.horizontal, 15)
         .background(Color("NEWbackground"))
-        
-        
-            
     }
 }
 
 struct AnalyzeView_Previews: PreviewProvider {
     static var previews: some View {
         AnalyzeView(viewModel: JournalData(UserProfile: Profile.empty))
-            //.preferredColorScheme(.dark)
     }
 }
+
+

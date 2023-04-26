@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct pageNumber: View{
+    let page: String
+    var body: some View {
+        Text(page)
+            .padding(.leading, 20)
+            .font(.custom("Poppins-Regular", size: 20))
+            .foregroundColor(Color("responseColor"))
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 struct inputSwipeView: View {
     @ObservedObject var viewModel: JournalData;
     @State var selectedTab: Int = 0
@@ -16,18 +27,20 @@ struct inputSwipeView: View {
     var body: some View {
         NavigationView {
             VStack{
-                //NavBarView()
+                //BACK BUTTON
                 Button {
                     dismiss()
                 } label: {
                     HStack{
                         Image(systemName: "chevron.left")
-                            .foregroundColor(Color("darkColor"))
+                            .foregroundColor(Color("NextArrowBackgroundColor"))
                             .font(.system(size: 30))
                         Spacer()
                     }
-                }
+                } //END BACK BUTTON
                     .padding(.top)
+                    .padding(.leading)
+                
                 TabView(selection: $selectedTab) {
                     InputView(viewModel: viewModel, type: "ROSE")
                         .tag(0)
@@ -37,7 +50,13 @@ struct inputSwipeView: View {
                         .tag(2)
                 }
                 .overlay(
-                    HStack{
+                    HStack(alignment: .lastTextBaseline){
+                        
+                        if selectedTab == 0 { pageNumber(page: "1 of 3 responses") }
+                        if selectedTab == 1 { pageNumber(page: "2 of 3 responses") }
+                        if selectedTab == 2 { pageNumber(page: "3 of 3 responses") }
+                        
+                        
                     
                         Button(action: {
                             let previousTab = (selectedTab - 1 + 4) % 4 // calculate index of previous tab
@@ -45,9 +64,9 @@ struct inputSwipeView: View {
                         }) {
                             Image(systemName: "chevron.left")
                                         .font(.title)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("NextArrowForegroundColor"))
                                         .padding()
-                                        .background(Color.blue)
+                                        .background(Color("NextArrowBackgroundColor"))
                                         .clipShape(Circle())
                         }
                         .opacity(selectedTab == 0 ? 0 : 1)
@@ -60,9 +79,10 @@ struct inputSwipeView: View {
                                 }) {
                                     Image(systemName: "chevron.right")
                                         .font(.title)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("NextArrowForegroundColor"))
                                         .padding()
-                                        .background(Color.blue)
+                                        .background(Color("NextArrowBackgroundColor"))
+                                    
                                         .clipShape(Circle())
                                 }
                                 .opacity(selectedTab == 2 ? 0 : 1)
@@ -74,8 +94,10 @@ struct inputSwipeView: View {
                     
                 )
             } //VStack
+            .background(Color("NEWbackground"))
         } //NavigationView
         .navigationBarBackButtonHidden(true)
+        .background(Color("NEWbackground"))
     }
 }
 

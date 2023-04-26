@@ -13,6 +13,14 @@ struct OpenJournal: View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(CustomColor.openJournalBackground)
                 .frame(width: 350, height: 175)
+                .overlay(
+                        Image("OpenImage")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 175)
+                            .offset(x: 90, y: 20)
+                            //.clipShape(RoundedRectangle(cornerRadius: 20))
+                    )
             
             HStack {
                 VStack (alignment: .leading) {
@@ -21,7 +29,9 @@ struct OpenJournal: View {
                         Image(systemName: "arrow.right").foregroundColor(CustomColor.darkTextColor)
                     }.offset(x: -70, y: 45)
                     TextView(text: "Let your thoughts run", fontSize: 14, offset: 0, fontType: "Poppins-Regular").foregroundColor(CustomColor.subtextColor).offset(x: -70, y: 45)
+                    
                 }
+                .offset(x: -6)
             }
         }
     }

@@ -27,6 +27,7 @@ struct HomepageView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 homepageHeader
                 
                 NavigationLink(destination: aboutUs()){
@@ -51,8 +52,9 @@ struct HomepageView: View {
                     }
                 } //ScrollView
             } //VStack
+            .background(Color("NEWbackground"))
         } // Navigation
-        .padding()
+        
     }
     
     var navigationBar: some View {
@@ -80,31 +82,33 @@ struct HomepageView: View {
         HStack {
             //Today and the date
             VStack {
-                TextView(
-                    text: "Today",
-                    fontSize: 30,
-                    offset: 0,
-                    fontType: "Poppins-Bold"
-                )
+                Text("Today")
+                    .font(.custom("Poppins-Bold", size: 30))
+                    .foregroundColor(Color("mainTextColor"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading)
                 
-                TextView(
-                    text: HPshowDate(date: self.endingDate),
-                    fontSize: 25,
-                    offset: 0,
-                    fontType: "Poppins-Regular"
-                )
+                Text(HPshowDate(date: self.endingDate))
+                    .font(.custom("Poppins-Regular", size: 25))
+                    .foregroundColor(Color("mainTextColor"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading)
             } //VStack
+            
             
             Spacer()
             
-            // Favorites Page
-            Image(systemName: "heart")
-                .font(.system(size: 30))
-                .padding()
-                .onTapGesture {
-                    // Navigate to the favorites page
-                }
+            //destination: FavoriteView(viewModel: self.viewModel)
+            //TestSixView()
+            NavigationLink(destination: FavoriteView(viewModel: self.viewModel)) {
+                Image(systemName: "heart")
+                    .foregroundColor(Color("responseColor"))
+                    .font(.system(size: 30))
+                    .padding(.trailing)
+            }
+            
         } //HStack
+        .background(Color("NEWbackground"))
     }
 }
 

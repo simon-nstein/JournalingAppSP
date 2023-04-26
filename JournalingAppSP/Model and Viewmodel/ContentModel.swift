@@ -84,8 +84,8 @@ extension Profile {
 
 protocol RBTObject {
     var dateID: String { get }
-    var message: String { get }
-    var favorite: String { get }
+    var message: String { get set }
+    var favorite: String { get set }
 }
 
 protocol TheOpenObject {
