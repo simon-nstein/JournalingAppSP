@@ -42,7 +42,7 @@ struct HomepageView: View {
                         GratitudeJournal()
                     }
                     
-                    NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
+                    NavigationLink(destination: openView(viewModel: self.viewModel)) {
                         OpenJournal()
                     }
                     

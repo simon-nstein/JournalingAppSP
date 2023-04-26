@@ -32,6 +32,7 @@
 		3FC6E9BE29C19AE2004D9531 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 3FC6E9BD29C19AE2004D9531 /* Auth0 */; };
 		3FC6E9C029C19C6C004D9531 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6E9BF29C19C6C004D9531 /* Auth0.plist */; };
 		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
+		F61F8D8329F8E9710011F1D1 /* openView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8229F8E9710011F1D1 /* openView.swift */; };
 		F62567A129E735C0005411BF /* TestThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A029E735C0005411BF /* TestThreeView.swift */; };
 		F62567A329EE193B005411BF /* TestFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A229EE193B005411BF /* TestFourView.swift */; };
 		F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A429EE3B65005411BF /* gratSwipeView.swift */; };
@@ -78,6 +79,7 @@
 		3FC6E9BB29C19A59004D9531 /* Auth0.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Auth0.swift; path = ../../Desktop/Auth0.swift; sourceTree = "<group>"; };
 		3FC6E9BF29C19C6C004D9531 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		F61F8D8229F8E9710011F1D1 /* openView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openView.swift; sourceTree = "<group>"; };
 		F62567A029E735C0005411BF /* TestThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestThreeView.swift; sourceTree = "<group>"; };
 		F62567A229EE193B005411BF /* TestFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFourView.swift; sourceTree = "<group>"; };
 		F62567A429EE3B65005411BF /* gratSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gratSwipeView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				3FDAECF529B7F69500C9A633 /* InputView.swift */,
 				F64552CB29BE99140054E7AF /* inputSwipeView.swift */,
 				F62567A429EE3B65005411BF /* gratSwipeView.swift */,
+				F61F8D8229F8E9710011F1D1 /* openView.swift */,
 			);
 			path = "User Input Views";
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */,
 				F6E6D1E429BD04FA00DF59B5 /* GlanceView.swift in Sources */,
 				3F78EB2A29F7713100285E7F /* ReminderView.swift in Sources */,
+				F61F8D8329F8E9710011F1D1 /* openView.swift in Sources */,
 				3F322C5829C25CC500B62873 /* profileView.swift in Sources */,
 				F6E6D1AC29B1A88800DF59B5 /* ContentView.swift in Sources */,
 				F6E6D1AA29B1A88800DF59B5 /* JournalingAppSPApp.swift in Sources */,

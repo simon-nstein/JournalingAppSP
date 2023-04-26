@@ -95,7 +95,6 @@ struct inputSwipeView: View {
             .background(Color("NEWbackground"))
         } //NavigationView
         .navigationBarBackButtonHidden(true)
-        .background(Color("NEWbackground"))
     }
 }
 
