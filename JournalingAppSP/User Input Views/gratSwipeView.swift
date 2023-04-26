@@ -21,12 +21,14 @@ struct gratSwipeView: View {
                 } label: {
                     HStack{
                         Image(systemName: "chevron.left")
-                            .foregroundColor(Color("darkColor"))
+                            .foregroundColor(Color("NextArrowBackgroundColor"))
                             .font(.system(size: 30))
                         Spacer()
                     }
-                }
-                    .padding(.top)
+                }//END BACK BUTTON
+                .padding(.top)
+                .padding(.leading)
+                
                 TabView(selection: $selectedTab) {
                     InputView(viewModel: viewModel, type: "GRAT1")
                         .tag(0)
@@ -80,8 +82,10 @@ struct gratSwipeView: View {
                     
                 )
             } //VStack
+            .background(Color("NEWbackground"))
         } //NavigationView
         .navigationBarBackButtonHidden(true)
+        .background(Color("NEWbackground"))
     }
 }
 

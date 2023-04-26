@@ -25,30 +25,32 @@ struct HomepageView: View {
     var endingDate: Date
     
     var body: some View {
-        VStack {
-            homepageHeader
-            
-            NavigationLink(destination: aboutUs()){
-                navigationBar
-            }
-            
-            ScrollView {
-                NavigationLink(destination: inputSwipeView(viewModel: self.viewModel)) {
-                    MindfulnessJournal()
+        NavigationView{
+            VStack {
+                homepageHeader
+                
+                NavigationLink(destination: aboutUs()){
+                    navigationBar
                 }
                 
-                NavigationLink(destination: gratSwipeView(viewModel: self.viewModel)) {
-                    GratitudeJournal()
-                }
-                
-                NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
-                    OpenJournal()
-                }
-                
-            } //ScrollView
-        } //VStack
-        .background(Color("NEWbackground"))
-}
+                ScrollView {
+                    NavigationLink(destination: inputSwipeView(viewModel: self.viewModel)) {
+                        MindfulnessJournal()
+                    }
+                    
+                    NavigationLink(destination: gratSwipeView(viewModel: self.viewModel)) {
+                        GratitudeJournal()
+                    }
+                    
+                    NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
+                        OpenJournal()
+                    }
+                    
+                } //ScrollView
+            } //VStack
+            .background(Color("NEWbackground"))
+        }
+    }
     
     var navigationBar: some View {
         ZStack {

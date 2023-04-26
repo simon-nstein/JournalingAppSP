@@ -105,7 +105,6 @@ struct InputView: View {
                         self.viewModel.addGrat(message: self.userInput, whichInput: "Input3")
                     }
                     
-                    
                 default:
                     break;
                 }

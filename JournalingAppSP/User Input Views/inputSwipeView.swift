@@ -56,8 +56,6 @@ struct inputSwipeView: View {
                         if selectedTab == 1 { pageNumber(page: "2 of 3 responses") }
                         if selectedTab == 2 { pageNumber(page: "3 of 3 responses") }
                         
-                        
-                    
                         Button(action: {
                             let previousTab = (selectedTab - 1 + 4) % 4 // calculate index of previous tab
                             selectedTab = previousTab
