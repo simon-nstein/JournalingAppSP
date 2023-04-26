@@ -69,7 +69,7 @@ struct inputSwipeView: View {
                         }
                         .opacity(selectedTab == 0 ? 0 : 1)
                         .padding(.trailing, 20)
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 80)
                         
                         Button(action: {
                                     let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
