@@ -50,14 +50,14 @@ struct ReminderView: View {
                     
                     HStack {
                         
-                        NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)) {
+                        NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile))) {
                             Text("No thanks")
                         }.foregroundColor(.white).padding(.leading, 25.0)
 
                         
                         Spacer()
                         
-                        NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile).onAppear {
+                        NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile)).onAppear {
                             self.notifyHandler.askPermission(date: self.selectedTime, type: "time", title: "Time to reflect", body: "Our app is here to help you keep track of your thoughts and emotions, and provide a safe space to express yourself freely.")
                         }) {
                             Text("Schedule Reminder")

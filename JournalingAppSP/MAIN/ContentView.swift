@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel: JournalData;
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var viewModel: JournalData
+    @State private var selectedTab: Tab = .house
     var userProfile: Profile
-    //@State var selectedDate = Date()
-    
-    
-    //let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2023)) ?? Date()
     let endingDate = Date()
+
+    init(viewModel: JournalData) {
+        self.viewModel = viewModel
+        self.userProfile = Profile.empty
+        UITabBar.appearance().isHidden = true
+    }
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -23,50 +25,39 @@ struct ContentView: View {
         return formatter
     }
     
-    //Added for DatePicker
-    @State private var selectDate = Date()
-    @State private var navigate = false
-    //End take out
+    
     
     var body: some View {
-        
-        TabView {
-            // Homepage
-            HomepageView(viewModel: self.viewModel, userProfile: self.userProfile, endingDate: self.endingDate)
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
-                }
+        ZStack{
+    
+            VStack{
+                TabView(selection: $selectedTab) {
+                    // Homepage
+                    HomepageView(viewModel: self.viewModel, userProfile: self.userProfile, endingDate: self.endingDate)
+                        .tag(Tab.house)
+                    
+                    // Calendar
+                    CalendarView(viewModel: self.viewModel)
+                        .tag(Tab.calendar)
+                    
+                    // Analyze
+                    AnalyzeView(viewModel: self.viewModel)
+                        .tag(Tab.leaf)
+                    
+                    // Profile
+                    profileView(userProfile: self.userProfile)
+                        .tag(Tab.person)
+                    
+                } //end TabView
+            }
             
-            // Calendar
-            CalendarView(viewModel: self.viewModel)
-                .tabItem {
-                    //Label("Calendar", systemImage: "calendar")
-                    Image(systemName: "calendar")
-                    Text("Calendar")
-                }
-            
-            // Analyze
-            AnalyzeView(viewModel: self.viewModel)
-                .tabItem {
-                    Image(systemName: "chart.bar")
-                    Text("Analyze")
-                }
-            
-            // Profile
-            profileView(userProfile: self.userProfile)
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
-                }
+            VStack{
+                Spacer()
+                TestSixView(selectedTab: $selectedTab)
+            }
             
         }
-        //EDIT
-        //.accentColor(.red)
-        //.background(Color.white) // add a white background to the TabView
-        //.edgesIgnoringSafeArea(.all)
         
-         
         
     }
     
@@ -120,6 +111,8 @@ struct TextView: View {
 
 struct ContentView_Previews: PreviewProvider {    
     static var previews: some View {
-        ContentView(viewModel: JournalData(UserProfile: Profile.empty), userProfile: Profile.empty)
+        //ContentView(viewModel: JournalData(UserProfile: Profile.empty), userProfile: Profile.empty)
+        ContentView(viewModel: JournalData(UserProfile: Profile.empty))
+        
     }
 }

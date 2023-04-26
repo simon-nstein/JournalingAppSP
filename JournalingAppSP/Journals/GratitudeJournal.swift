@@ -14,7 +14,7 @@ struct GratitudeJournal: View {
                 .foregroundColor(CustomColor.gratitudeBackground)
                 .frame(width: 350, height: 175)
                 .overlay(
-                        Image("GratImage")
+                        Image("GratImageFlip")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 350, height: 175)

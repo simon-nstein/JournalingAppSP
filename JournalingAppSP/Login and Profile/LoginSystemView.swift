@@ -16,7 +16,7 @@ struct LoginSystemView: View {
             if userNeedsGoals {
                 GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
             } else {
-                ContentView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+                ContentView(viewModel: JournalData(UserProfile: self.userProfile))
             }
         } else {
             VStack {

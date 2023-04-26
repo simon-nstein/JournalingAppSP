@@ -24,7 +24,7 @@ struct MindfulnessJournal: View {
                         Image("MindImage")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 350, height: 175)
+                            .frame(width: 170, height: 175)
                             .offset(x: 100)
                     )
                 .overlay(

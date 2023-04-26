@@ -7,19 +7,50 @@
 
 import SwiftUI
 
+enum Tab: String, CaseIterable {
+    case house
+    case calendar
+    case leaf
+    case person
+}
+
 struct TestSixView: View {
-    var body: some View {
-        ZStack{
-            Color.green
-            .edgesIgnoringSafeArea(.all)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.green) // Add this line
+    
+    @Binding var selectedTab: Tab
+    private var imageName: String {
+            selectedTab.rawValue
         }
+    
+    
+    var body: some View {
+        
+        VStack{
+            HStack{
+                ForEach(Tab.allCases, id: \.rawValue){ tab in
+                    Spacer()
+                    Image(systemName: selectedTab == tab ? imageName: tab.rawValue)
+                        .foregroundColor(selectedTab == tab ? .red : .gray)
+                        .font(.system(size: 22))
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.1)) {
+                                selectedTab = tab
+                            }
+                        }
+                    Spacer()
+                }
+                
+            }
+            .frame(width: nil, height: 60)
+            .background(.thinMaterial)
+            .cornerRadius(10)
+            .padding()
+        }
+        
     }
 }
 
 struct TestSixView_Previews: PreviewProvider {
     static var previews: some View {
-        TestSixView()
+        TestSixView(selectedTab: .constant(.house))
     }
 }
