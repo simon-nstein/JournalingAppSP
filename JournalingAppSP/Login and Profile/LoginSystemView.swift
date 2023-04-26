@@ -61,7 +61,8 @@ struct LoginSystemView: View {
     }
     
     struct MyButtonStyle: ButtonStyle {
-        let darkColor = CustomColor.darkButtonColor
+        //let darkColor = CustomColor.darkButtonColor
+        let darkColor = Color.red
         
         func makeBody(configuration: Configuration) -> some View {
             configuration.label

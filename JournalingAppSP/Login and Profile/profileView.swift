@@ -89,8 +89,11 @@ struct BarView: View {
     let text: String
     let statistic: String
     
-    let darkBlue = CustomColor.darkBlue
-    let textColor = CustomColor.TextColor
+    //let darkBlue = CustomColor.darkBlue
+    //let textColor = CustomColor.TextColor
+    
+    let darkBlue = Color.red
+    let textColor = Color.blue
     
     var body: some View {
         HStack {
