@@ -25,36 +25,30 @@ struct HomepageView: View {
     var endingDate: Date
     
     var body: some View {
-            VStack {
-                
-                homepageHeader
-                
-                NavigationLink(destination: aboutUs()){
-                    navigationBar
+        VStack {
+            homepageHeader
+            
+            NavigationLink(destination: aboutUs()){
+                navigationBar
+            }
+            
+            ScrollView {
+                NavigationLink(destination: inputSwipeView(viewModel: self.viewModel)) {
+                    MindfulnessJournal()
                 }
                 
-                ScrollView {
-                    NavigationLink(destination: inputSwipeView(viewModel: self.viewModel)) {
-                        MindfulnessJournal()
-                    }
-                    
-                    NavigationLink(destination: gratSwipeView(viewModel: self.viewModel)) {
-                        GratitudeJournal()
-                    }
-                    
-                    NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
-                        OpenJournal()
-                    }
-                    
-                    NavigationLink(destination: TestFiveView(viewModel: self.viewModel)) {
-                        OpenJournal()
-                    }
-                } //ScrollView
-            } //VStack
-            .background(Color("NEWbackground"))
-        } // Navigation
-        
-    }
+                NavigationLink(destination: gratSwipeView(viewModel: self.viewModel)) {
+                    GratitudeJournal()
+                }
+                
+                NavigationLink(destination: InputView(viewModel: self.viewModel, type: "OPEN")) {
+                    OpenJournal()
+                }
+                
+            } //ScrollView
+        } //VStack
+        .background(Color("NEWbackground"))
+}
     
     var navigationBar: some View {
         ZStack {
@@ -94,11 +88,8 @@ struct HomepageView: View {
                     .padding(.leading)
             } //VStack
             
-            
             Spacer()
             
-            //destination: FavoriteView(viewModel: self.viewModel)
-            //TestSixView()
             NavigationLink(destination: FavoriteView(viewModel: self.viewModel)) {
                 Image(systemName: "heart")
                     .foregroundColor(Color("responseColor"))
