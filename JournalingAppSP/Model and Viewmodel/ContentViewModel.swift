@@ -413,15 +413,44 @@ class JournalData: ObservableObject {
         //CHANGE savedRoses
     }
     
-    
+    /*
     func getRBT(with array: [RBTObject], stringDate: String) -> [String: String]? {
+        
+        //for calendar it comes in as "M/DD/YY"
+        print("Date", stringDate)
+        
+        //array date looks like "YYYY-MM-DD"
+        
         //gets the message and favorite for a specific day
         //depends on which array you pass in - savedRoses - savedBuds - savedThorns
         for i in 0..<array.count {
+            print("IN DATE LOOKS LIKE:", array[i].dateID)
             if array[i].dateID == stringDate {
-                //print("GETFAV", array[i].favorite)
-                //print("GetFavorite", array[i].favorite)
-                //return array[i].favorite
+                return ["message": array[i].message, "favorite": array[i].favorite]
+            }
+        }
+        return nil
+    }
+     */
+    
+    
+    func getRBT(with array: [RBTObject], stringDate: String) -> [String: String]? {
+        var newDATE = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/dd/yy"
+        if let date = dateFormatter.date(from: stringDate) {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            newDATE = dateFormatter.string(from: date)
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            if let date = dateFormatter.date(from: stringDate) {
+                newDATE = dateFormatter.string(from: date)
+            } else {
+                return nil
+            }
+        }
+        for i in 0..<array.count {
+            if array[i].dateID == newDATE {
                 return ["message": array[i].message, "favorite": array[i].favorite]
             }
         }
@@ -430,10 +459,24 @@ class JournalData: ObservableObject {
     
     //OPEN
     func getOpen(with array: [TheOpenObject], stringDate: String) -> [String: String]? {
+        var newDATE = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/dd/yy"
+        if let date = dateFormatter.date(from: stringDate) {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            newDATE = dateFormatter.string(from: date)
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            if let date = dateFormatter.date(from: stringDate) {
+                newDATE = dateFormatter.string(from: date)
+            } else {
+                return nil
+            }
+        }
         //gets the message and favorite for a specific day
         //depends on which array you pass in - savedRoses - savedBuds - savedThorns
         for i in 0..<array.count {
-            if array[i].dateID == stringDate {
+            if array[i].dateID == newDATE {
                 return ["message": array[i].userInput, "favorite": array[i].favorite]
             }
         }
@@ -536,9 +579,25 @@ class JournalData: ObservableObject {
     
     
     func getGrat(array: [TheGratitudeObject], stringDate: String, whichInput: String) -> [String: String]? {
+        
+        var newDATE = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/dd/yy"
+        if let date = dateFormatter.date(from: stringDate) {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            newDATE = dateFormatter.string(from: date)
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            if let date = dateFormatter.date(from: stringDate) {
+                newDATE = dateFormatter.string(from: date)
+            } else {
+                return nil
+            }
+        }
+        
         //gets the message and favorite for a specific day
         for i in 0..<array.count {
-            if array[i].dateID == stringDate {
+            if array[i].dateID == newDATE {
                 if whichInput == "Input1"{
                     return ["message": array[i].message1, "favorite": array[i].favorite1]
                 }

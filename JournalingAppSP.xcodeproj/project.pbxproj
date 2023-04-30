@@ -34,6 +34,7 @@
 		3FDAECF629B7F69500C9A633 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDAECF529B7F69500C9A633 /* InputView.swift */; };
 		F61F8D8329F8E9710011F1D1 /* openView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8229F8E9710011F1D1 /* openView.swift */; };
 		F61F8D8729F9DB8D0011F1D1 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8629F9DB8D0011F1D1 /* CustomNavBarView.swift */; };
+		F61F8D8A29FB71640011F1D1 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F61F8D8929FB71640011F1D1 /* SwiftUIX */; };
 		F62567A129E735C0005411BF /* TestThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A029E735C0005411BF /* TestThreeView.swift */; };
 		F62567A329EE193B005411BF /* TestFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A229EE193B005411BF /* TestFourView.swift */; };
 		F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A429EE3B65005411BF /* gratSwipeView.swift */; };
@@ -112,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F61F8D8A29FB71640011F1D1 /* SwiftUIX in Frameworks */,
 				3F3916F629DCBC4800E37684 /* FirebaseDatabaseSwift in Frameworks */,
 				3F3916F429DCBC4800E37684 /* FirebaseDatabase in Frameworks */,
 				3F3916F029DCBC4800E37684 /* FirebaseAnalyticsSwift in Frameworks */,
@@ -307,6 +309,7 @@
 				3F3916F529DCBC4800E37684 /* FirebaseDatabaseSwift */,
 				3F3916F729DCBC4800E37684 /* FirebaseFirestore */,
 				3F3916F929DCBC4800E37684 /* FirebaseFirestoreSwift */,
+				F61F8D8929FB71640011F1D1 /* SwiftUIX */,
 			);
 			productName = JournalingAppSP;
 			productReference = F6E6D1A629B1A88800DF59B5 /* JournalingAppSP.app */;
@@ -339,6 +342,7 @@
 			packageReferences = (
 				3FC6E9BC29C19AE2004D9531 /* XCRemoteSwiftPackageReference "Auth0" */,
 				3F3916EC29DCBC4800E37684 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F61F8D8829FB71640011F1D1 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = F6E6D1A729B1A88800DF59B5 /* Products */;
 			projectDirPath = "";
@@ -626,6 +630,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		F61F8D8829FB71640011F1D1 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -668,6 +680,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3FC6E9BC29C19AE2004D9531 /* XCRemoteSwiftPackageReference "Auth0" */;
 			productName = Auth0;
+		};
+		F61F8D8929FB71640011F1D1 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F61F8D8829FB71640011F1D1 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
 

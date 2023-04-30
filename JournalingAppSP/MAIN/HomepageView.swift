@@ -46,6 +46,10 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
+                    NavigationLink(destination: TestFiveView(viewModel: self.viewModel)) {
+                        OpenJournal()
+                    }
+                    
                 } //ScrollView
             } //VStack
             .background(Color("NEWbackground"))

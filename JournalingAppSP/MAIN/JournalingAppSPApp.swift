@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct JournalingAppSPApp: App {
+    let sharedData = SharedData()
     var body: some Scene {
         WindowGroup {
             LoginSystemView()
+                .environmentObject(sharedData)
         }
     }
 }
