@@ -12,20 +12,23 @@ struct LoginSystemView: View {
     
     var body: some View {
         
-        if isAuthenticated {
-            if userNeedsGoals {
-                GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
-            } else {
-                ContentView(viewModel: JournalData(UserProfile: self.userProfile))
-            }
-        } else {
-            VStack {
-                Button("Log in") {
-                    login()
+        VStack {
+            if isAuthenticated {
+                if userNeedsGoals {
+                    GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+                } else {
+                    ContentView(viewModel: JournalData(UserProfile: self.userProfile))
                 }
-                .buttonStyle(MyButtonStyle())
-            } // VStack
-        } // if isAuthenticated
+            } else {
+                VStack {
+                    Text("Hello World")
+                }
+            } // if isAuthenticated
+        }.onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+               login()
+            }
+        }
     } // body
     
     
