@@ -46,7 +46,7 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
-                    NavigationLink(destination: TestFiveView(viewModel: self.viewModel)) {
+                    NavigationLink(destination: newCalendarView(viewModel: self.viewModel)) {
                         OpenJournal()
                     }
                     

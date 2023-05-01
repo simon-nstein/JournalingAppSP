@@ -35,6 +35,8 @@
 		F61F8D8329F8E9710011F1D1 /* openView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8229F8E9710011F1D1 /* openView.swift */; };
 		F61F8D8729F9DB8D0011F1D1 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8629F9DB8D0011F1D1 /* CustomNavBarView.swift */; };
 		F61F8D8A29FB71640011F1D1 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F61F8D8929FB71640011F1D1 /* SwiftUIX */; };
+		F61F8D8C29FEC0200011F1D1 /* CustomCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8B29FEC0200011F1D1 /* CustomCalendar.swift */; };
+		F61F8D8E29FEC0850011F1D1 /* newCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61F8D8D29FEC0850011F1D1 /* newCalendarView.swift */; };
 		F62567A129E735C0005411BF /* TestThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A029E735C0005411BF /* TestThreeView.swift */; };
 		F62567A329EE193B005411BF /* TestFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A229EE193B005411BF /* TestFourView.swift */; };
 		F62567A529EE3B65005411BF /* gratSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62567A429EE3B65005411BF /* gratSwipeView.swift */; };
@@ -83,6 +85,8 @@
 		3FDAECF529B7F69500C9A633 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F61F8D8229F8E9710011F1D1 /* openView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openView.swift; sourceTree = "<group>"; };
 		F61F8D8629F9DB8D0011F1D1 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
+		F61F8D8B29FEC0200011F1D1 /* CustomCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendar.swift; sourceTree = "<group>"; };
+		F61F8D8D29FEC0850011F1D1 /* newCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCalendarView.swift; sourceTree = "<group>"; };
 		F62567A029E735C0005411BF /* TestThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestThreeView.swift; sourceTree = "<group>"; };
 		F62567A229EE193B005411BF /* TestFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFourView.swift; sourceTree = "<group>"; };
 		F62567A429EE3B65005411BF /* gratSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gratSwipeView.swift; sourceTree = "<group>"; };
@@ -170,7 +174,9 @@
 				F6E6D1E329BD04FA00DF59B5 /* GlanceView.swift */,
 				F6E6D1E529BD111500DF59B5 /* HistoryView.swift */,
 				F62567BE29F83399005411BF /* FavoriteView.swift */,
+				F61F8D8B29FEC0200011F1D1 /* CustomCalendar.swift */,
 				F62567A829F1ECEB005411BF /* AnalyzeView.swift */,
+				F61F8D8D29FEC0850011F1D1 /* newCalendarView.swift */,
 				3F4E39A529DBA803000FC2DC /* CalendarView.swift */,
 			);
 			path = "Glance Views";
@@ -379,6 +385,7 @@
 			files = (
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
 				F61F8D8729F9DB8D0011F1D1 /* CustomNavBarView.swift in Sources */,
+				F61F8D8C29FEC0200011F1D1 /* CustomCalendar.swift in Sources */,
 				F62567A729F0FD08005411BF /* TestFiveView.swift in Sources */,
 				F62567A329EE193B005411BF /* TestFourView.swift in Sources */,
 				3F78EB2629F6036400285E7F /* GoalView.swift in Sources */,
@@ -401,6 +408,7 @@
 				3FBD98C029B278A700804A6A /* ContentViewModel.swift in Sources */,
 				3F4814F829B5A51200FAEB20 /* WeekGlance.swift in Sources */,
 				3F209E1529CBD9CF00028B56 /* aboutUs.swift in Sources */,
+				F61F8D8E29FEC0850011F1D1 /* newCalendarView.swift in Sources */,
 				F6E6D1E629BD111500DF59B5 /* HistoryView.swift in Sources */,
 				F64552D029BF7B130054E7AF /* TestTwoView.swift in Sources */,
 				3F209E1C29CD328200028B56 /* OpenJournal.swift in Sources */,
