@@ -18,41 +18,57 @@ struct ReminderView: View {
     var body: some View {
         
             ZStack {
-                CustomColor.darkBackground
+                Color("NEWbackground") // Set the background color
+                    .ignoresSafeArea()
                 VStack {
-                    TextView(text: "Do you want to be reminded to journal everyday?", fontSize: 25, offset: 0, fontType: "Poppins-SemiBold").foregroundColor(.white).padding(.horizontal, 25.0).multilineTextAlignment(.center)
-                    TextView(text: "To see success, we highly recommend that you set up notifications that remind you to journal at a set time.", fontSize: 16, offset: 0, fontType: "Poppins-Regular").foregroundColor(.white).padding().multilineTextAlignment(.center)
-                    Spacer()
+                    TextView(text: "Do you want to be reminded to journal everyday?", fontSize: 25, offset: 0, fontType: "Poppins-SemiBold")
+                        .foregroundColor(Color("LoginHeader"))
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    TextView(text: "To see success, we highly recommend that you set up notifications that remind you to journal at a set time.", fontSize: 16, offset: 0, fontType: "Poppins-Regular")
+                        .foregroundColor(Color("LoginSubtext"))
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    //Spacer()
+                    
+                    
                     
                     ZStack {
                         Rectangle()
-                            .fill(CustomColor.reminderBackground)
+                            .fill(Color("ReminderOuterBox"))
                             .frame(width: 350, height: 100)
+                            .cornerRadius(10)
                         
                         Rectangle()
-                            .fill(CustomColor.reminderInsideBackground)
+                            .fill(Color("ReminderBox"))
                             .frame(width: 340, height: 90)
+                            .cornerRadius(10)
                         
                         HStack {
                             Image(systemName: "clock")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("LoginHeader"))
                                 .padding(.leading, 50.0)
+                                .font(.system(size: 35))
                             Spacer()
 
                             DatePicker("", selection: $selectedTime, displayedComponents: [ .hourAndMinute])
                                 .labelsHidden()
-                                .accentColor(.white)
+                                .accentColor(Color("LoginHeader"))
                                 .padding(.trailing, 50.0)
 
                         }.padding()
                         
-                    }.padding(.bottom, 100.0)
+                    }//.padding(.bottom, 100.0)
                     
                     HStack {
                         
                         NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile))) {
                             Text("No thanks")
-                        }.foregroundColor(.white).padding(.leading, 25.0)
+                                .font(.custom("Poppins-Regular", size: 16))
+                                .foregroundColor(Color("LoginHeader"))
+                        }
+                        .padding(.leading, 25.0)
+                        
 
                         
                         Spacer()
@@ -61,11 +77,17 @@ struct ReminderView: View {
                             self.notifyHandler.askPermission(date: self.selectedTime, type: "time", title: "Time to reflect", body: "Our app is here to help you keep track of your thoughts and emotions, and provide a safe space to express yourself freely.")
                         }) {
                             Text("Schedule Reminder")
-                        }.foregroundColor(.white).padding(.trailing, 25.0)
+                                .font(.custom("Poppins-Regular", size: 16))
+                                
+                        }
+                        .foregroundColor(Color("LoginHeader"))
+                        .padding(.trailing, 25.0)
                     }
                     
                 }.padding(.vertical, 100.0)
-            }.ignoresSafeArea().navigationBarBackButtonHidden(true).navigationBarHidden(true)
+            }.ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
     }
 }
 

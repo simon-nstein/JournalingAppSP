@@ -103,6 +103,13 @@ struct HomepageView: View {
                     .padding(.trailing)
             }
             
+            NavigationLink(destination: ReminderView(viewModel: self.viewModel, userProfile: self.userProfile)) {
+                Image(systemName: "clock")
+                    .foregroundColor(Color("responseColor"))
+                    .font(.system(size: 30))
+                    .padding(.trailing)
+            }
+            
         } //HStack
         .background(Color("NEWbackground"))
     }

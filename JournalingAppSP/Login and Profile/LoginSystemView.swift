@@ -35,7 +35,7 @@ struct LoginSystemView: View {
                 }//end VStack
             }//end ZStack
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     login()
                     //print("hello")
                 }
