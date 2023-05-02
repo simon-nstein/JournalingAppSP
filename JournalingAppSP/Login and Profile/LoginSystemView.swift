@@ -6,9 +6,10 @@ import Auth0
 struct LoginSystemView: View {
     
     @State private var isAuthenticated = false
-    @State private var userNeedsGoals = false
+    //@State private var userNeedsGoals = false
     @State var userProfile = Profile.empty
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @EnvironmentObject var sharedData: SharedData
     
     var body: some View {
             ZStack {
@@ -16,7 +17,7 @@ struct LoginSystemView: View {
                     .ignoresSafeArea()
                 VStack {
                     if isAuthenticated {
-                        if userNeedsGoals {
+                        if sharedData.userNeedsGoals {
                             GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
                         } else {
                             ContentView(viewModel: JournalData(UserProfile: self.userProfile))
@@ -112,7 +113,7 @@ extension LoginSystemView {
                         } else {
                             print("User does not exist -- We need to go to the Goal View")
                             delegate.addNewUser(username: user)
-                            self.userNeedsGoals = true
+                            sharedData.userNeedsGoals = true
                             
                         }
                     }
@@ -121,7 +122,7 @@ extension LoginSystemView {
             }
     }
     
-    private func logout() {
+    public func logout() {
         Auth0
             .webAuth()
             .clearSession { result in
@@ -131,6 +132,7 @@ extension LoginSystemView {
                     print("Failed with: \(error)")
                     
                 case .success:
+                    print("Logged Out")
                     self.isAuthenticated = false
                     self.userProfile = Profile.empty
                 }

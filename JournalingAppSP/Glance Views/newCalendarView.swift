@@ -7,7 +7,9 @@
 
 class SharedData: ObservableObject {
     @Published var sharedVariable: Bool = false
+    @Published var userNeedsGoals: Bool = false
     @Published var selectedDate: String = "2023-05-01"
+    
 }
 
 

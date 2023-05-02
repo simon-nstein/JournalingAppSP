@@ -5,12 +5,6 @@
 //  Created by Simon Neuwirth-Stein on 4/19/23.
 //
 
-/*
-class SharedData: ObservableObject {
-    @Published var sharedVariable: Bool = false
-}
- */
-
 
 import SwiftUI
 

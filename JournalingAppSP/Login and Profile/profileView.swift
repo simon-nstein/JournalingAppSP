@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Auth0
 
 struct profileView: View {
     let userProfile: Profile
+    @State private var isToggled = false
+    let loginSystemView = LoginSystemView()
+    
     
     var body: some View {
         
@@ -45,42 +49,65 @@ struct profileView: View {
             ScrollView {
                 
                 BarView(
-                    image: "flame",
+                    image: "flame.fill",
                     text: "Current Streak",
-                    statistic: "3 days"
+                    statistic: "3 days",
+                    imageColor: "HeartRed"
                 )
+                
                 Divider()
                 
                 BarView(
-                    image: "flame",
-                    text: "Longest Streak",
-                    statistic: "9 days"
-                )
-                Divider()
-                
-                BarView(
-                    image: "flame",
+                    image: "calendar",
                     text: "This Week",
-                    statistic: "2/7 Days"
+                    statistic: "2/7 Days",
+                    imageColor: "mainTextColor"
                 )
                 Divider()
                 
                 BarView(
-                    image: "flame",
+                    image: "calendar",
                     text: "This Month",
-                    statistic: "10/30 Days"
+                    statistic: "10/30 Days",
+                    imageColor: "mainTextColor"
                 )
                 Divider()
                 
                 BarView(
-                    image: "flame",
+                    image: "calendar",
                     text: "This Year",
-                    statistic: "50/365 days"
+                    statistic: "50/365 days",
+                    imageColor: "mainTextColor"
                 )
                 Divider()
+                
+                Toggle("Notifications", isOn: $isToggled)
+                    .padding()
+                    .foregroundColor(Color("LogoutText"))
+                    .font(.custom("Poppins-SemiBold", size: 20))
+                    .toggleStyle(SwitchToggleStyle(tint: Color("LogoutText")))
+                    .onChange(of: isToggled) { newValue in
+                        //do something
+                        print("turn off notifications")
+                    }
+                
+                Button(action: {
+                    loginSystemView.logout()
+                    print("logout")
+                }) {
+                    Text("Logout")
+                        .foregroundColor(Color("LogoutText"))
+                        .font(.custom("Poppins-SemiBold", size: 20))
+                        .padding()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .background(Color("LogoutBox"))
+                        .cornerRadius(10)
+                }.padding()
 
             }
-        }
+        }//end VStack
+        .background(Color("NEWbackground"))
+        
     }
 }
 
@@ -88,9 +115,7 @@ struct BarView: View {
     let image: String
     let text: String
     let statistic: String
-    
-    //let darkBlue = CustomColor.darkBlue
-    //let textColor = CustomColor.TextColor
+    let imageColor: String
     
     let darkBlue = Color.red
     let textColor = Color.blue
@@ -98,18 +123,19 @@ struct BarView: View {
     var body: some View {
         HStack {
             Image(systemName: image)
-                .foregroundColor(darkBlue)
+                .foregroundColor(Color(imageColor))
                 .padding(.horizontal)
         
             Text(text)
                 .font(Font.custom("Poppins-SemiBold", size: 20))
-                .foregroundColor(textColor)
+                .foregroundColor(Color("mainTextColor"))
             
             
             Spacer()
             
             Text(statistic)
                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
+                .foregroundColor(Color("mainTextColor"))
                 .padding(.horizontal)
         }
     }
