@@ -11,25 +11,36 @@ struct LoginSystemView: View {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some View {
-        
-        VStack {
-            if isAuthenticated {
-                if userNeedsGoals {
-                    GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
-                } else {
-                    ContentView(viewModel: JournalData(UserProfile: self.userProfile))
-                }
-            } else {
+            ZStack {
+                Color("NEWbackground") // Set the background color
+                    .ignoresSafeArea()
                 VStack {
-                    Text("Hello World")
+                    if isAuthenticated {
+                        if userNeedsGoals {
+                            GoalView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)
+                        } else {
+                            ContentView(viewModel: JournalData(UserProfile: self.userProfile))
+                        }
+                    } else {
+                        VStack {
+                            Text("LEV")
+                                .font(.custom("Poppins-Bold", size: 60))
+                                .foregroundColor(Color("LoginHeader"))
+                            Text("Connecting the mind, heart, and soul through journaling...")
+                                .font(.custom("Poppins-Regular", size: 20))
+                                .foregroundColor(Color("LoginSubtext"))
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+                }//end VStack
+            }//end ZStack
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    login()
+                    //print("hello")
                 }
-            } // if isAuthenticated
-        }.onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-               login()
-            }
+            }//endonAppear
         }
-    } // body
     
     
     struct UserImage: View {
