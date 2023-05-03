@@ -27,7 +27,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let gratitudeRef = databaseRef.child("Users/\(username)/Gratitude_Section/\(DATE)")
         let openRef = databaseRef.child("Users/\(username)/Open_Section/\(DATE)")
         
-        let streakRef = databaseRef.child("Users/\(username)/Streak").setValue(["date": DATE])
+        //let streakRef = databaseRef.child("Users/\(username)/Streak").setValue(["date": DATE])
         
         
 

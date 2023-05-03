@@ -32,14 +32,16 @@ struct CustomCalendar: View {
                                 sharedData.sharedVariable.toggle()
                             }
                         }) {
+                            
                             Text(dayFormatter.string(from: date))
+                                .frame(minWidth: 0, maxWidth: 21) //helps the size of the cirlce
                                 //.font(.custom("Poppins-Regular", size: 16))
                                 .padding(6)
                                 .foregroundColor(calendar.isDateInToday(date) ? Color.white : .primary)
                                 .background(
-                                    calendar.isDateInToday(date) ? Color.gray
-                                    : calendar.isDate(date, inSameDayAs: selectedDate) ? Color("CalendarCircle")
-                                    : .clear
+                                    calendar.isDateInToday(date) ? Color.gray //if date is today background color is gray
+                                    : calendar.isDate(date, inSameDayAs: selectedDate) ? Color("CalendarCircle") //If date is the same day as a selectedDate
+                                    : .clear //if neither of those two
                                 )
                                 .cornerRadius(100)
                         }
@@ -55,8 +57,7 @@ struct CustomCalendar: View {
                 },
                 trailing: { date in
                     Text(dayFormatter.string(from: date))
-                        //.foregroundColor(.secondary)
-                        .cornerRadius(100)
+                        //.cornerRadius(100)
                         .foregroundColor(Color("CalendarDaysOfWeek"))
                     
                         //.font(.custom("Poppins-Regular", size: 16))
