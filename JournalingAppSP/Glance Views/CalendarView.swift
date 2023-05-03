@@ -154,7 +154,7 @@ struct CalendarView: View {
                 
                 
                 //DIVIDER
-                if let one = viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) {
+                if let _ = viewModel.getRBT(with: viewModel.savedThorns, stringDate: dateToString(date: selectDate)) {
                     VStack(spacing: 0) {
                         Divider().background(Color("lineColor")).frame(height: 10)
                         //height does nothing

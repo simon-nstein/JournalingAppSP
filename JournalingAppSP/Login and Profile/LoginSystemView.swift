@@ -35,6 +35,9 @@ struct LoginSystemView: View {
                     }
                 }//end VStack
             }//end ZStack
+            .ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     login()
