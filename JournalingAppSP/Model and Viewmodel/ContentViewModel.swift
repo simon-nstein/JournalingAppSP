@@ -26,6 +26,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let mindfulnessRef = databaseRef.child("Users/\(username)/Mindfulness_Section/\(DATE)")
         let gratitudeRef = databaseRef.child("Users/\(username)/Gratitude_Section/\(DATE)")
         let openRef = databaseRef.child("Users/\(username)/Open_Section/\(DATE)")
+        
+        let streakRef = databaseRef.child("Users/\(username)/Streak").setValue(["date": DATE])
+        
+        
 
         mindfulnessRef.child("Rose").setValue(["Message":"", "Favorite": ""])   // Adds new sections for Rose, Bud, Thorn, Gratitude, Open Journal, and Notifications
         mindfulnessRef.child("Bud").setValue(["Message":"", "Favorite": ""])
@@ -68,8 +72,6 @@ class JournalData: ObservableObject {
     @Published var savedOpens: [OpenObject] = []
     @Published var savedGratitudes: [GratitudeObject] = []
     
-    @Published var test2: [RoseObject] = []
-    
     @Published var weekRoses: [RoseObject] = []
     @Published var weekBuds: [BudObject] = []
     @Published var weekThorns: [ThornObject] = []
@@ -81,6 +83,9 @@ class JournalData: ObservableObject {
     @Published var monthThorns: [ThornObject] = []
     @Published var monthOpens: [OpenObject] = []
     @Published var monthGratitudes: [GratitudeObject] = []
+    
+    
+    @Published var savedStreaks: [StreakObject] = []
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     let UserProfile: Profile
@@ -94,6 +99,7 @@ class JournalData: ObservableObject {
         fetchGrat()
         //isDateInCurrentWeek(dateString: "2023-04-01")
         //week()
+        getStreak()
         
     }
     func test(message: String) {
@@ -115,7 +121,6 @@ class JournalData: ObservableObject {
             ref.child(path).childByAutoId().setValue(textField)
         }
         print("added new goals [+]")
-//>>>>>>> main
     }
     
     
@@ -139,7 +144,6 @@ class JournalData: ObservableObject {
                                 if !(self.savedRoses.contains(roseObject)) {
                                     self.savedRoses.append(roseObject)
                                 }
-                                //print("INNNNNNN", self.savedRoses)
                                 
                             }
                         }
@@ -168,6 +172,85 @@ class JournalData: ObservableObject {
         fetchRoses()
     }
     
+    func addStreak() {
+        let stringDate = getTodaysDate()
+        
+        if !self.savedStreaks.contains(StreakObject(dateID: stringDate)) {
+            self.savedStreaks.append(StreakObject(dateID: stringDate))
+        }
+        
+        print("Added New Streak [+]")
+    }
+    
+    //
+    
+    func getStreak() -> Int {
+        let today = Date()
+        var count = 0
+        let dateFormatter = DateFormatter()
+        
+        for i in 0..<self.savedStreaks.count {
+            let yesterday = Calendar.current.date(byAdding: .day, value: -i, to: today)!
+            let dateString = dateFormatter.string(from: yesterday)
+            for j in 0..<self.savedStreaks.count {
+                if savedStreaks[j].dateID == dateString {
+                    count += 1
+                }else{
+                    return count
+                }
+            }
+        }
+        return count
+    }
+    
+    func getPeriodStreak(period: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let calendar = Calendar.current
+        let currentDate = Date()
+        var count = 0
+        if period == "week"{
+            print("self.savedStreaks", self.savedStreaks)
+            let currentWeek = calendar.component(.weekOfYear, from: currentDate)
+            print("currentWeek", currentWeek)
+            for i in 0..<self.savedStreaks.count {
+                print("self.savedStreaks", self.savedStreaks)
+                if let Datedate = dateFormatter.date(from: savedStreaks[i].dateID) {
+                    print("Datedate", Datedate)
+                    let givenWeek = calendar.component(.weekOfYear, from: Datedate)
+                    if currentWeek == givenWeek{ count += 1 }
+                }
+            }
+        }
+        
+        if period == "month"{
+            let currentMonth = calendar.component(.month, from: currentDate)
+            
+            for i in 0..<self.savedStreaks.count {
+                
+                if let Datedate = dateFormatter.date(from: savedStreaks[i].dateID) {
+                    let givenMonth = calendar.component(.month, from: Datedate)
+                    if currentMonth == givenMonth{ count += 1 }
+                }
+                
+            }
+        }
+        
+        if period == "year" {
+            let currentYear = calendar.component(.year, from: currentDate)
+            
+            for i in 0..<self.savedStreaks.count {
+                if let date = dateFormatter.date(from: savedStreaks[i].dateID) {
+                    let year = calendar.component(.year, from: date)
+                    if currentYear == year {
+                        count += 1
+                    }
+                }
+            }
+        }
+        
+    return count
+    }
     
     /*
      //KEEEEEEP

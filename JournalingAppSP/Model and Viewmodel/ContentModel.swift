@@ -104,6 +104,10 @@ protocol TheGratitudeObject {
     var favorite3: String { get }
 }
 
+protocol TheStreakObject {
+    var dateID: String { get }
+}
+
 struct RoseObject: Hashable, RBTObject {
     var message: String
     var favorite: String
@@ -137,6 +141,10 @@ struct GratitudeObject: Hashable, TheGratitudeObject {
     var favorite2: String
     var message3: String
     var favorite3: String
+}
+
+struct StreakObject: Hashable, TheStreakObject {
+    var dateID: String
 }
 
 

@@ -45,7 +45,7 @@ struct ContentView: View {
                         .tag(Tab.chartBar)
                     
                     // Profile
-                    profileView(userProfile: self.userProfile)
+                    profileView(viewModel: self.viewModel)
                         .tag(Tab.person)
                     
                 } //end TabView

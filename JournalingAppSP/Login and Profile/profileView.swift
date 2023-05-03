@@ -9,9 +9,11 @@ import SwiftUI
 import Auth0
 
 struct profileView: View {
-    let userProfile: Profile
+    @ObservedObject var viewModel: JournalData;
+
+    //let userProfile: Profile
     @State private var isToggled = false
-    let loginSystemView = LoginSystemView()
+    //let loginSystemView = LoginSystemView()
     
     
     var body: some View {
@@ -23,7 +25,7 @@ struct profileView: View {
             /*
             UserImage(urlString: userProfile.picture)
                 .padding()
-             */
+             
             
             Spacer()
         
@@ -43,43 +45,48 @@ struct profileView: View {
             }
             Divider()
             Spacer()
+             */
+            
             
             
             // User Data
             ScrollView {
                 
-                BarView(
-                    image: "flame.fill",
-                    text: "Current Streak",
-                    statistic: "3 days",
-                    imageColor: "HeartRed"
-                )
-                
-                Divider()
-                
-                BarView(
-                    image: "calendar",
-                    text: "This Week",
-                    statistic: "2/7 Days",
-                    imageColor: "mainTextColor"
-                )
-                Divider()
-                
-                BarView(
-                    image: "calendar",
-                    text: "This Month",
-                    statistic: "10/30 Days",
-                    imageColor: "mainTextColor"
-                )
-                Divider()
-                
-                BarView(
-                    image: "calendar",
-                    text: "This Year",
-                    statistic: "50/365 days",
-                    imageColor: "mainTextColor"
-                )
-                Divider()
+                VStack{
+                    BarView(
+                        image: "flame.fill",
+                        text: "Current Streak",
+                        imageColor: "HeartRed",
+                        count: "\(viewModel.getStreak()) days"
+                        
+                    )
+                    
+                    Divider()
+                    
+                    BarView(
+                        image: "calendar",
+                        text: "This Week",
+                        imageColor: "mainTextColor",
+                        count: "\(viewModel.getPeriodStreak(period: "week"))/7"
+                    )
+                    Divider()
+                    
+                    BarView(
+                        image: "calendar",
+                        text: "This Month",
+                        imageColor: "mainTextColor",
+                        count: "\(viewModel.getPeriodStreak(period: "month"))/31"
+                    )
+                    Divider()
+                    
+                    BarView(
+                        image: "calendar",
+                        text: "This Year",
+                        imageColor: "mainTextColor",
+                        count: "\(viewModel.getPeriodStreak(period: "year"))/365"
+                    )
+                    Divider()
+                }
                 
                 Toggle("Notifications", isOn: $isToggled)
                     .padding()
@@ -91,8 +98,9 @@ struct profileView: View {
                         print("turn off notifications")
                     }
                 
+                
                 Button(action: {
-                    loginSystemView.logout()
+                    //loginSystemView.logout()
                     print("logout")
                 }) {
                     Text("Logout")
@@ -114,11 +122,13 @@ struct profileView: View {
 struct BarView: View {
     let image: String
     let text: String
-    let statistic: String
+    //let statistic: String
     let imageColor: String
+    let count: String
     
     let darkBlue = Color.red
     let textColor = Color.blue
+    
     
     var body: some View {
         HStack {
@@ -130,10 +140,9 @@ struct BarView: View {
                 .font(Font.custom("Poppins-SemiBold", size: 20))
                 .foregroundColor(Color("mainTextColor"))
             
-            
             Spacer()
             
-            Text(statistic)
+            Text(count)
                 .font(Font.custom("Poppins-Regular", size: CustomFontSize.standardFontSize))
                 .foregroundColor(Color("mainTextColor"))
                 .padding(.horizontal)
@@ -145,7 +154,15 @@ struct BarView: View {
 struct profileView_Previews: PreviewProvider {
     
     static var previews: some View {
-        profileView(userProfile: Profile(
+        profileView(
+            
+            viewModel: JournalData(UserProfile: Profile.empty)
+            
+            
+                    
+        
+            /*
+        userProfile: Profile(
             id: "id",
             name: "Paul McSlarrow",
             email: "pmcslarrow@icloud.com",
@@ -153,6 +170,15 @@ struct profileView_Previews: PreviewProvider {
             picture: "",
             updatedAt: "",
             id_string: ""
-        ))
+        )
+             */
+        
+        
+        
+        
+        
+        
+        
+        )
     }
 }

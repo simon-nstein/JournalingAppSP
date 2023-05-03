@@ -67,6 +67,8 @@ struct InputView: View {
                     if self.userInput != "" {
                         self.viewModel.roseInput = self.userInput
                         self.viewModel.addRose(with: self.userInput)
+                        //NEW STREAK
+                        self.viewModel.addStreak()
                         //self.viewModel.addRBT(message: self.userInput, path: "Rose", savedType: &viewModel.savedBuds)
                     }
                 case "BUD":
@@ -85,6 +87,8 @@ struct InputView: View {
                     if self.userInput != "" {
                         self.viewModel.openInput = self.userInput
                         self.viewModel.addOpen(with: self.userInput)
+                        //NEW STREAK
+                        self.viewModel.addStreak()
                     }
                     
                     
@@ -93,6 +97,8 @@ struct InputView: View {
                     if self.userInput != "" {
                         self.viewModel.gratitude1Input = self.userInput
                         self.viewModel.addGrat(message: self.userInput, whichInput: "Input1")
+                        //NEW STREAK
+                        self.viewModel.addStreak()
                     }
                 case "GRAT2":
                     if self.userInput != "" {
