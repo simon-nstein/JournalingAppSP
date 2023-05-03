@@ -71,6 +71,10 @@ struct ReminderView: View {
                                     .font(.system(size: 35))
                                 Spacer()
                                 
+                                //PAUL
+                                //self.selectedTime = ?? should be the time they have saved - idk how to get that or where u save it
+                                //so that when it loads the datepicker is the time they crrently have as their saved notificaiton time
+                                //if they dont have a saved time them just make it the current time right now
                                 DatePicker("", selection: $selectedTime, displayedComponents: [ .hourAndMinute])
                                     .labelsHidden()
                                     .accentColor(Color("LoginHeader"))
@@ -78,39 +82,8 @@ struct ReminderView: View {
                                 
                             }.padding()
                             
-                        }//.padding(.bottom, 100.0)
-                        
-                        
-                        
-                        
-                        /*
-                        if !sharedData.userNeedsGoals {
-                            HStack {
-                                
-                                NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile))) {
-                                    Text("No thanks")
-                                        .font(.custom("Poppins-Regular", size: 16))
-                                        .foregroundColor(Color("LoginHeader"))
-                                }
-                                .padding(.leading, 25.0)
-                                
-                                
-                                
-                                Spacer()
-                                
-                                NavigationLink(destination: ContentView(viewModel: JournalData(UserProfile: self.userProfile)).onAppear {
-                                    self.notifyHandler.askPermission(date: self.selectedTime, type: "time", title: "Time to reflect", body: "Our app is here to help you keep track of your thoughts and emotions, and provide a safe space to express yourself freely.")
-                                }) {
-                                    Text("Schedule Reminder")
-                                        .font(.custom("Poppins-Regular", size: 16))
-                                    
-                                }
-                                .foregroundColor(Color("LoginHeader"))
-                                .padding(.trailing, 25.0)
-                            }//end HStack
                         }
-                         */
-                        
+                   
                     }
                     Spacer()
                     if !sharedData.userNeedsGoals {
