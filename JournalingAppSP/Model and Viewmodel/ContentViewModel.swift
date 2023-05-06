@@ -102,8 +102,36 @@ class JournalData: ObservableObject {
         getStreak()
         
     }
-    func test(message: String) {
-        print(message)
+
+
+    func enableNotification() {
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Notifications/"
+        ref.child(path).setValue("true")
+    }
+    
+    func disableNotification() {
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        let path = "Notifications/"
+        ref.child(path).setValue("false")
+    }
+    
+    func isNotificationEnabled(completion: @escaping (Bool) -> Void) {
+        let rootRef = Database.database().reference()
+        let ref = rootRef.child("Users/\(self.UserProfile.id_string)")
+        
+        ref.observe(.value, with: { snapshot in
+            if let data = snapshot.value as? [String: Any] {
+                if let notificationSelection = data["Notifications"] as? String {
+                    completion(notificationSelection == "true")
+                } else {
+                    print("Error getting notification")
+                    completion(false)
+                }
+            }
+        })
     }
     
     func addGoal(goalsArray: [String], textField: String) -> Void {
@@ -853,6 +881,8 @@ struct CustomFontSize {
 }
 
 class NotificationHandler {
+    @State private var savedNotifications: [UNNotificationRequest] = []
+
     func askPermission(date: Date, type: String, timeInterval: Double=10, title: String, body: String) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if granted {
@@ -882,5 +912,33 @@ class NotificationHandler {
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
+    }
+    
+
+    func enableNotifications() {
+        // Recreate notification requests from saved data entities
+        for request in savedNotifications {
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Error adding notification: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        // Clear saved notifications
+        self.savedNotifications.removeAll()
+        print("--> Success in enabling notifications")
+
+    }
+
+    func disableNotifications() {
+        // Save all pending notifications in the savedNotifications array
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            self.savedNotifications = requests
+        }
+        
+        // Remove all pending notification requests
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        print("--> Success in disabling notifications")
     }
 }

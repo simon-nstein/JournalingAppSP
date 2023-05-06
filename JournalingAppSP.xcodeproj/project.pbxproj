@@ -13,6 +13,7 @@
 		3F209E1C29CD328200028B56 /* OpenJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1B29CD328200028B56 /* OpenJournal.swift */; };
 		3F209E1E29CE2C2C00028B56 /* HomepageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F209E1D29CE2C2C00028B56 /* HomepageView.swift */; };
 		3F322C5829C25CC500B62873 /* profileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F322C5729C25CC500B62873 /* profileView.swift */; };
+		3F369CCF2A07111900B75536 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F369CCE2A07111900B75536 /* SettingsView.swift */; };
 		3F3916EB29DCBAA300E37684 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F3916EA29DCBAA300E37684 /* GoogleService-Info.plist */; };
 		3F3916EE29DCBC4800E37684 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3916ED29DCBC4800E37684 /* FirebaseAnalytics */; };
 		3F3916F029DCBC4800E37684 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3916EF29DCBC4800E37684 /* FirebaseAnalyticsSwift */; };
@@ -68,6 +69,7 @@
 		3F209E1B29CD328200028B56 /* OpenJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenJournal.swift; sourceTree = "<group>"; };
 		3F209E1D29CE2C2C00028B56 /* HomepageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageView.swift; sourceTree = "<group>"; };
 		3F322C5729C25CC500B62873 /* profileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileView.swift; sourceTree = "<group>"; };
+		3F369CCE2A07111900B75536 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3F3916EA29DCBAA300E37684 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F4814F529B59D0700FAEB20 /* JournalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalCoreData.xcdatamodel; sourceTree = "<group>"; };
 		3F4814F729B5A51200FAEB20 /* WeekGlance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGlance.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				3F322C5729C25CC500B62873 /* profileView.swift */,
 				3FC6E9B429C18E10004D9531 /* LoginSystemView.swift */,
 				3F209E1429CBD9CF00028B56 /* aboutUs.swift */,
+				3F369CCE2A07111900B75536 /* SettingsView.swift */,
 			);
 			path = "Login and Profile";
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F369CCF2A07111900B75536 /* SettingsView.swift in Sources */,
 				F6E6D1CE29B80C9A00DF59B5 /* NavBarView.swift in Sources */,
 				F61F8D8729F9DB8D0011F1D1 /* CustomNavBarView.swift in Sources */,
 				F61F8D8C29FEC0200011F1D1 /* CustomCalendar.swift in Sources */,

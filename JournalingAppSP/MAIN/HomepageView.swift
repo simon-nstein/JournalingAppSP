@@ -103,7 +103,7 @@ struct HomepageView: View {
                     .padding(.trailing)
             }
             
-            NavigationLink(destination: ReminderView(viewModel: self.viewModel, userProfile: self.userProfile)) {
+            NavigationLink(destination: ReminderView(viewModel: self.viewModel, userProfile: self.userProfile, settingsPageNavigation: false)) {
                 Image(systemName: "clock")
                     .foregroundColor(Color("responseColor"))
                     .font(.system(size: 30))

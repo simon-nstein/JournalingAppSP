@@ -88,7 +88,7 @@ struct GoalView: View {
                     
                     
                     HStack {
-                            NavigationLink(destination: ReminderView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile)) {
+                            NavigationLink(destination: ReminderView(viewModel: JournalData(UserProfile: self.userProfile), userProfile: self.userProfile, settingsPageNavigation: false)) {
                                 Text("Remind me later")
                             }
                         
