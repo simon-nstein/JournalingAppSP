@@ -57,7 +57,7 @@ struct InputView: View {
             .lineLimit(5...100)
             .padding()
             .font(Font.custom("Poppins-Regular", size: 24))
-            .foregroundColor(Color("StartTypingColor"))
+            //.foregroundColor(Color("StartTypingColor"))
             
             // Saving data
             .onDisappear {
