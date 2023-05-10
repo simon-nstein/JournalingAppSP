@@ -44,36 +44,37 @@ struct gratSwipeView: View {
                         if selectedTab == 1 { pageNumber(page: "2 of 3 responses") }
                         if selectedTab == 2 { pageNumber(page: "3 of 3 responses") }
                         
-                        
-                    
                         Button(action: {
                             let previousTab = (selectedTab - 1 + 4) % 4 // calculate index of previous tab
                             selectedTab = previousTab
                         }) {
-                            Image(systemName: "chevron.left")
-                                        .font(.title)
-                                        .foregroundColor(Color("NextArrowForegroundColor"))
-                                        .padding()
-                                        .background(Color("NextArrowBackgroundColor"))
-                                        .clipShape(Circle())
+                            Image(systemName: "chevron.left.circle.fill")
+                                .font(.system(size: 55))
+                                .foregroundColor(Color("NextArrowBackgroundColor"))
                         }
                         .opacity(selectedTab == 0 ? 0 : 1)
-                        .padding(.trailing, 20)
+                        //.padding(.leading, 50)
                         .padding(.bottom, 80)
                         
                         Button(action: {
-                                    let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
-                                    selectedTab = nextTab
+                                    if selectedTab == 0 || selectedTab == 1{
+                                        let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
+                                        selectedTab = nextTab
+                                    }else{
+                                        dismiss()
+                                    }
+                            
                                 }) {
-                                    Image(systemName: "chevron.right")
-                                        .font(.title)
-                                        .foregroundColor(Color("NextArrowForegroundColor"))
-                                        .padding()
-                                        .background(Color("NextArrowBackgroundColor"))
-                                    
-                                        .clipShape(Circle())
+                                    if selectedTab == 0 || selectedTab == 1{
+                                            Image(systemName: "chevron.right.circle.fill")
+                                                .font(.system(size: 55))
+                                                .foregroundColor(Color("NextArrowBackgroundColor"))
+                                    } else if selectedTab == 2 {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .font(.system(size: 55))
+                                            .foregroundColor(Color("NextArrowBackgroundColor"))
+                                    }
                                 }
-                                .opacity(selectedTab == 2 ? 0 : 1)
                                 .padding(.trailing, 20)
                                 .padding(.bottom, 80)
                         
