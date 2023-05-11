@@ -61,7 +61,9 @@ struct gratSwipeView: View {
                                         let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
                                         selectedTab = nextTab
                                     }else{
-                                        dismiss()
+                                        if self.viewModel.gratitude1Input != "" && self.viewModel.gratitude2Input != "" && self.viewModel.gratitude3Input != "" {
+                                            dismiss()
+                                        }
                                     }
                             
                                 }) {
@@ -72,7 +74,8 @@ struct gratSwipeView: View {
                                     } else if selectedTab == 2 {
                                         Image(systemName: "checkmark.circle.fill")
                                             .font(.system(size: 55))
-                                            .foregroundColor(Color("NextArrowBackgroundColor"))
+                                            //.foregroundColor(Color("NextArrowBackgroundColor"))
+                                            .foregroundColor(self.viewModel.gratitude1Input == "" || self.viewModel.gratitude2Input == "" || self.viewModel.gratitude3Input == "" ? Color("NOTNextArrowBackgroundColor") : Color("NextArrowBackgroundColor"))
                                     }
                                 }
                                 .padding(.trailing, 20)

@@ -73,7 +73,11 @@ struct inputSwipeView: View {
                                         let nextTab = (selectedTab + 1) % 3 // calculate index of next tab
                                         selectedTab = nextTab
                                     }else{
-                                        dismiss()
+                                        //only go to homescreen if they've done every response
+                                        if self.viewModel.roseInput != "" && self.viewModel.budInput != "" && self.viewModel.thornInput != "" {
+                                            dismiss()
+                                            
+                                        }
                                     }
                             
                                 }) {
@@ -84,12 +88,8 @@ struct inputSwipeView: View {
                                     } else if selectedTab == 2 {
                                         Image(systemName: "checkmark.circle.fill")
                                             .font(.system(size: 55))
-                                            .foregroundColor(Color("NextArrowBackgroundColor"))
-                                            .foregroundColor(self.viewModel.roseInput != "" || self.viewModel.roseInput != "" ? Color("NOTNextArrowBackgroundColor") : Color("NextArrowBackgroundColor"))
-
-                                            //self.viewModel.roseInput != ""
-                                        //NOTNextArrowBackgroundColor
-                                            //should be a lighter color if they haven't filled out all the responses
+                                            //.foregroundColor(Color("NextArrowBackgroundColor"))
+                                            .foregroundColor(self.viewModel.roseInput == "" || self.viewModel.budInput == "" || self.viewModel.thornInput == "" ? Color("NOTNextArrowBackgroundColor") : Color("NextArrowBackgroundColor"))
                                     }
                                 }
                                 .padding(.trailing, 20)
