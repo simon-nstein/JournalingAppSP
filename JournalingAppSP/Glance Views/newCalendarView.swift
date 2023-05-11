@@ -5,11 +5,22 @@
 //  Created by Simon Neuwirth-Stein on 4/19/23.
 //
 
+/*
 class SharedData: ObservableObject {
     @Published var sharedVariable: Bool = false
     @Published var userNeedsGoals: Bool = false
     @Published var selectedDate: String = "2023-05-01"
-    
+}
+ */
+
+class SharedData: ObservableObject {
+    @Published var sharedVariable: Bool = false
+    @Published var userNeedsGoals: Bool = false
+    @Published var selectedDate: String = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: Date())
+    }()
 }
 
 
@@ -43,7 +54,8 @@ struct newCalendarView: View {
                                 
                             }//end ZStack
                             
-                            //Text(showDate(date: selectDate))
+                            
+                            
                             Text(sharedData.selectedDate)
                                 .foregroundColor(Color("calendarDate"))
                                 .font(.custom("Poppins-SemiBold", size: 25))

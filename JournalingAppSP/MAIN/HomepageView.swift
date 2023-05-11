@@ -46,9 +46,11 @@ struct HomepageView: View {
                         OpenJournal()
                     }
                     
+                    /*
                     NavigationLink(destination: newCalendarView(viewModel: self.viewModel)) {
                         OpenJournal()
                     }
+                     */
                     
                 } //ScrollView
             } //VStack

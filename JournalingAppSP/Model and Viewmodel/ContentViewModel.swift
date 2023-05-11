@@ -99,7 +99,7 @@ class JournalData: ObservableObject {
         fetchGrat()
         //isDateInCurrentWeek(dateString: "2023-04-01")
         //week()
-        getStreak()
+        //getStreak()
         
     }
 

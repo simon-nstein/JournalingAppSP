@@ -65,6 +65,7 @@ struct InputView: View {
                 case "ROSE":
                     //only saves if they type something
                     if self.userInput != "" {
+                        print("HI")
                         self.viewModel.roseInput = self.userInput
                         self.viewModel.addRose(with: self.userInput)
                         //NEW STREAK

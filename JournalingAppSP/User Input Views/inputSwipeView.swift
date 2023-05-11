@@ -85,6 +85,11 @@ struct inputSwipeView: View {
                                         Image(systemName: "checkmark.circle.fill")
                                             .font(.system(size: 55))
                                             .foregroundColor(Color("NextArrowBackgroundColor"))
+                                            .foregroundColor(self.viewModel.roseInput != "" || self.viewModel.roseInput != "" ? Color("NOTNextArrowBackgroundColor") : Color("NextArrowBackgroundColor"))
+
+                                            //self.viewModel.roseInput != ""
+                                        //NOTNextArrowBackgroundColor
+                                            //should be a lighter color if they haven't filled out all the responses
                                     }
                                 }
                                 .padding(.trailing, 20)

@@ -37,7 +37,8 @@ struct ContentView: View {
                         .tag(Tab.house)
                     
                     // Calendar
-                    CalendarView(viewModel: self.viewModel)
+                    //CalendarView(viewModel: self.viewModel)
+                    newCalendarView(viewModel: self.viewModel)
                         .tag(Tab.calendar)
                     
                     // Analyze
